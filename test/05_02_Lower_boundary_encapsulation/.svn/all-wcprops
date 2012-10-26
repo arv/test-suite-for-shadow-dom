@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/dom/!svn/ver/44/test/05_02_Lower_boundary_encapsulation
+END
+A_05_02_01.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dom/!svn/ver/44/test/05_02_Lower_boundary_encapsulation/A_05_02_01.js
+END
+A_05_02_02.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dom/!svn/ver/43/test/05_02_Lower_boundary_encapsulation/A_05_02_02.js
+END
+A_05_02_03.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dom/!svn/ver/44/test/05_02_Lower_boundary_encapsulation/A_05_02_03.js
+END
+A_05_02_04.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dom/!svn/ver/43/test/05_02_Lower_boundary_encapsulation/A_05_02_04.js
+END
+A_05_02_05.js
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/dom/!svn/ver/43/test/05_02_Lower_boundary_encapsulation/A_05_02_05.js
+END
