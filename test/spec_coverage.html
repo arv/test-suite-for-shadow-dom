@@ -1,0 +1,159 @@
+<!--
+
+How to use:
+1) Start any web server with document root in this folder (like php -S localhost:7070)
+2) Access to the page: http://localhost:7070/spec_coverage.html
+
+-->
+
+<body>
+<table border=1 height="100%" width="100%">
+    <tr>
+        <td width="80%">
+            <iframe src="coverage/shadow_dom_spec.html" style="height: 100%; width: 100%;" id="specFrame"></iframe>
+        </td>
+        <td width="20%">
+            <div style="height: 100%; width: 100%;" id="assertFrameDiv"></div>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+
+<script>
+    function Test() {
+    }
+    Test.prototype.step = function (func, this_obj) {
+    }
+    function test(test) {
+        //do nothing
+    }
+    function async_test(test) {
+        return new Test();
+    }
+    function include(script_filename) {
+        document.write('<' + 'script');
+        document.write(' language="javascript"');
+        document.write(' type="text/javascript"');
+        document.write(' src="' + script_filename + '">');
+        document.write('</' + 'script' + '>');
+    }
+</script>
+<script src="testcommon.js"></script>
+<script src="all_tests.js"></script>
+<script src="tokenizer.js"></script>
+
+<script>
+    var specArea = document.getElementById("specFrame");
+    var assertsArea = document.getElementById("assertFrameDiv");
+    var tnt = null;
+    var defaultHighlightColor = "Khaki";
+    var activeHighlightColor = "LightSalmon";
+    var errorAssertBgColor = "Red";
+    var errorAssertFgColor = "White";
+    var emptyAssertBgColor = "White";
+    var emptyAssertFgColor = "Gray";
+
+
+    function init() {
+        tnt = new TextNodeTokenizer(specArea.contentWindow.document.documentElement);
+        for (var v in window) {
+            if (v.indexOf("A_") == 0) {
+                var a = window[v];
+                if (v == a.name) {
+                    registerAssert(a.name, a.assert, a.highlight);
+                }
+            }
+        }
+    }
+
+    function registerAssert(name, comment, tokens) {
+        var assertElement = document.createElement("div");
+        assertElement.innerHTML = "<span id='" + name + "' onclick=\"updateSelection(\'" + name + "');\">" + name + "</span>";
+        assertsArea.appendChild(assertElement);
+
+        applyAssert2Spec(name, tokens);
+    }
+
+    function applyAssert2Spec(name, highlight) {
+        if (highlight == undefined || highlight.length == 0) {
+            var titleNode = assertsArea.ownerDocument.getElementById(name);
+            titleNode.style.backgroundColor = emptyAssertBgColor;
+            titleNode.style.color = emptyAssertFgColor;
+            return;
+        }
+        var doc = specArea.contentWindow.document;
+        var res = tnt.addBlockToMapping(prepareTokensBlock(name, highlight, "[[", "]]"));
+        if (res != null) {
+            var titleNode = assertsArea.ownerDocument.getElementById(name);
+            titleNode.style.backgroundColor = errorAssertBgColor;
+            titleNode.style.color = errorAssertFgColor;
+            titleNode.onclick = function (e) {
+                alert(res);
+            }
+        } else {
+            var nodes = tnt.getNodesByBlock(name);
+            nodes.forEach(function (node) {
+                node.parentNode.style.backgroundColor = defaultHighlightColor;
+                node.parentNode.onclick = function (e) {
+                    var node = e.target.childNodes[0];
+                    var blockNames = tnt.getBlocksByNode(node);
+                    updateSelection(blockNames);
+                    if (blockNames.length > 0) {
+                        var titleNode = assertsArea.ownerDocument.getElementById(blockNames[0]);
+                        var offsetTop = titleNode.offsetTop;
+                        window.scrollTo(0, offsetTop - 20);
+                    }
+                }
+            });
+        }
+    }
+
+    // Check for browser support of event handling capability
+    if (window.addEventListener) {
+        window.addEventListener("load", init, false);
+    } else if (window.attachEvent) {
+        window.attachEvent("onload", init);
+    } else {
+        window.onload = init;
+    }
+
+    var selectedBlocks = [];
+
+    function updateSelection(blockNames) {
+        //drop current selection
+        selectedBlocks.forEach(function (blockName) {
+            setSelected(blockName, false);
+        });
+        selectedBlocks = [];
+
+        //select again
+        var newSelection = blockNames;
+        if (!(newSelection instanceof Array)) {
+            newSelection = [newSelection];
+        }
+        newSelection.forEach(function (blockName) {
+            var nodes = tnt.getNodesByBlock(blockName);
+            if (nodes.length > 0) {
+                var node = nodes[0];
+                var offsetTop = node.parentNode.offsetTop;
+                specArea.contentWindow.scrollTo(0, offsetTop - (specArea.contentWindow.innerHeight / 4));
+                setSelected(blockName, true);
+                selectedBlocks.push(blockName);
+            }
+        });
+    }
+    function setSelected(blockName, flag) {
+        var specNodes = tnt.getNodesByBlock(blockName);
+        specNodes.forEach(function (node) {
+            node.parentNode.style.backgroundColor = flag ? activeHighlightColor : defaultHighlightColor;
+        });
+        var titleNode = assertsArea.ownerDocument.getElementById(blockName);
+        titleNode.style.backgroundColor = flag ? activeHighlightColor : "";
+    }
+
+
+</script>
+
+

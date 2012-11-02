@@ -1,5 +1,5 @@
 <?php
-require_once "env.php";
+require_once "env_web_server.php";
 
 $json_input = file_get_contents("php://input");
 

@@ -4,12 +4,13 @@ Set of utilities to run external program from PHP and check output for required,
  */
 
 require_once "ps.php";
+require_once "tc.php";
 
 function halt($error_msg, $exit_code = 1)
 {
     global $tc_reporting;
     if ($tc_reporting) {
-        //    tc_message($error_msg, "ERROR");
+        tc_build_status(TC_BUILD_STATUS_ERROR, $error_msg);
     } else {
         fwrite(STDERR, $error_msg . "\n");
     }

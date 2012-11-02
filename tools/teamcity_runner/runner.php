@@ -6,9 +6,9 @@ Results listener server stores the test run result in a file
 Once the result is stored or by timeout the script analyses the file and generates report for teamcity
  */
 
-require_once "env.php";
-require_once "shell.php";
-require_once "tc.php";
+require_once "env_runner.php";
+require_once "../scripts_common/shell.php";
+require_once "../scripts_common/tc.php";
 
 $err = prepareRunDir();
 if ($err == null) {
@@ -45,7 +45,7 @@ function prepareRunDir()
         $run_dir_param = path_as_ps_ex_param($run_dir);
         sh_rm($run_dir_param);
         sh_mkdir($run_dir_param);
-        sh_cp("env.php results_page.php index.html tests_page.php xhr_reporter.js", $run_dir_param);
+        sh_cp("env_web_server.php results_page.php index.html tests_page.php xhr_reporter.js", $run_dir_param);
         sh_cp("../../test/*.js ../../test/*.css", $run_dir_param);
         sh_cp("../../test/resources", $run_dir_param, "-r");
 

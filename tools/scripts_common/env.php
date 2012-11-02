@@ -22,32 +22,6 @@ $log_kill_file = get_path_env("LOG_KILLS_FILE", safe_path("$tmp_dir/$tc_agent_na
 /** @var $run_dir - work dir to use for current run */
 $run_dir = get_path_env("RUN_DIR", safe_path("$tmp_dir/$tc_agent_name.run"));
 
-/** @var $run_host - host used by results listener server */
-$run_host = get_process_env("RUN_HOST", "localhost");
-
-/** @var $run_port - port used by results listener server  */
-$run_port = get_process_env("RUN_PORT", "10101");
-
-
-/** @var $jsengine  - JS engine to test. Example: path to chrome.exe file */
-$jsengine = get_path_env("JS_ENGINE", "chrome");
-
-/** @var $results_flag_file - this file is created to report that all tests results are processed by results listener
-and results are stored to  $results_log_file*/
-$results_flag_file = "results.flag";
-
-/** @var $results_log_file - a file results listener uses to store tests results */
-$results_log_file = "results.log";
-
-//timeout in seconds
-$tests_run_timeout = get_process_env("TESTS_TIMEOUT", "20");
-
-//timeout to start results listening server in seconds
-$rs_startup_timeout = get_process_env("RS_STARTUP_TIMEOUT", "10");
-
-$use_remote = false;
-$remote_host = false;
-$remote_port = false;
 
 function get_process_env($var, $default_val)
 {

@@ -3,72 +3,59 @@
 var A_05_01_03 = {
     name:'A_05_01_03',
     assert:'Upper-boundary encapsulation: ' +
-        'The nodes are not present the document\'s NodeList collection instances',
-    link:'http://www.w3.org/TR/shadow-dom/#upper-boundary-encapsulation'
+        'The nodes and named elements are not accessible with Window object named properties',
+    link:'http://www.w3.org/TR/shadow-dom/#upper-boundary-encapsulation',
+    highlight:'[[The nodes and named elements are not accessible]] using shadow host\'s document DOM tree accessors or [[with Window object named properties]]'
+
 };
 
 test(function () {
-    var d = document.implementation.createHTMLDocument('test doc');
-    var s = new SR(d.body);
+    var d = document;
 
-    //NodeList is returned by querySelectorAll, getElementsByClassName, getElementsByTagName etc
-    var span = document.createElement('span');
-    s.appendChild(span);
+    var div = d.createElement('div');
+    d.body.appendChild(div);
+    var s = new SR(div);
 
-    // getElementsByTagName
-    assert_equals(d.getElementsByTagName('span').length, 0,
-        'elements in shadow DOM must not be exposed via ' +
-            'document.getElementsByTagName');
+    try {
+        //Window named properties
+        var namedElements = ['a', 'applet', 'area', 'embed', 'form', 'frame',
+            'frameset', 'iframe', 'img', 'object'];
 
-    // getElementsByTagNameNS
-    assert_equals(d.getElementsByTagNameNS('*', 'span').length, 0,
-        'elements in shadow DOM must not be exposed via ' +
-            'document.getElementsByTagNameNS');
+        namedElements.forEach(function (tagName) {
+            var element = d.createElement(tagName);
+            element.name = 'named' + tagName;
+            s.appendChild(element);
 
-    // getElementsByClassName
-    span.setAttribute('class', 'shadowy');
-    assert_equals(d.getElementsByClassName('shadowy').length, 0,
-        'elements in shadow DOM must not be exposed via ' +
-            'document.getElementsByClassName');
-
-    // querySelectorAll
-    span.setAttribute('id', 'spandex');
-    assert_equals(d.querySelectorAll('#spandex').length, 0,
-        'elements in shadow DOM must not be exposed via ' +
-            'document.querySelectorAll by their id');
-    assert_equals(d.querySelectorAll('.shadowy').length, 0,
-        'elements in shadow DOM must not be exposed via ' +
-            'document.querySelectorAll by their class name');
-    assert_equals(d.querySelectorAll('span').length, 0,
-        'elements in shadow DOM must not be exposed via ' +
-            'document.querySelectorAll by their tag name');
-
+            assert_false(element.name in window,
+                'named "' + tagName + '" must not appear in window object named properties');
+        });
+    } finally {
+        d.body.removeChild(div);
+    }
 }, 'A_05_01_03_T01', PROPS(A_05_01_03, {
-    author:'Sergey G. Grekhov (sgrekhov@unipro.ru)',
+    author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));
 
 
 test(function () {
-    var d = document.implementation.createHTMLDocument('test doc');
-    var s = new SR(d.body);
+    var d = document;
 
-    //HTMLCollection
-    var htmlCollections = ['anchors', 'embeds', 'forms', 'images', 'links', 'plugins', 'scripts'];
-    var htmlCollectionsElements = ['a', 'object', 'form', 'img', 'area', 'embed', 'script'];
-    var cnt = 0;
-    htmlCollectionsElements.forEach(function (tagName) {
-        var element = d.createElement(tagName);
-        s.appendChild(element);
-        var collection = null;
-        eval('collection = d.' + htmlCollections[cnt++] + ';');
-        if (collection) {
-            assert_equals(collection.length, 0, 'Elements in shadow DOM must not be exposed via ' +
-                'document.' + htmlCollections[cnt++] + ' collection');
-        }
+    var div = d.createElement('div');
+    d.body.appendChild(div);
+    var s = new SR(div);
 
-    });
-}, 'A_05_01_03_T02', PROPS(A_05_01_03, {
-    author:'Sergey G. Grekhov (sgrekhov@unipro.ru)',
+    try {
+        var f = d.createElement('div');
+        f.id = 'divWithId';
+        s.appendChild(f);
+        assert_false('divWithId' in window,
+            'element with ID must not appear in window object named properties');
+    } finally {
+        d.body.removeChild(div);
+    }
+
+}, 'A_05_01_03_T2', PROPS(A_05_01_03, {
+    author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));

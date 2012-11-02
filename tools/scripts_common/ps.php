@@ -6,7 +6,7 @@ Set of utilities to run external program from PHP, check it status and kill by t
 require_once "env.php";
 
 
-ps_cleanup_old_runs();
+//ps_cleanup_old_runs();
 $ps_active_pid = false;
 
 

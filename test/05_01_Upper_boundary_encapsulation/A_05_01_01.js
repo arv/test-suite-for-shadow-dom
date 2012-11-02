@@ -4,7 +4,8 @@ var A_05_01_01 = {
     name:'A_05_01_01',
     assert:'Upper-boundary encapsulation:' +
         'The ownerDocument property refers to the document of the shadow host',
-    link:'http://www.w3.org/TR/shadow-dom/#upper-boundary-encapsulation'
+    link:'http://www.w3.org/TR/shadow-dom/#upper-boundary-encapsulation',
+    highlight: 'The ownerDocument property refers to the document of the shadow host'
 };
 
 
@@ -51,8 +52,8 @@ test(function () {
     d.body.appendChild(n);
     try {
         var s = new SR(n);
-        assert(false, 'Check that Text node can\'t be used as shadow root');
-        //TODO: no such text in specification??
+        assert(false, 'Text node can\'t be used as shadow root');
+        //TODO: no such text in specification?? -> https://www.w3.org/Bugs/Public/show_bug.cgi?id=19690
     } catch (e) {
         //ok
     }
@@ -67,7 +68,7 @@ test(function () {
     d.body.appendChild(n);
     try {
         var s = new SR(n);
-        assert(false, 'Check that Comment node can\'t be used as shadow root');
+        assert(false, 'Comment node can\'t be used as shadow root');
     } catch (e) {
         //ok
     }
@@ -82,7 +83,7 @@ test(function () {
     d.documentElement.appendChild(n);
     try {
         var s = new SR(n);
-        assert(false, 'Check that CDATA section can\'t be used as shadow root');
+        assert(false, 'CDATA section can\'t be used as shadow root');
     } catch (e) {
         //ok
     }
@@ -113,7 +114,7 @@ test(function () {
     d.documentElement.appendChild(n);
     try {
         var s = new SR(n);
-        assert(false, 'Check that DocumentFragment node can\'t be used as shadow root');
+        assert(false, 'DocumentFragment node can\'t be used as shadow root');
     } catch (e) {
         //ok
     }
@@ -128,7 +129,7 @@ test(function () {
     d.documentElement.appendChild(n);
     try {
         var s = new SR(n);
-        assert(false, 'Check that Entity Reference node can\'t be used as shadow root');
+        assert(false, 'Entity Reference node can\'t be used as shadow root');
     } catch (e) {
         //ok
     }
@@ -143,7 +144,7 @@ test(function () {
     d.documentElement.appendChild(n);
     try {
         var s = new SR(n);
-        assert(false, 'Check that Processing instruction node can\'t be used as shadow root');
+        assert(false, 'Processing instruction node can\'t be used as shadow root');
     } catch (e) {
         //ok
     }

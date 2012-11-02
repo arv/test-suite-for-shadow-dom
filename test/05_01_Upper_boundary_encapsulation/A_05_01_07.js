@@ -3,33 +3,58 @@
 var A_05_01_07 = {
     name:'A_05_01_07',
     assert:'Upper-boundary encapsulation:' +
-        'The selectors must not cross the shadow boundary from the document' +
-        'tree into the shadow DOM subtree',
+        'The nodes with a unique id and named elements are addressable ' +
+        'from any attributes of elements in the same shadow DOM subtree',
     link:'http://www.w3.org/TR/shadow-dom/#upper-boundary-encapsulation'
 };
 
 test(function () {
     var d = document.implementation.createHTMLDocument('test doc');
 
-    var s = new SR(d.body);
+    var div = d.createElement('div');
+    d.body.appendChild(div);
 
-    var e = d.createElement('span');
-    e.setAttribute('id', 'spandex');
-    e.setAttribute('class', 'shadowy');
-    s.appendChild(e);
+    var s = new SR(div);
 
-    assert_equals(d.querySelector('span'), null,
-        'elements in shadow DOM must not be accessible via the ' +
-            'document host\'s tag name selectors');
+    var inp = d.createElement('input');
+    inp.setAttribute('type', 'text');
+    inp.setAttribute('id', 'inpid');
+    d.body.appendChild(inp);
 
-    assert_equals(d.querySelector('.shadowy'), null,
-        'elements in shadow DOM must not be accessible via the ' +
-            'document host\'s .className selectors');
+    var lbl = d.createElement('label');
+    lbl.setAttribute('for', 'inpid');
+    s.appendChild(lbl);
+    s.appendChild(inp);
 
-    assert_equals(d.querySelector('#spandex'), null,
-        'elements in shadow DOM must not be accessible via the ' +
-            'document host\'s #id selectors');
+    assert_equals(lbl.control, inp, 'Elements in shadow DOM must be accessible from ' +
+        'shadow document label.for attribute');
 
+
+    var formAssociatedElements = ['button', 'fieldset', 'input', 'keygen', 'label', 'object',
+        'output', 'select', 'textarea'];
+
+    formAssociatedElements.forEach(function (tagName) {
+        d = document.implementation.createHTMLDocument('test doc');
+
+        var form = d.createElement('form');
+        var el = d.createElement(tagName);
+
+        d.body.appendChild(form);
+        d.body.appendChild(el);
+
+        form.setAttribute('id', 'formid');
+        el.setAttribute('form', 'formid');
+
+        div = d.createElement('div');
+        d.body.appendChild(div);
+
+        s = new SR(div);
+        s.appendChild(form);
+        s.appendChild(el);
+
+        assert_equals(el.form, form, 'Elements in shadow DOM must be accessible from ' +
+            'shadow document ' + tagName + '.form attribute');
+    });
 }, 'A_05_01_07_T01', PROPS(A_05_01_07, {
     author:'Sergey G. Grekhov (sgrekhov@unipro.ru)',
     reviewer:''

@@ -479,7 +479,7 @@ A_05_03_06_T11.step(function () {
 
 
 
-var A_05_03_06_T12 = async_test('A_05_03_06_T11', PROPS(A_05_03_06, {
+var A_05_03_06_T12 = async_test('A_05_03_06_T12', PROPS(A_05_03_06, {
     author:'Sergey G. Grekhov (sgrekhov@unipro.ru)',
     assert:'Matching Insertion Points: ' +
     	'A valid selector fragment may contain a :nth-last-of-type() pseudo-class selector',
@@ -522,5 +522,162 @@ A_05_03_06_T12.step(function () {
             iframe.parentNode.removeChild(iframe);
         }
         A_05_03_06_T12.done();
+    });
+});
+
+
+
+
+var A_05_03_06_T13 = async_test('A_05_03_06_T13', PROPS(A_05_03_06, {
+    author:'Sergey G. Grekhov (sgrekhov@unipro.ru)',
+    assert:'Matching Insertion Points: ' +
+    	'A valid selector fragment may contain a :first-of-type pseudo-class selector',
+    reviewer:''
+}));
+
+
+A_05_03_06_T13.step(function () {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'resources/bobs_page.html';
+    document.body.appendChild(iframe);
+
+    iframe.onload = A_05_03_06_T13.step_func(function () {
+        try {
+
+            var d = iframe.contentDocument;
+            var ul = d.querySelector('ul.stories');
+            var s = new SR(ul);
+            
+            //make shadow subtree
+            var subdiv1 = document.createElement('div');
+            subdiv1.innerHTML = '<ul><content select=":first-of-type"></content></ul>';
+            s.appendChild(subdiv1);
+
+            //li1 should be visible, all others not
+            assert_true(d.querySelector('#li1').offsetTop > 0,
+                'Element should match :first-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li2').offsetTop, 0,
+                'Point 1: element shouldn\'t match :first-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li3').offsetTop, 0,
+            	'Point 2: element shouldn\'t match :first-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li4').offsetTop, 0,
+            	'Point 3: element shouldn\'t match :first-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li5').offsetTop, 0,
+            	'Point 4: element shouldn\'t match :first-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li6').offsetTop, 0,
+        		'Point 5: element shouldn\'t match :first-of-type pseudo-class selector');
+
+        } finally {
+            iframe.parentNode.removeChild(iframe);
+        }
+        A_05_03_06_T13.done();
+    });
+});
+
+
+
+var A_05_03_06_T14 = async_test('A_05_03_06_T14', PROPS(A_05_03_06, {
+    author:'Sergey G. Grekhov (sgrekhov@unipro.ru)',
+    assert:'Matching Insertion Points: ' +
+    	'A valid selector fragment may contain a :last-of-type pseudo-class selector',
+    reviewer:''
+}));
+
+
+A_05_03_06_T14.step(function () {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'resources/bobs_page.html';
+    document.body.appendChild(iframe);
+
+    iframe.onload = A_05_03_06_T14.step_func(function () {
+        try {
+
+            var d = iframe.contentDocument;
+            var ul = d.querySelector('ul.stories');
+            var s = new SR(ul);
+            
+            //make shadow subtree
+            var subdiv1 = document.createElement('div');
+            subdiv1.innerHTML = '<ul><content select=":last-of-type"></content></ul>';
+            s.appendChild(subdiv1);
+
+            //li6 should be visible, all others not
+            assert_true(d.querySelector('#li6').offsetTop > 0,
+                'Element should match :last-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li1').offsetTop, 0,
+                'Point 1: element shouldn\'t match :last-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li2').offsetTop, 0,
+            	'Point 2: element shouldn\'t match :last-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li3').offsetTop, 0,
+            	'Point 3: element shouldn\'t match :last-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li4').offsetTop, 0,
+            	'Point 4: element shouldn\'t match :last-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li5').offsetTop, 0,
+        		'Point 5: element shouldn\'t match :last-of-type pseudo-class selector');
+
+        } finally {
+            iframe.parentNode.removeChild(iframe);
+        }
+        A_05_03_06_T14.done();
+    });
+});
+
+
+
+var A_05_03_06_T15 = async_test('A_05_03_06_T15', PROPS(A_05_03_06, {
+    author:'Sergey G. Grekhov (sgrekhov@unipro.ru)',
+    assert:'Matching Insertion Points: ' +
+    	'A valid selector fragment may contain a :only-of-type pseudo-class selector',
+    reviewer:''
+}));
+
+
+A_05_03_06_T15.step(function () {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'resources/bobs_page.html';
+    document.body.appendChild(iframe);
+
+    iframe.onload = A_05_03_06_T15.step_func(function () {
+        try {
+
+            var d = iframe.contentDocument;
+            var ul = d.querySelector('ul.stories');
+            var s = new SR(ul);
+            
+            //make shadow subtree
+            var subdiv1 = document.createElement('div');
+            subdiv1.innerHTML = '<ul><content select=":only-of-type"></content></ul>';
+            s.appendChild(subdiv1);
+
+            //All li1-li6 elements shoul be invisible
+            assert_equals(d.querySelector('#li1').offsetTop, 0,
+                'Point 1: element shouldn\'t match :only-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li2').offsetTop, 0,
+            	'Point 2: element shouldn\'t match :only-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li3').offsetTop, 0,
+            	'Point 3: element shouldn\'t match :only-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li4').offsetTop, 0,
+            	'Point 4: element shouldn\'t match :only-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li5').offsetTop, 0,
+        		'Point 5: element shouldn\'t match :only-of-type pseudo-class selector');
+            assert_equals(d.querySelector('#li6').offsetTop, 0,
+    			'Point 6: element shouldn\'t match :only-of-type pseudo-class selector');
+            
+            var s2 = new SR(d.querySelector('#divid'));
+            
+            //make shadow subtree
+            var subdiv2 = document.createElement('div');
+            subdiv2.innerHTML = '<content select=":only-of-type"></content>';
+            s2.appendChild(subdiv2);
+
+            //Span and ul both should be visible
+            assert_true(d.querySelector('#spandex').offsetTop > 0,
+                'Point 7: Element should match :only-of-type pseudo-class selector');
+            assert_true(d.querySelector('#ul2').offsetTop > 0,
+            	'Point 8: Element should match :only-of-type pseudo-class selector');
+        } finally {
+            iframe.parentNode.removeChild(iframe);
+        }
+        A_05_03_06_T15.done();
     });
 });

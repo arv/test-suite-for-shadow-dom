@@ -12,10 +12,6 @@ var SR = window.ShadowRoot ||
     };
 
 
-function NAME(assertion, idx) {
-    return assertion.name + "_T" + idx;
-}
-
 function PROPS(assertion, properties) {
     var res = Object(), attr;
     for (attr in assertion) {
