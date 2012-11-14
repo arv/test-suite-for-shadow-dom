@@ -13,12 +13,12 @@ var A_05_02_01 = {
 };
 
 
-var A_05_02_01_T1 = async_test('A_05_02_01_T1', PROPS(A_05_02_01, {
+var A_05_02_01_T01 = async_test('A_05_02_01_T1', PROPS(A_05_02_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));
 
-A_05_02_01_T1.step(unit(function (ctx) {	
+A_05_02_01_T01.step(unit(function (ctx) {	
 	
     var d = newRenderedHTMLDocument(ctx);
     
@@ -40,12 +40,11 @@ A_05_02_01_T1.step(unit(function (ctx) {
     div2.setAttribute('id', 'div2');
     s.appendChild(div2);
     
-    s.addEventListener('mouseover', A_05_02_01_T1.step_func(function(event) {
-    	assert_equals(event.relatedTarget.getAttribute('id'), 'div1', 'relatedTarget retargeting ' +
-    			'should not occur for nodes in the same tree');  	
+    s.addEventListener('mouseover', A_05_02_01_T01.step_func(function(event) {
+    	assert_equals(event.relatedTarget.getAttribute('id'), 'div1', 'Wrong relatedTarget');  	
     }), false);
     
-    d.body.addEventListener('mouseover', A_05_02_01_T1.step_func(function(event) {
+    d.body.addEventListener('mouseover', A_05_02_01_T01.step_func(function(event) {
     	assert_true(false, 'Event must be stopped at Shadow boundary');  	
     }), false);
     
@@ -57,5 +56,5 @@ A_05_02_01_T1.step(unit(function (ctx) {
     div2.dispatchEvent(evt);
     
     
-    A_05_02_01_T1.done();
+    A_05_02_01_T01.done();
 }));
