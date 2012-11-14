@@ -26,7 +26,7 @@ function save_file_and_commit($spec_file_name, $content, $repo_dir, $message)
         halt("Failed to write file:  $spec_file_name");
     }
 
-    tc_message("Committing changes to SVN");
+    tc_message("Committing changes to git");
 //    sh_svn($spec_dir, "commit -m \"$message\"");
     sh_git($repo_dir, "commit -m \"$message\"");
     sh_git($repo_dir, "push origin master");
