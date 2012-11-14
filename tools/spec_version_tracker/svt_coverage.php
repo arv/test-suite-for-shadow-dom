@@ -16,7 +16,7 @@ try {
 
     $spec_dir = safe_path(getcwd() . "/../../test/spec");
     $spec_file_name = "$spec_dir/shadow_dom_spec.html";
-    save_file_and_commit($spec_file_name, $content, $spec_dir, "updating shadow dom spec for coverage");
+//    save_file_and_commit($spec_file_name, $content, $spec_dir, "automatic update of shadow dom spec used by  coverage");
 
 
     $tests_dir = safe_path(getcwd() . "/../../test");
@@ -30,7 +30,7 @@ try {
             $content = "$content\ninclude(\"$name\");";
         }
     }
-    save_file_and_commit($tests_file_name, $content, $tests_dir + "/..", "auto updating 'all_tests.js' and spec files");
+    save_file_and_commit($tests_file_name, $content, $tests_dir + "/..", "auto update of 'all_tests.js' and spec file used by coverage");
 } catch (Exception $e) {
     halt("Failed with exception!:" . $e->getMessage());
 }
