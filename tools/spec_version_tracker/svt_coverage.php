@@ -30,7 +30,7 @@ try {
             $content = "$content\ninclude(\"$name\");";
         }
     }
-    save_file_and_commit($tests_file_name, $content, $tests_dir + "/..", "auto update of 'all_tests.js' and spec file used by coverage");
+    save_file_and_commit($tests_file_name, $content, $tests_dir + "/..", "\"auto update of 'all_tests.js' and spec file used by coverage\"");
 } catch (Exception $e) {
     halt("Failed with exception!:" . $e->getMessage());
 }
