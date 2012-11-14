@@ -1,0 +1,526 @@
+<!--
+
+How to use:
+1) Start any web server with document root in this folder (like php -S localhost:7070)
+2) Access to the page: http://localhost:7070/spec_cove.html
+
+-->
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden
+        }
+
+        table {
+            height: 100%;
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        iframe {
+            height: 100%;
+            width: 100%
+        }
+
+        .header {
+            border-bottom: 1px solid #000
+        }
+
+        .content {
+            height: 100%
+        }
+    </style>
+</head>
+<body>
+<table border=0>
+    <tr>
+        <td width="*">
+            <table>
+                <tr>
+                    <td>
+                        <iframe src="spec/shadow_dom_spec.html" style="height: 100%; width: 100%;" id="specFrame"></iframe>
+                    </td>
+                </tr>
+                <tr height="33%" id="testFrameRow" style="display: none;">
+                    <td>
+                        <div style="float:right; margin-top:15px; cursor: pointer; font-family: monospace;" onclick="hideTestFrame()">[X]</div>
+                        <iframe id="testFrame"></iframe>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td width="350">
+            <iframe id="assertFrame"></iframe>
+        </td>
+    </tr>
+</table>
+</body>
+
+<script>
+    var allIncludes = [];
+    function include(script_filename) {
+        document.write('<' + 'script');
+        document.write(' language="javascript"');
+        document.write(' type="text/javascript"');
+        document.write(' src="' + script_filename + '">');
+        document.write('</' + 'script' + '>');
+
+        allIncludes.push(script_filename);
+    }
+    function load(url) {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", url, false);
+        xmlhttp.send(null);
+        return xmlhttp.responseText;
+    }
+</script>
+<script src="testharness.js"></script>
+<script src="testcommon.js"></script>
+<script src='rainbow.js'></script>
+
+<script>
+    function getChapterNameByAssertion(aName) {
+        var res = aName.substr(2, 5).replace("00", "").replace("_", ".").replace(".0", ".");
+        if (res[0] == "0") {
+            res = res.substr(1);
+        }
+        if (res[res.length - 1] == ".") {
+            res = res.substr(0, res.length - 1);
+        }
+        return res;
+    }
+
+    function Chapter(name) {
+        this.name = name;
+        this.chapterTitle = "";
+        this.e = null;
+        this.testsTotal = 0;
+        this.testsPassed = 0;
+        this.testsWithoutReview = 0;
+        this.assertions = [];
+        this.assertionsPassed = 0;
+        this.sectionElement = null;
+    }
+    Chapter.prototype.isFailed = function () {
+        return this.assertionsPassed < this.assertions.length;
+    };
+
+
+    function Assertion(props) {
+        this.name = props.name;
+        this.highlight = props.highlight;
+        this.props = props;
+        this.tests = [];
+        this.testsPassed = 0;
+        this.testsWithoutReview = 0;
+    }
+    Assertion.prototype.isFailed = function () {
+        return this.testsPassed < this.tests.length;
+    };
+
+
+    setup({
+        output_document:null
+    });
+
+    var chaptersMap = {};
+    var chapters = [];
+    var assertionsMap = {};
+
+    function findChapter(aName) {
+        var bName = getChapterNameByAssertion(aName);
+        var res = chaptersMap[bName];
+        if (typeof (res) == "undefined") {
+            res = chaptersMap[bName] = new Chapter(bName);
+            chapters.push(res);
+        }
+        return res;
+    }
+
+    function findAssertion(testProps) {
+        var res = assertionsMap[testProps.name];
+        if (typeof (res) == "undefined") {
+            res = assertionsMap[testProps.name] = new Assertion(testProps);
+            assertionsCount++;
+        }
+        return res;
+    }
+
+    function tests_completion_callback(tests, status) {
+        this.tests = tests;
+        tests.forEach(function (t) {
+            var a = findAssertion(t.properties);
+            var c = findChapter(a.name);
+            if (c.assertions.indexOf(a) == -1) {
+                c.assertions.push(a);
+            }
+            a.tests.push(t);
+            c.testsTotal++;
+            if (t.status == 0) {
+                a.testsPassed++;
+                c.testsPassed++;
+            }
+            t.reviewed = typeof(t.properties.reviewer) != "undefined" && t.properties.reviewer.length > 0;
+            if (!t.reviewed) {
+                a.testsWithoutReview++;
+                c.testsWithoutReview++;
+            }
+
+        });
+        chapters.forEach(function (c) {
+            c.assertions.forEach(function (a) {
+                if (!a.isFailed()) {
+                    c.assertionsPassed++;
+                }
+            });
+        });
+
+        chapters.sort(function (c1, c2) {
+            return c1.name.localeCompare(c2.name);
+        });
+        chapters.forEach(function (c) {
+            c.assertions.sort(function (a1, a2) {
+                return a1.name.localeCompare(a2.name);
+            });
+        });
+    }
+    add_completion_callback(tests_completion_callback);
+</script>
+
+
+<script src="all_tests.js"></script>
+<script src="tokenizer.js"></script>
+
+<script>
+var assertionsCount = 0;
+var specsFrame = document.getElementById("specFrame");
+var assertsAreaFrame = document.getElementById("assertFrame");
+var assertsAreaBody = assertsAreaFrame.contentWindow.document.body;
+var testFrameRow = document.getElementById("testFrameRow");
+var testFrame = document.getElementById("testFrame");
+var tnt = null;
+var defaultHighlightColor = "Khaki";
+var activeHighlightColor = "LightSalmon";
+var mappingErrorAssertBgColor = "Red";
+var mappingErrorAssertFgColor = "White";
+var emptyAssertBgColor = "White";
+var emptyAssertFgColor = "Gray";
+var testPassedColor = "green";
+var testFailedColor = "red";
+var testTotalColor = "blue";
+var testsWithoutReviewTotalColor = "gray";
+var chapterBlocks = {};
+
+function init() {
+    done(); // wait for harness to complete
+    showTotals();
+    tnt = new TextNodeTokenizer(specsFrame.contentWindow.document.documentElement);
+    chapters.forEach(function (c) {
+        showChapter(c);
+    });
+}
+
+
+function showTotals() {
+    var testsTotal = 0, testsPassed = 0, testsWithoutReview = 0;
+    chapters.forEach(function (c) {
+        testsTotal += c.testsTotal;
+        testsPassed += c.testsPassed;
+        testsWithoutReview += c.testsWithoutReview;
+    });
+    var totalsElement = document.createElement("div");
+    totalsElement.innerHTML = "<br><table id='total' style='font-weight: bold; width:300; border: 0; margin: 0;'>" +
+            "<tr style='color: black;'><td>Assertions</td><td>" + assertionsCount + "</td></tr>" +
+            "<tr style='color:" + testPassedColor + ";'><td>Tests passed</td><td>" + testsPassed + "</td></tr>" +
+            "<tr style='color:" + testFailedColor + ";'><td>Tests failed</td><td>" + (testsTotal - testsPassed) + "</td></tr>" +
+            "<tr style='color:" + testsWithoutReviewTotalColor + ";'><td>Tests without review</td><td>" + testsWithoutReview + "</td></tr>" +
+            "<tr style='color:" + testTotalColor + ";'><td>Tests total</td><td>" + testsTotal + "</td></tr>" +
+            "</table><br><hr><br>";
+    assertsAreaBody.appendChild(totalsElement);
+}
+
+
+function updateChapterTitle(c) {
+    var sections = tnt.root.querySelectorAll('.section');
+    var res = "???";
+    for (var i = 0; i < sections.length; i++) {
+        var s = sections.item(i);
+        if (s.firstChild.textContent == c.name) {
+            var spanWithChapterName = s.nextElementSibling;
+            while (spanWithChapterName.textContent == null) {
+                spanWithChapterName = s.nextElementSibling;
+            }
+            res = spanWithChapterName.textContent;
+            var anchor = s.parentNode.getAttribute("href");
+            c.sectionElement = specsFrame.contentWindow.document.querySelector(anchor);
+            break;
+        }
+    }
+    c.chapterTitle = res;
+}
+
+function showChapter(c) {
+    updateChapterTitle(c);
+    var headElement = document.createElement("span");
+    headElement.style.cursor = "pointer";
+    headElement.innerHTML = "<span style='text-decoration:underline; font-family: monospace;' id='" + c.name + "_tree" + "' "
+            + " onclick='parent.toggleTreeDetails(\"" + c.name + "\")'>[-]</span>";
+    var color = c.isFailed() ? testFailedColor : c.testsWithoutReview > 0 ? testsWithoutReviewTotalColor : "";
+    headElement.innerHTML += "<span id='" + c.name + "' " +
+            "onclick='parent.scrollToSection(\"" + c.name + "\")/*;parent.toggleTreeDetails(\"" + c.name + "\")*/' "
+            + " style='margin-left:5px; text-decoration:underline; color:" + color + "'>"
+            + c.name + " " + c.chapterTitle;
+    headElement.innerHTML += "</span><br>";
+
+    c.assertionsDetails = document.createElement("div");
+    c.assertionsDetails.setAttribute("id", c.name + "_det");
+    c.assertionsDetails.style.display = "block";
+    c.assertionsDetails.style.marginLeft = "10px";
+    assertsAreaBody.appendChild(headElement);
+    assertsAreaBody.appendChild(c.assertionsDetails);
+    c.assertions.forEach(function (a) {
+        showAssertion(c, a);
+    });
+}
+
+function showAssertion(c, a) {
+    var assertElement = document.createElement("div");
+    assertElement.innerHTML = "<span style='text-decoration:underline; cursor: pointer; font-family: monospace;' id='" + a.name + "_tree" + "' "
+            + " onclick='parent.toggleTreeDetails(\"" + a.name + "\")'>[+]</span>";
+    assertElement.innerHTML += "<span id='" + a.name + "' onclick=\"parent.updateAssertionsSelection(\'" + a.name + "', true);\" style='cursor:pointer; margin-left:5px'>"
+            + a.name + "<span " + (a.isFailed() ? " style='color:" + testFailedColor + ";'" : "")
+            + ";'> [" + a.testsPassed + "/" + a.tests.length + "]</span>";
+
+    if (a.testsWithoutReview > 0) {
+        assertElement.innerHTML += "<span style='color: " + testsWithoutReviewTotalColor + ";'>&nbsp;[no review:" + a.testsWithoutReview + "]</span>";
+    }
+    assertElement.innerHTML += "</span>";
+    assertElement.innerHTML += "<br>";
+
+    c.assertionsDetails.appendChild(assertElement);
+
+    var testDetails = document.createElement("div");
+    testDetails.setAttribute("id", a.name + "_det");
+    testDetails.style.display = "none";
+    testDetails.style.fontSize = "small";
+
+    testDetails.innerHTML = "";
+    a.tests.forEach(function (t) {
+        var testColor = t.status == 0 ? testPassedColor : testFailedColor;
+        testDetails.innerHTML += "<li style='color:" + testColor + "; cursor: pointer; margin-left: 20px; list-style-type:square' "
+                + "onclick='parent.activateTest(\"" + a.name + "\",\"" + t.name + "\")'>"
+                + t.name
+                + (t.reviewed ? "" : "<span style='color: " + testsWithoutReviewTotalColor + ";'>&nbsp;[no review]</span>")
+                + (t.status == 0 ? "" : "<br><span style='font: xx-small; margin-left: 30px;'> [" + escapeHTML(t.message) + "]") + "</span>"
+                + "</li>";
+    });
+    c.assertionsDetails.appendChild(testDetails);
+
+    highlightSpecs(a);
+}
+var entityMap = {
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':'&quot;',
+    "'":'&#39;',
+    "/":'&#x2F;'
+};
+
+function escapeHTML(string) {
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
+        return entityMap[s];
+    });
+}
+
+function highlightSpecs(a) {
+    if (typeof(a.highlight) == "undefined" || a.highlight == null || a.highlight.length == 0) {
+        var titleNode = assertsAreaBody.ownerDocument.getElementById(a.name);
+        titleNode.style.backgroundColor = emptyAssertBgColor;
+        titleNode.style.color = emptyAssertFgColor;
+        titleNode.style.cursor = "default";
+        return;
+    }
+    var doc = specsFrame.contentWindow.document;
+    var res = tnt.addBlockToMapping(prepareTokensBlock(a.name, a.highlight, "[[", "]]"));
+    if (res != null) {
+        var titleNode = assertsAreaBody.ownerDocument.getElementById(a.name);
+        titleNode.style.backgroundColor = mappingErrorAssertBgColor;
+        titleNode.style.color = mappingErrorAssertFgColor;
+        titleNode.onclick = function (e) {
+            alert(res);
+        }
+    } else {
+        var nodes = tnt.getNodesByBlock(a.name);
+        nodes.forEach(function (node) {
+            node.parentNode.style.backgroundColor = defaultHighlightColor;
+            node.parentNode.style.cursor = "pointer";
+            node.parentNode.onclick = function (e) {
+                var node = e.target.childNodes[0];
+                var blockNames = tnt.getBlocksByNode(node);
+                updateAssertionsSelection(blockNames, false);
+                if (blockNames.length > 0) {
+                    var titleNode = assertsAreaBody.ownerDocument.getElementById(blockNames[0]);
+                    var offsetTop = titleNode.offsetTop;
+                    assertsAreaFrame.contentWindow.scrollTo(0, offsetTop - 20);
+                }
+            }
+        });
+    }
+}
+
+// Check for browser support of event handling capability
+if (window.addEventListener) {
+    window.addEventListener("load", init, false);
+} else if (window.attachEvent) {
+    window.attachEvent("onload", init);
+} else {
+    window.onload = init;
+}
+
+var selectedAssertions = [];
+
+function updateAssertionsSelection(aNames, scrollTo) {
+    //drop current selection
+    selectedAssertions.forEach(function (blockName) {
+        setSelectedAssertion(blockName, false);
+    });
+    selectedAssertions = [];
+
+    //select again
+    var newSelection = aNames;
+    if (!(newSelection instanceof Array)) {
+        newSelection = [newSelection];
+    }
+    newSelection.forEach(function (aName) {
+        var nodes = tnt.getNodesByBlock(aName);
+        if (nodes.length > 0) {
+            var node = nodes[0];
+            var offsetTop = node.parentNode.offsetTop;
+            if (scrollTo) {
+                specsFrame.contentWindow.scrollTo(0, offsetTop - (specsFrame.contentWindow.innerHeight / 4));
+            }
+            setSelectedAssertion(aName, true);
+            selectedAssertions.push(aName);
+        }
+    });
+}
+function setSelectedAssertion(aName, flag) {
+    var specNodes = tnt.getNodesByBlock(aName);
+    specNodes.forEach(function (node) {
+        node.parentNode.style.backgroundColor = flag ? activeHighlightColor : defaultHighlightColor;
+    });
+    var titleNode = assertsAreaBody.ownerDocument.getElementById(aName);
+    titleNode.style.backgroundColor = flag ? activeHighlightColor : "";
+    var cName = getChapterNameByAssertion(aName);
+
+    var detailsNode = assertsAreaBody.ownerDocument.getElementById(cName + "_det");
+    var treeNode = assertsAreaBody.ownerDocument.getElementById(cName + "_tree");
+    if (detailsNode.style.display == "none") {
+        detailsNode.style.display = "block";
+        treeNode.innerHTML = "[-]";
+    }
+}
+
+function scrollToSection(cName) {
+    var c = chaptersMap[cName];
+    if (c.sectionElement == null) {
+        return;
+    }
+    var top = c.sectionElement.offsetTop;
+    specsFrame.contentWindow.scrollTo(0, top);
+}
+
+function toggleTreeDetails(id) {
+    var detailsNode = assertsAreaBody.ownerDocument.getElementById(id + "_det");
+    var treeNode = assertsAreaBody.ownerDocument.getElementById(id + "_tree");
+    if (detailsNode.style.display == "none") {
+        detailsNode.style.display = "block";
+        treeNode.innerHTML = "[-]";
+    } else {
+        detailsNode.style.display = "none";
+        treeNode.innerHTML = "[+]";
+    }
+}
+
+function activateTest(aName, tName) {
+    updateAssertionsSelection(aName, true);
+    var file = null;
+    for (var i = 0; i < allIncludes.length; i++) {
+        var f = allIncludes[i];
+        if (f.indexOf(aName) >= 0) {
+            file = f;
+            break;
+        }
+    }
+    if (file == null) {
+        alert("Test not found: " + tName);
+        return;
+    }
+    assertionText = tName;
+    var fileContent = load(file);
+    var head = "<head>" +
+            "<link type='text/css' rel='stylesheet' href='rainbow.css'/></head>";
+    var body = "<body><pre><code data-language='javascript'>" + fileContent + "</code></pre></body>";
+    testFrame.contentWindow.document.open();
+    testFrame.contentWindow.document.write("<html>" + head + body + "</html>");
+    testFrame.contentWindow.document.close();
+    Rainbow.color(testFrame.contentWindow.document, function () {
+        var e1 = findElementWithText(testFrame.contentWindow.document.documentElement, "'" + tName + "'");
+        if (e1 != null) {
+            var e2 = findFunctionStartElement(e1);
+            var e = e2 == null ? e1 : e2;
+            var offsetTop = e.offsetTop;
+            testFrame.contentWindow.scrollTo(0, offsetTop);
+        }
+
+    });
+    testFrameRow.style.display = "";
+}
+
+function findFunctionStartElement(e) {
+    var p = e.parentNode;
+    var e2 = e;
+    while ((e2 = e2.previousElementSibling) != null) {
+        if (e2.getAttribute("class") == "function call" && e2.childNodes.length > 0) {
+            var t = e2.childNodes[0];
+            if (t.nodeType == Node.TEXT_NODE && (t.textContent == "test" || t.textContent == "async_test")) {
+                var e3 = e2.previousElementSibling;
+                while (e3 != null && e3.getAttribute("class") == "comment") {
+                    e2 = e3;
+                    e3 = e3.previousElementSibling;
+                }
+                return e2;
+            }
+        }
+    }
+    return null;
+}
+
+function findElementWithText(n, text) {
+    if (n.nodeType == Node.TEXT_NODE && n.textContent.indexOf(text) >= 0) {
+        return n.parentNode;
+    }
+    var childNodes = n.childNodes;
+    for (var i = 0; i < childNodes.length; i++) {
+        var res = findElementWithText(childNodes[i], text);
+        if (res != null) {
+            return res;
+        }
+    }
+    return null;
+}
+
+function hideTestFrame() {
+    testFrameRow.style.display = "none";
+}
+
+</script>
+
