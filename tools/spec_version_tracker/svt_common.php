@@ -28,6 +28,6 @@ function save_file_and_commit($spec_file_name, $content, $repo_dir, $message)
 
     tc_message("Committing changes to git");
 //    sh_svn($spec_dir, "commit -m \"$message\"");
-    sh_git($repo_dir, "commit -m \"$message\"");
+    sh_git($repo_dir, "commit -a -m \"$message\"");
     sh_git($repo_dir, "push origin master");
 }
