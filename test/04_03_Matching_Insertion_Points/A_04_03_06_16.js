@@ -31,7 +31,7 @@ A_04_03_06_16_T01.step(function () {
             subdiv1.innerHTML = '<ul><content select=":only-of-type"></content></ul>';
             s.appendChild(subdiv1);
 
-            //All li1-li6 elements shoul be invisible
+            //All li1-li6 elements should be invisible
             assert_equals(d.querySelector('#li1').offsetTop, 0,
                 'Point 1: element shouldn\'t match :only-of-type pseudo-class selector');
             assert_equals(d.querySelector('#li2').offsetTop, 0,
