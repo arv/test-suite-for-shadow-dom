@@ -31,7 +31,7 @@ A_04_03_06_15_T01.step(function () {
             subdiv1.innerHTML = '<ul><content select=":last-of-type"></content></ul>';
             s.appendChild(subdiv1);
 
-            //li6 should be visible, all others not
+            //li6 must be visible, all others not
             assert_true(d.querySelector('#li6').offsetTop > 0,
                 'Element should match :last-of-type pseudo-class selector');
             assert_equals(d.querySelector('#li1').offsetTop, 0,
