@@ -13,7 +13,6 @@ var A_04_07_01 = {
 
 
 test(unit(function (ctx) {
-
     var d = newRenderedHTMLDocument(ctx);
     var div = d.createElement('div');
     div.innerHTML = '' + 
