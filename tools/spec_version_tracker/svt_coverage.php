@@ -9,7 +9,7 @@ try {
     $content = fetch_spec_content();
 
     $content = str_replace("a href=\"http",
-                "a target='_blank' href=\"http", $content);
+        "a target='_blank' href=\"http", $content);
 
     $content = str_replace("\"../../",
         "\"$spec_url_dir/../../", $content);
@@ -30,7 +30,7 @@ try {
             $content = "$content\ninclude(\"$name\");";
         }
     }
-    save_file_and_commit($tests_file_name, $content, $tests_dir, "updating all_tests.js file");
+    save_file_and_commit($tests_file_name, $content, $tests_dir + "/..", "auto updating 'all_tests.js' and spec files");
 } catch (Exception $e) {
     halt("Failed with exception!:" . $e->getMessage());
 }

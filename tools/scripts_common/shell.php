@@ -29,6 +29,15 @@ function sh_cp($from, $to, $opts = "")
     }
 }
 
+function sh_git($dir, $git_command)
+{
+    $command = "git $git_command";
+    $out = ps_exec($command, true, $dir);
+    if (match_any_token($out, array("fatal:"))) {
+        throw new RuntimeException("Failed to run git command: $command. Output: $out");
+    }
+}
+
 function sh_svn($dir, $svn_command)
 {
     $command = "svn $svn_command";
@@ -36,5 +45,4 @@ function sh_svn($dir, $svn_command)
     if (match_any_token($out, array("is not a working copy", "Commit failed"))) {
         throw new RuntimeException("Failed to run SVN command: $command. Output: $out");
     }
-
 }

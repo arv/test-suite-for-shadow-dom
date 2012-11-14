@@ -19,7 +19,7 @@ function fetch_spec_content()
 }
 
 
-function save_file_and_commit($spec_file_name, $content, $spec_dir, $message)
+function save_file_and_commit($spec_file_name, $content, $repo_dir, $message)
 {
     tc_message("Storing content to $spec_file_name");
     if (file_put_contents($spec_file_name, $content) == false) {
@@ -27,5 +27,7 @@ function save_file_and_commit($spec_file_name, $content, $spec_dir, $message)
     }
 
     tc_message("Committing changes to SVN");
-    sh_svn($spec_dir, "commit -m \"$message\"");
+//    sh_svn($spec_dir, "commit -m \"$message\"");
+    sh_git($repo_dir, "commit -m \"$message\"");
+    sh_git($repo_dir, "push origin master");
 }
