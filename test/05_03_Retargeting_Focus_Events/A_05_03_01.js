@@ -45,11 +45,11 @@ A_05_03_01_T01.step(unit(function (ctx) {
     d.body.appendChild(inp2);
     
     s.addEventListener('DOMFocusOut', A_05_03_01_T01.step_func(function(event) {
-    	assert_equals(event.target.getAttribute('id'), 'inp1', 'Inside shadoe tree: Wrong target');  	
+    	assert_equals(event.target.getAttribute('id'), 'inp1', 'Inside shadow tree: Wrong target');  	
     }), false);
     
     d.body.addEventListener('DOMFocusOut', A_05_03_01_T01.step_func(function(event) {
-    	assert_equals(event.target.getAttribute('id'), 'host', 'Inside shadoe tree: Wrong target');  	
+    	assert_equals(event.target.getAttribute('id'), 'host', 'Inside shadow tree: Wrong target');  	
     }), false);
     
     inp1.focus();
@@ -156,35 +156,35 @@ var A_05_03_01_T04 = async_test('A_05_03_01_T04', PROPS(A_05_03_01, {
 
 A_05_03_01_T04.step(unit(function (ctx) {	
 	
- var d = newRenderedHTMLDocument(ctx);
- 
- var host = d.createElement('div');
- host.setAttribute('style', 'height:50%; width:100%');
- host.setAttribute('id', 'host');
- d.body.appendChild(host);
- 
- //Shadow root to play with
- var s = new SR(host);
- 
- var inp1 = d.createElement('input');
- inp1.setAttribute('id', 'inp1');
- inp1.setAttribute('type', 'checkbox');
- s.appendChild(inp1);
- 
- var inp2 = d.createElement('input');
- inp2.setAttribute('id', 'inp2');
- inp2.setAttribute('type', 'checkbox');
- s.appendChild(inp2);
- 
- inp1.focus();
- 
- d.body.addEventListener('DOMFocusOut', A_05_03_01_T04.step_func(function(event) {
- 	assert_true(false, 'Event should be stopped at Shadow boundary');  	
- }), false);
- 
- inp2.focus();
- 
- A_05_03_01_T04.done();
+	 var d = newRenderedHTMLDocument(ctx);
+	 
+	 var host = d.createElement('div');
+	 host.setAttribute('style', 'height:50%; width:100%');
+	 host.setAttribute('id', 'host');
+	 d.body.appendChild(host);
+	 
+	 //Shadow root to play with
+	 var s = new SR(host);
+	 
+	 var inp1 = d.createElement('input');
+	 inp1.setAttribute('id', 'inp1');
+	 inp1.setAttribute('type', 'checkbox');
+	 s.appendChild(inp1);
+	 
+	 var inp2 = d.createElement('input');
+	 inp2.setAttribute('id', 'inp2');
+	 inp2.setAttribute('type', 'checkbox');
+	 s.appendChild(inp2);
+	 
+	 inp1.focus();
+	 
+	 d.body.addEventListener('DOMFocusOut', A_05_03_01_T04.step_func(function(event) {
+	 	assert_true(false, 'Event should be stopped at Shadow boundary');  	
+	 }), false);
+	 
+	 inp2.focus();
+	 
+	 A_05_03_01_T04.done();
 }));
 
 
@@ -199,130 +199,130 @@ var A_05_03_01_T05 = async_test('A_05_03_01_T05', PROPS(A_05_03_01, {
 
 A_05_03_01_T05.step(unit(function (ctx) {	
 	
-var d = newRenderedHTMLDocument(ctx);
-
-var host = d.createElement('div');
-host.setAttribute('id', 'host');
-d.body.appendChild(host);
-
-var inp1 = d.createElement('input');
-inp1.setAttribute('id', 'inp1');
-inp1.setAttribute('type', 'checkbox');
-inp1.setAttribute('class', 'clazz1');
-host.appendChild(inp1);
-
-var inp2 = d.createElement('input');
-inp2.setAttribute('id', 'inp2');
-inp2.setAttribute('type', 'checkbox');
-inp2.setAttribute('class', 'clazz2');
-host.appendChild(inp2);
-
-var inp3 = d.createElement('input');
-inp3.setAttribute('id', 'inp3');
-inp3.setAttribute('type', 'checkbox');
-inp3.setAttribute('class', 'clazz1');
-host.appendChild(inp3);
-
-
-//Shadow root to play with
-var s = new SR(host);
-
-var shadowDiv = document.createElement('div');
-shadowDiv.innerHTML = '<content select=".clazz1"></content>';
-s.appendChild(shadowDiv);
-
-//element outside the shadow tree
-var inp4 = d.createElement('input');
-inp4.setAttribute('id', 'inp4');
-inp4.setAttribute('type', 'checkbox');
-inp4.setAttribute('class', 'clazz1');
-d.body.appendChild(inp4);
-
-inp1.focus();
-
-s.addEventListener('DOMFocusOut', A_05_03_01_T05.step_func(function(event) {
-	assert_equals(event.target.getAttribute('id'), 'inp1', 'Inside shadow tree: ' +
-			'Event for nodes, distributed ' +
-			'agains insertion points shouldn\'t be retargeted');  	
-}), false);
-
-
-d.body.addEventListener('DOMFocusOut', A_05_03_01_T05.step_func(function(event) {
-	assert_equals(event.target.getAttribute('id'), 'inp1', 'Outside shadow tree: ' + 
-			'Event for nodes, distributed ' +
-			'agains insertion points shouldn\'t be retargeted');  	
-}), false);
-
-inp4.focus();
-
-A_05_03_01_T05.done();
+	var d = newRenderedHTMLDocument(ctx);
+	
+	var host = d.createElement('div');
+	host.setAttribute('id', 'host');
+	d.body.appendChild(host);
+	
+	var inp1 = d.createElement('input');
+	inp1.setAttribute('id', 'inp1');
+	inp1.setAttribute('type', 'checkbox');
+	inp1.setAttribute('class', 'clazz1');
+	host.appendChild(inp1);
+	
+	var inp2 = d.createElement('input');
+	inp2.setAttribute('id', 'inp2');
+	inp2.setAttribute('type', 'checkbox');
+	inp2.setAttribute('class', 'clazz2');
+	host.appendChild(inp2);
+	
+	var inp3 = d.createElement('input');
+	inp3.setAttribute('id', 'inp3');
+	inp3.setAttribute('type', 'checkbox');
+	inp3.setAttribute('class', 'clazz1');
+	host.appendChild(inp3);
+	
+	
+	//Shadow root to play with
+	var s = new SR(host);
+	
+	var shadowDiv = document.createElement('div');
+	shadowDiv.innerHTML = '<content select=".clazz1"></content>';
+	s.appendChild(shadowDiv);
+	
+	//element outside the shadow tree
+	var inp4 = d.createElement('input');
+	inp4.setAttribute('id', 'inp4');
+	inp4.setAttribute('type', 'checkbox');
+	inp4.setAttribute('class', 'clazz1');
+	d.body.appendChild(inp4);
+	
+	inp1.focus();
+	
+	s.addEventListener('DOMFocusOut', A_05_03_01_T05.step_func(function(event) {
+		assert_equals(event.target.getAttribute('id'), 'inp1', 'Inside shadow tree: ' +
+				'Event for nodes, distributed ' +
+				'agains insertion points shouldn\'t be retargeted');  	
+	}), false);
+	
+	
+	d.body.addEventListener('DOMFocusOut', A_05_03_01_T05.step_func(function(event) {
+		assert_equals(event.target.getAttribute('id'), 'inp1', 'Outside shadow tree: ' + 
+				'Event for nodes, distributed ' +
+				'agains insertion points shouldn\'t be retargeted');  	
+	}), false);
+	
+	inp4.focus();
+	
+	A_05_03_01_T05.done();
 }));
 
 
 //Retargeting shouldn't occur for DOM tree nodes distributed
 //among insertion points. Check DOMFocusIn
 var A_05_03_01_T06 = async_test('A_05_03_01_T06', PROPS(A_05_03_01, {
-author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-reviewer:''
+	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+	reviewer:''
 }));
 
 A_05_03_01_T06.step(unit(function (ctx) {	
 	
-var d = newRenderedHTMLDocument(ctx);
-
-var host = d.createElement('div');
-host.setAttribute('id', 'host');
-d.body.appendChild(host);
-
-var inp1 = d.createElement('input');
-inp1.setAttribute('id', 'inp1');
-inp1.setAttribute('type', 'checkbox');
-inp1.setAttribute('class', 'clazz1');
-host.appendChild(inp1);
-
-var inp2 = d.createElement('input');
-inp2.setAttribute('id', 'inp2');
-inp2.setAttribute('type', 'checkbox');
-inp2.setAttribute('class', 'clazz2');
-host.appendChild(inp2);
-
-var inp3 = d.createElement('input');
-inp3.setAttribute('id', 'inp3');
-inp3.setAttribute('type', 'checkbox');
-inp3.setAttribute('class', 'clazz1');
-host.appendChild(inp3);
-
-
-//Shadow root to play with
-var s = new SR(host);
-
-var shadowDiv = document.createElement('div');
-shadowDiv.innerHTML = '<content select=".clazz1"></content>';
-s.appendChild(shadowDiv);
-
-//element outside the shadow tree
-var inp4 = d.createElement('input');
-inp4.setAttribute('id', 'inp4');
-inp4.setAttribute('type', 'checkbox');
-inp4.setAttribute('class', 'clazz1');
-d.body.appendChild(inp4);
-
-inp4.focus();
-
-s.addEventListener('DOMFocusIn', A_05_03_01_T06.step_func(function(event) {
-	assert_equals(event.target.getAttribute('id'), 'inp1', 'Inside shadow tree: ' +
-			'Event for nodes, distributed ' +
-			'agains insertion points shouldn\'t be retargeted');  	
-}), false);
-
-
-d.body.addEventListener('DOMFocusIn', A_05_03_01_T05.step_func(function(event) {
-	assert_equals(event.target.getAttribute('id'), 'inp1', 'Outside shadow tree: ' + 
-			'Event for nodes, distributed ' +
-			'agains insertion points shouldn\'t be retargeted');  	
-}), false);
-
-inp1.focus();
-
-A_05_03_01_T06.done();
+	var d = newRenderedHTMLDocument(ctx);
+	
+	var host = d.createElement('div');
+	host.setAttribute('id', 'host');
+	d.body.appendChild(host);
+	
+	var inp1 = d.createElement('input');
+	inp1.setAttribute('id', 'inp1');
+	inp1.setAttribute('type', 'checkbox');
+	inp1.setAttribute('class', 'clazz1');
+	host.appendChild(inp1);
+	
+	var inp2 = d.createElement('input');
+	inp2.setAttribute('id', 'inp2');
+	inp2.setAttribute('type', 'checkbox');
+	inp2.setAttribute('class', 'clazz2');
+	host.appendChild(inp2);
+	
+	var inp3 = d.createElement('input');
+	inp3.setAttribute('id', 'inp3');
+	inp3.setAttribute('type', 'checkbox');
+	inp3.setAttribute('class', 'clazz1');
+	host.appendChild(inp3);
+	
+	
+	//Shadow root to play with
+	var s = new SR(host);
+	
+	var shadowDiv = document.createElement('div');
+	shadowDiv.innerHTML = '<content select=".clazz1"></content>';
+	s.appendChild(shadowDiv);
+	
+	//element outside the shadow tree
+	var inp4 = d.createElement('input');
+	inp4.setAttribute('id', 'inp4');
+	inp4.setAttribute('type', 'checkbox');
+	inp4.setAttribute('class', 'clazz1');
+	d.body.appendChild(inp4);
+	
+	inp4.focus();
+	
+	s.addEventListener('DOMFocusIn', A_05_03_01_T06.step_func(function(event) {
+		assert_equals(event.target.getAttribute('id'), 'inp1', 'Inside shadow tree: ' +
+				'Event for nodes, distributed ' +
+				'agains insertion points shouldn\'t be retargeted');  	
+	}), false);
+	
+	
+	d.body.addEventListener('DOMFocusIn', A_05_03_01_T05.step_func(function(event) {
+		assert_equals(event.target.getAttribute('id'), 'inp1', 'Outside shadow tree: ' + 
+				'Event for nodes, distributed ' +
+				'agains insertion points shouldn\'t be retargeted');  	
+	}), false);
+	
+	inp1.focus();
+	
+	A_05_03_01_T06.done();
 }));
