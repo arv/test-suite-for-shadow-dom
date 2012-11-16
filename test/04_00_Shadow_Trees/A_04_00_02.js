@@ -2,7 +2,7 @@
 
 var A_04_00_02 = {
     name:'A_04_00_02',
-    assert:' Only elements must be allowed to become shadow hosts',
+    assert:'Nodes, that are not elements, are not allowed to become shadow hosts',
     link:'http://www.w3.org/TR/shadow-dom/#shadow-dom-subtrees',
     highlight:'Only elements must be allowed to become shadow hosts.'
 };
