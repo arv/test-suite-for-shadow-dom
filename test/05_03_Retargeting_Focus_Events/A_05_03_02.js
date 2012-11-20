@@ -21,45 +21,6 @@ var A_05_03_02 = {
 };
 
 
-//Example taken from http://www.w3.org/TR/shadow-dom/#event-retargeting-example
-A_05_03_02.createTestMediaPlayer = function(d) {
-    d.body.innerHTML = '' +
-	'<div id="player">' +
-		'<input type="checkbox" id="outside-control">' +
-		'<div id="player-shadow-root">' +
-	    '</div>' +
-	'</div>';
-
-	var playerShadowRoot = new SR(d.querySelector('#player-shadow-root'));
-	playerShadowRoot.innerHTML = '' + 
-		'<div id="controls">' +
-			'<button class="play-button">PLAY</button>' +
-			'<input type="range" id="timeline">' +
-				'<div id="timeline-shadow-root">' +
-				'</div>' +
-			'</input>' +
-		    '<div class="volume-slider-container" id="volume-slider-container">' +
-		        '<input type="range" class="volume-slider" id="volume-slider">' +
-		            '<div id="volume-shadow-root">' +		                
-		            '</div>' +
-		        '</input>' +
-		    '</div>' +
-		'</div>';
-	
-	var timeLineShadowRoot = new SR(playerShadowRoot.querySelector('#timeline-shadow-root'));
-	timeLineShadowRoot.innerHTML =  '<div class="slider-thumb" id="timeline-slider-thumb"></div>';
-	
-	var volumeShadowRoot = new SR(playerShadowRoot.querySelector('#volume-shadow-root'));
-	volumeShadowRoot.innerHTML = '<div class="slider-thumb" id="volume-slider-thumb"></div>';
-	
-	return {
-		'playerShadowRoot': playerShadowRoot,
-		'timeLineShadowRoot': timeLineShadowRoot,
-		'volumeShadowRoot': volumeShadowRoot
-	};
-}
-
-
 //test blur event
 var A_05_03_02_T01 = async_test('A_05_03_02_T01', PROPS(A_05_03_02, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -71,7 +32,7 @@ A_05_03_02_T01.step(unit(function (ctx) {
 	
     var d = newRenderedHTMLDocument(ctx);
     
-    var roots = A_05_03_02.createTestMediaPlayer(d);
+    var roots = createTestMediaPlayer(d);
     
     roots.playerShadowRoot.querySelector('.volume-slider').focus();
     
