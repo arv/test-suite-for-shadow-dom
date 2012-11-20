@@ -11,10 +11,7 @@ policies and contribution forms [3].
 var A_05_01_02 = {
     name:'A_05_01_02',
     assert:'Event Retargeting:' +
-		'Event retargeting is a process of computing relative targets for each ancestor of the node ' +
-    	'at which the event is dispatched. A relative target is a DOM node that most accurately ' +
-    	'represents the target of a dispatched event at a given ancestor while maintaining ' +
-    	'the upper boundary encapsulation',
+		'Event retargeting for document nodes distributed among insertion points',
     link:'http://www.w3.org/TR/shadow-dom/#event-retargeting',
     highlight:'A relative target is a node that most accurately represents the target of ' +
     	'a dispatched event at a given ancestor while maintaining the upper boundary encapsulation'
@@ -44,9 +41,9 @@ A_05_01_02_T1.step(function () {
         div.innerHTML = '<ul id="ip_wrapper"><content select=".shadow"></content></ul>';
         s.appendChild(div);
     	  
-    	ul.addEventListener('click', A_05_01_02_T1.step_func(function (event) {
-            assert_equals(event.target.tagName, 'LI', 'Information about event target crossing ' +
-            		'the shadow boundaries should not be adjusted for documrnt nodes distributed' +
+    	d.body.addEventListener('click', A_05_01_02_T1.step_func(function (event) {
+            assert_equals(event.target.tagName, 'UL', 'Information about event target crossing ' +
+            		'the shadow boundaries should be adjusted for document nodes distributed' +
             		'among insertion points');
         }), false);
     	
