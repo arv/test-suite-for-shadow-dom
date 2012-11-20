@@ -107,6 +107,4 @@ A_05_01_01_T2.step(function () {
 });
 
 
-//TODO (sgrekhov) Add tests for events dispatched by elements in the fallback content
-
 
