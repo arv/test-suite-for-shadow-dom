@@ -11,8 +11,7 @@ policies and contribution forms [3].
 var A_05_01_01 = {
     name:'A_05_01_01',
     assert:'Event Retargeting:' +
-		'In the cases where events cross the shadow boundaries, the event\'s information ' +
-		'about the target of the event is adjusted in order to maintain upper boundary encapsulation',
+		'test that event.target is retargeted when event crosses shadow boundary and vice versa',
     link:'http://www.w3.org/TR/shadow-dom/#event-retargeting',
     highlight:'In the cases where events cross the shadow boundaries, the event\'s information about the target ' +
     	'of the event is adjusted in order to maintain upper boundary encapsulation'
@@ -49,7 +48,7 @@ A_05_01_01_T1.step(function () {
 	  
     	div2.addEventListener('click', A_05_01_01_T1.step_func(function (event) {
             assert_equals(event.target.tagName, 'INPUT', 'Information about target of the event that ' +
-            		'doen\'t cross the shadow boundaries should not be adjusted');      		
+            		'doesn\'t cross the shadow boundaries should not be adjusted');      		
         }), false);
     	
         var event = d.createEvent('HTMLEvents');
