@@ -126,3 +126,17 @@ test(function () {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
     reviewer:'Sergey G. Grekhov <sgrekhov@unipro.ru>'
 }));
+
+//check that document can't be used as a shadow host
+test(function () {
+    var d = newDocument();
+
+    try {
+        var s = new SR(d);
+        assert(false, 'Document can\'t be used as shadow root');
+    } catch (e) {
+        rethrowInternalErrors(e);
+    }
+}, 'A_04_00_02_T08', PROPS(A_04_00_02, {
+    author:'Aleksei Yu. Semenov',
+}));
