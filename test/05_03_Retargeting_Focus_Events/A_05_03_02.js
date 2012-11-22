@@ -45,8 +45,8 @@ A_05_03_02_T01.step(unit(function (ctx) {
     roots.playerShadowRoot.querySelector('.volume-slider').addEventListener('blur', 
     		A_05_03_02_T01.step_func(function(event) {
     			invoked = true;
-	    	assert_equals(event.target.getAttribute('id'), 'volume-slider', 
-	    			'Wrong target');
+		    	assert_equals(event.target.getAttribute('id'), 'volume-slider', 
+		    			'Wrong target');
 	    }), false);
         
     // move focus out of shadow tree. blur should be fired

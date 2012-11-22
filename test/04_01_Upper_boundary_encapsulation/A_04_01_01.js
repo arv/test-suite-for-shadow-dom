@@ -11,14 +11,13 @@ policies and contribution forms [3].
 var A_04_01_01 = {
     name:'A_04_01_01',
     assert:'Upper-boundary encapsulation:' +
-        'The ownerDocument property refers to the document of the shadow host',
+        'The ownerDocument property of all nodes in shadow tree refers to the document of the shadow host',
     link:'http://www.w3.org/TR/shadow-dom/#upper-boundary-encapsulation',
     highlight:'The ownerDocument property refers to the document of the shadow host'
 };
 
 
-// check that top-level elements (documentElement, head, body)
-// has valid owner document when used as shadow hosts
+// shadow host: top-level elements (documentElement, head, body)
 test(function () {
     var d = newHTMLDocument();
 
@@ -36,8 +35,7 @@ test(function () {
     reviewer:'Mikhail Fursov <mfursov@unipro.ru>'
 }));
 
-// check that elements with different depth in the original document
-// has valid owner document when used as shadow hosts
+// shadow host: elements with different depth in the original document
 test(function () {
     var d = newHTMLDocument();
 
@@ -79,8 +77,7 @@ test(function () {
     reviewer:'Mikhail Fursov <mfursov@unipro.ru>'
 }));
 
-// check that element created by different document automatically
-// gets valid owner document when added to shadow tree
+// shadow tree node: created by different document
 test(function () {
     var d1 = newHTMLDocument();
     var d2 = newHTMLDocument();
@@ -97,8 +94,8 @@ test(function () {
     reviewer:'Mikhail Fursov <mfursov@unipro.ru>'
 }));
 
-// check that all child elements of adopted element automatically
-// gets valid owner document when added to shadow tree
+// check that all children nodes of shadow root
+// get valid owner document when added to shadow tree
 test(function () {
     var d1 = newHTMLDocument();
     var d2 = newHTMLDocument();
@@ -115,10 +112,10 @@ test(function () {
 
 }, 'A_04_01_01_T05', PROPS(A_04_01_01, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov'
 }));
 
-// check that parent document of adopted element still refer to the
+// check that parent element of shadow node still refer to the
 // original owner document
 test(function () {
     var d1 = newHTMLDocument();
