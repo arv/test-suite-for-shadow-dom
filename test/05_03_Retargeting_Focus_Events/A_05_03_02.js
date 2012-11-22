@@ -32,6 +32,8 @@ A_05_03_02_T01.step(unit(function (ctx) {
 	
     var d = newRenderedHTMLDocument(ctx);
     
+    var invoked = false;
+    
     var roots = createTestMediaPlayer(d);
     
     roots.playerShadowRoot.querySelector('.volume-slider').focus();
@@ -42,12 +44,15 @@ A_05_03_02_T01.step(unit(function (ctx) {
     //For #volume-slider relative target is #volume-slider
     roots.playerShadowRoot.querySelector('.volume-slider').addEventListener('blur', 
     		A_05_03_02_T01.step_func(function(event) {
+    			invoked = true;
 	    	assert_equals(event.target.getAttribute('id'), 'volume-slider', 
 	    			'Wrong target');
 	    }), false);
         
     // move focus out of shadow tree. blur should be fired
     d.querySelector('#outside-control').focus();
+    
+    assert_true(invoked, 'Event listener was not invoked');
     
     A_05_03_02_T01.done();
 }));

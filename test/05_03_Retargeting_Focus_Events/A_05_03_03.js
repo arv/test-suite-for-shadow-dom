@@ -32,6 +32,8 @@ A_05_03_03_T01.step(unit(function (ctx) {
 	
     var d = newRenderedHTMLDocument(ctx);
     
+    var invoked = false;
+    
     var roots = createTestMediaPlayer(d);
     
     d.querySelector('#outside-control').focus();
@@ -42,12 +44,14 @@ A_05_03_03_T01.step(unit(function (ctx) {
     //For #volume-slider relative target is #volume-slider
     roots.playerShadowRoot.querySelector('.volume-slider').addEventListener('focus', 
     		A_05_03_03_T01.step_func(function(event) {
-	    	assert_equals(event.target.getAttribute('id'), 'volume-slider', 
-	    			'Wrong target');
+    			invoked = true;
+		    	assert_equals(event.target.getAttribute('id'), 'volume-slider', 
+		    			'Wrong target');
 	    }), false);
         
     roots.playerShadowRoot.querySelector('.volume-slider').focus();
     
+    assert_true(invoked, 'Event listener was not invoked');
     
     A_05_03_03_T01.done();
 }));
