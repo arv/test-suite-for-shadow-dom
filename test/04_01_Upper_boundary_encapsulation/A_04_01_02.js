@@ -28,7 +28,7 @@ test(function () {
     // now add body
     s.appendChild(d2.body);
 
-    assert_equals(d2.body, null, '"body" in shadow DOM must not be exposed ' +
+    assert_equals(d1.body, null, '"body" in shadow DOM must not be exposed ' +
         'via the "document.body" DOM accessor');
 
 }, 'A_04_01_02_T01', PROPS(A_04_01_02, {
