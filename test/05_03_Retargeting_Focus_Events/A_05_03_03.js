@@ -9,7 +9,7 @@ policies and contribution forms [3].
 */
 
 var A_05_03_03 = {
-    name:'A_05_03_02',
+    name:'A_05_03_03',
     assert:'Retargeting focus events:' +
 		'The focus event must be treated in the same way ' +
 		'as events with a relatedTarget, where the corresponding node that is losing focus as ' +
