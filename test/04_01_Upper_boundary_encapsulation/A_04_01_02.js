@@ -11,7 +11,7 @@ policies and contribution forms [3].
 var A_04_01_02 = {
     name:'A_04_01_02',
     assert:'Upper-boundary encapsulation: ' +
-        'The nodes and named elements are not accessible using shadow host\'s ' +
+        'The shadow nodes and named shadow elements are not accessible using shadow host\'s ' +
         'document DOM tree accessors',
     link:'http://www.w3.org/TR/shadow-dom/#upper-boundary-encapsulation',
     highlight:'The nodes and named elements are not accessible using shadow host\'s document DOM tree accessors'
@@ -22,13 +22,15 @@ var A_04_01_02 = {
 test(function () {
     var d1 = newHTMLDocument();
     var d2 = newHTMLDocument();
+
     var s = new SR(d1.documentElement);
 
     assert_not_equals(d2.body, null, 'initial DOM model state check failed!');
-    // now add body
+    var d2_body = d2.body; // remember the reference to d2.body
+    // now add body to shadow tree
     s.appendChild(d2.body);
 
-    assert_equals(d1.body, null, '"body" in shadow DOM must not be exposed ' +
+    assert_not_equals(d1.body, d2_body, '"body" in shadow DOM must not be exposed ' +
         'via the "document.body" DOM accessor');
 
 }, 'A_04_01_02_T01', PROPS(A_04_01_02, {
@@ -44,11 +46,12 @@ test(function () {
     var s = new SR(d1.documentElement);
 
     assert_not_equals(d2.head, null, 'initial DOM model state check failed!');
+    var d2_head = d2.head;
 
     // now add head (with title)
     s.appendChild(d2.head);
 
-    assert_equals(d2.head, null, '"head" in shadow DOM must not be exposed ' +
+    assert_not_equals(d1.head, d2_head, '"head" in shadow DOM must not be exposed ' +
         'via the "document.head" DOM accessor');
 
     assert_equals(d2.title, '', '"title" text in shadow DOM must not be ' +
@@ -67,6 +70,9 @@ test(function () {
 
     allLengthBefore = d.all.length;
     e = d.createElement('br');
+    d.body.appendChild(e);
+    assert_true(d.all.length>allLengthBefore, 'The element should be accessible before test');
+
     s.appendChild(e);
 
     assert_equals(d.all.length, allLengthBefore, 'elements in shadow DOM must not ' +
@@ -85,6 +91,9 @@ test(function () {
 
     e = d.createElement('a');
     e.setAttribute('name', 'x');
+    d.body.appendChild(e);
+    assert_true(d.anchors.length>0, 'The element should be accessible before test');
+
     s.appendChild(e);
 
     assert_equals(d.anchors.length, 0,
@@ -103,6 +112,9 @@ test(function () {
     var s = new SR(d.documentElement);
 
     e = d.createElement('applet');
+    d.body.appendChild(e);
+    assert_true(d.applets.length>0, 'The element should be accessible before test');
+
     s.appendChild(e);
     assert_equals(d.applets.length, 0,
         '"applets" elements in shadow DOM must not ' +
@@ -121,6 +133,9 @@ test(function () {
     var s = new SR(d.documentElement);
 
     e = d.createElement('embed');
+    d.body.appendChild(e);
+    assert_true(d.embeds.length>0, 'The element should be accessible before test');
+
     s.appendChild(e);
     assert_equals(d.embeds.length, 0, '"embeds" in shadow DOM must not be exposed via the ' +
         '"document.embeds" DOM accessor');
@@ -137,6 +152,9 @@ test(function () {
     var s = new SR(d.documentElement);
 
     e = d.createElement('form');
+    d.body.appendChild(e);
+    assert_true(d.forms.length>0, 'The element should be accessible before test');
+
     s.appendChild(e);
     assert_equals(d.forms.length, 0, '"form" elements in shadow DOM must not be exposed via the ' +
         'document.forms DOM accessor');
@@ -153,6 +171,9 @@ test(function () {
     var s = new SR(d.documentElement);
 
     var e = d.createElement('img');
+    d.body.appendChild(e);
+    assert_true(d.images.length>0, 'The element should be accessible before test');
+
     s.appendChild(e);
     assert_equals(d.images.length, 0, '"images" in shadow DOM must not be exposed via the ' +
         '"document.images" DOM accessor');
@@ -171,6 +192,9 @@ test(function () {
 
     e = d.createElement('a');
     e.setAttribute('href', 'http://www.w3.org/');
+    d.body.appendChild(e);
+    assert_true(d.links.length>0, 'The element should be accessible before test');
+
     s.appendChild(e);
     assert_equals(d.links.length, 0, '"a" elements with "href" attributes in shadow DOM must not ' +
         'be exposed via the "document.links" DOM accessor');
@@ -189,6 +213,9 @@ test(function () {
 
     e = d.createElement('area');
     e.setAttribute('href', 'http://www.w3.org/');
+    d.body.appendChild(e);
+    assert_true(d.links.length>0, 'The element should be accessible before test');
+
     s.appendChild(e);
     assert_equals(d.links.length, 0, '"area" elements with href attributes in shadow DOM must ' +
         'not be exposed via the "document.links" DOM accessor');
@@ -206,7 +233,11 @@ test(function () {
     var s = new SR(d.documentElement);
 
     e = d.createElement('script');
+    d.head.appendChild(e);
+    assert_true(d.scripts.length>0, 'The element should be accessible before test');
+
     s.appendChild(e);
+
     assert_equals(d.scripts.length, 0, '"script" elements in shadow DOM must not be exposed via ' +
         'the "document.scripts" DOM accessor');
 
@@ -242,7 +273,11 @@ test(function () {
 
     e = d.createElement('div');
     e.setAttribute('name', 'bob');
+    d.body.appendChild(e);
+    assert_true(d.getElementsByTagName('div').length > 0, 'The element should be accessible before test');
+
     s.appendChild(e);
+
     assert_equals(d.getElementsByTagName('div').length, 0, 'elements (like "div") in shadow DOM ' +
         'must not be exposed via the getElementsByTagName DOM accessor');
 
@@ -250,6 +285,7 @@ test(function () {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
     reviewer:'Sergey G. Grekhov <sgrekhov@unipro.ru>'
 }));
+
 
 // check that element is not exposed via 'getElementByClassName' accessor
 // when added to shadow tree
@@ -260,6 +296,9 @@ test(function () {
     e = d.createElement('div');
     e.setAttribute('name', 'bob');
     e.setAttribute('class', 'clazz');
+    d.body.appendChild(e);
+    assert_true(d.getElementsByClassName('clazz').length > 0, 'The element should be accessible before test');
+
     s.appendChild(e);
     assert_equals(d.getElementsByClassName('clazz').length, 0, 'elements (like "div") in shadow DOM ' +
         'must not be exposed via the getElementsByClassName DOM accessor');
@@ -267,4 +306,23 @@ test(function () {
 }, 'A_04_01_02_T12_03', PROPS(A_04_01_02, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
     reviewer:'Sergey G. Grekhov <sgrekhov@unipro.ru>'
+}));
+
+//check that element is not exposed via 'getElementByTagNameNS' accessor
+//when added to shadow tree
+test(function () {
+	var d = newHTMLDocument();
+	var s = new SR(d.documentElement);
+
+	e = d.createElementNS('http://www.w3c.org/namespace','div');
+	d.body.appendChild(e);
+	assert_true(d.getElementsByTagNameNS('http://www.w3c.org/namespace','div').length > 0, 'The element should be accessible before test');
+
+	s.appendChild(e);
+
+	assert_equals(d.getElementsByTagNameNS('http://www.w3c.org/namespace','div').length, 0, 'elements (like "div") in shadow DOM ' +
+	   'must not be exposed via the getElementsByTagNameNS DOM accessor');
+
+}, 'A_04_01_02_T12_04', PROPS(A_04_01_02, {
+	author:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
