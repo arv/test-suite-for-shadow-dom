@@ -70,8 +70,8 @@ function newIFrame(ctx, src) {
     );
     return iframe;
 }
-function newRenderedHTMLDocument(ctx, src) {
-    var frame = newIFrame(ctx, src);
+function newRenderedHTMLDocument(ctx) {
+    var frame = newIFrame(ctx);
     return frame.contentWindow.document;
 }
 
