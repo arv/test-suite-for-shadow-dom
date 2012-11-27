@@ -69,3 +69,6 @@ include("05_04_Events_that_are_Always_Stopped/A_05_04_09.js");
 include("05_05_Event_Dispatch/A_05_05_01.js");
 include("05_05_Event_Dispatch/A_05_05_02.js");
 include("05_05_Event_Dispatch/A_05_05_03.js");
+include("06_00_Styles/A_06_00_01.js");
+include("06_00_Styles/A_06_00_02.js");
+include("06_00_Styles/A_06_00_03.js");
