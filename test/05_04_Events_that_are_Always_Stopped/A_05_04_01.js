@@ -53,8 +53,12 @@ A_05_04_01_T01.step(unit(function (ctx) {
     A_05_04_01_T01.done();
 }));
 
-//Retargeting shouldn't occur for DOM tree nodes distributed
-//among insertion points. Check DOMFocusIn
+
+//Check event fired from DOM node distributed into insertion point
+//TODO (sgrekhov) see https://bugs.webkit.org/show_bug.cgi?id=103479
+//if this test is correct then add such test for other events.
+//Otherwise change expected result according result of the bug above and add for other
+//events anyway
 var A_05_04_01_T02 = async_test('A_05_04_01_T02', PROPS(A_05_04_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
@@ -95,8 +99,7 @@ A_05_04_01_T02.step(unit(function (ctx) {
 	s.appendChild(shadowDiv);
 		
     s.addEventListener('abort', A_05_04_01_T02.step_func(function(event) {
-    	alert(12);
-    	assert_equals(event.target.getAttribute('id'), 'inp1', 'Inside shadoe tree: Wrong target');  	
+    	assert_equals(event.target.getAttribute('id'), 'inp1', 'Inside shadow tree: Wrong target');  	
     }), false);
     
     d.body.addEventListener('abort', A_05_04_01_T02.step_func(function(event) {
