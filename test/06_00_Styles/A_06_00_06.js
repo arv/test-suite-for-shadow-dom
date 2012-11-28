@@ -22,7 +22,7 @@ test(unit(function (ctx) {
 	var d = newRenderedHTMLDocument(ctx);
     
     d.body.innerHTML = 
-    	'<div id="">' +
+    	'<div>' +
     		'<span class="invis" id="theTreeSpan">This is an element in the document tree</span>' +
     	'</div>' +
     	'<div id="sr">' +
