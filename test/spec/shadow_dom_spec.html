@@ -185,7 +185,7 @@
 
 <p>To solve this problem at its core, a new abstraction is introduced. The <dfn id="dfn-shadow-dom">shadow DOM</dfn> allows multiple <a target='_blank' href="http://www.w3.org/TR/domcore/#introduction-to-the-dom">DOM</a> trees (in addition to the <a href="#dfn-document-tree">document tree</a>) to be composed into one larger <a target='_blank' href="http://www.w3.org/TR/domcore/#trees">tree</a> when rendered. The existence of multiple <a target='_blank' href="http://www.w3.org/TR/domcore/#introduction-to-the-dom">DOM</a> trees is enabled by letting any <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-element">element</a> in the <a href="#dfn-document-tree">document tree</a> to host one or more additional <a target='_blank' href="http://www.w3.org/TR/domcore/#introduction-to-the-dom">DOM</a> trees. These <dfn id="dfn-shadow-tree">shadow trees</dfn> are governed by a set of rules that establish encapsulation <a href="#dfn-boundary">boundaries</a> while retaining the standard <a target='_blank' href="http://www.w3.org/TR/domcore/#introduction-to-the-dom">DOM</a> composability semantics.</p>
 
-<p>The encapsulation <a href="#dfn-boundary">boundaries</a> between <a href="#dfn-shadow-tree">shadow trees</a> are called <dfn id="dfn-shadow-boundary">shadow boundaries</dfn>. The <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-element">elements</a> that host <a href="#dfn-shadow-tree">shadow trees</a> are called <dfn id="dfn-shadow-host">shadow hosts</dfn>, and the <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-tree-root">roots</a> of the <a href="#dfn-shadow-tree">shadow trees</a> are called <dfn id="dfn-shadow-root">shadow roots</dfn>. Only <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-element">elements</a> <strong>must</strong> be allowed to become <a href="#dfn-shadow-host">shadow hosts</a>.</p>
+<p>The encapsulation <a href="#dfn-boundary">boundaries</a> between the <a href="dfn-document-tree">document tree</a> and <a href="#dfn-shadow-tree">shadow trees</a> are called <dfn id="dfn-shadow-boundary">shadow boundaries</dfn>. The <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-element">elements</a> that host <a href="#dfn-shadow-tree">shadow trees</a> are called <dfn id="dfn-shadow-host">shadow hosts</dfn>, and the <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-tree-root">roots</a> of the <a href="#dfn-shadow-tree">shadow trees</a> are called <dfn id="dfn-shadow-root">shadow roots</dfn>. Only <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-element">elements</a> <strong>must</strong> be allowed to become <a href="#dfn-shadow-host">shadow hosts</a>.</p>
 
 <object data="http://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/../../assets/images/shadow-trees.svg" width="800" height="430"></object>
 
@@ -598,7 +598,7 @@ For example, when developing a 2-dimensional range slider widget, which offers a
 <p>At the time of event dispatch:</p>
 <ul>
     <li>The <a target='_blank' href="http://www.w3.org/TR/domcore/#event"><code>Event</code></a> <a target='_blank' href="http://www.w3.org/TR/domcore/#dom-event-target"><code>target</code></a> and <a target='_blank' href="http://www.w3.org/TR/domcore/#dom-event-currenttarget"><code>currentTarget</code></a> attributes <strong>must</strong> return the <a href="#dfn-relative-target">relative target</a> for the <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-node">node</a> on which event listeners are <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-event-listener-invoke">invoked</a></li>
-    <li>The <a target='_blank' href="http://www.w3.org/TR/DOM-Level-3-Events/#events-UIEvent"><code>UIEvent</code></a> <a target='_blank' href="http://www.w3.org/TR/DOM-Level-3-Events/#events-MouseEvent-relatedTarget"><code>relatedTarget</code></a> attribute <strong>must</strong> return the <a href="#dfn-adjusted-related-target">adjusted related target</a></li>
+    <li>The <a target='_blank' href="http://www.w3.org/TR/DOM-Level-3-Events/#events-MouseEvent"><code>MouseEvent</code></a> <a target='_blank' href="http://www.w3.org/TR/DOM-Level-3-Events/#events-MouseEvent-relatedTarget"><code>relatedTarget</code></a> attribute <strong>must</strong> return the <a href="#dfn-adjusted-related-target">adjusted related target</a></li>
     <li>If the <a target='_blank' href="http://www.w3.org/TR/DOM-Level-3-Events/#events-MouseEvent-relatedTarget"><code>relatedTarget</code></a> and <a target='_blank' href="http://www.w3.org/TR/domcore/#dom-event-target"><code>target</code></a> are the same for a given node, its the event listeners <strong>must not</strong> be invoked</li>
     <li>When <em>capturing</em>, which entails processing step 3 of the <a target='_blank' href="http://www.w3.org/TR/domcore/#dispatching-events">event dispatch algorithm</a>, the <a target='_blank' href="http://www.w3.org/TR/domcore/#event"><code>Event</code></a> <a target='_blank' href="http://www.w3.org/TR/domcore/#dom-event-eventphase">eventPhase</a> attribute <strong>must</strong> return <a target='_blank' href="http://www.w3.org/TR/domcore/#dom-event-at_target">AT_TARGET</a> <strong>if</strong> the <a href="#dfn-relative-target">relative target</a> is same as the <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-node">node</a> on which event listeners are <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-event-listener-invoke">invoked</a></li>
     <li>When <em>bubbling</em>, which entails processing step 6 of the <a target='_blank' href="http://www.w3.org/TR/domcore/#dispatching-events">event dispatch algorithm</a>, the event listeners <strong>must not</strong> be <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-event-listener-invoke">invoked</a> on a <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-node">node</a> <strong>if</strong> it is the same as its <a href="#dfn-relative-target">relative target</a></li>
@@ -1045,13 +1045,13 @@ interface <dfn id="api-shadow-aware">ShadowAware</dfn> {
 <dt><dfn id="api-shadow-aware-create-shadow-root"><code>createShadowRoot</code></dfn></dt>
 <dd>When invoked, these steps <strong>must</strong> be run:
 <ol>
-    <li>If the <a target='_blank' href="http://www.w3.org/TR/domcore/#context-object">context object</a> is not an <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-element">element</a>, throw <a target='_blank' href="http://www.w3.org/TR/domcore/#dom-domexception-hierarchy_request_err">HierarchyRequestError</a> exception.</li>
+    <li>If the <a target='_blank' href="http://www.w3.org/TR/domcore/#context-object">context object</a> is not an <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-element">element</a>, throw <a target='_blank' href="http://www.w3.org/TR/domcore/#typemismatcherror">TypeMismatchError</a> exception.</li>
     <li>Otherwise:
     <ol>
         <li>Create a new instance of the <a href="#api-shadow-root"><code>ShadowRoot</code></a> object</li>
         <li>Establish the <a target='_blank' href="http://www.w3.org/TR/domcore/#context-object">context object</a> as the <a href="#dfn-shadow-host">shadow host</a> of the <a href="#api-shadow-root"><code>ShadowRoot</code></a> object</li>
         <li>Add the <a href="#api-shadow-root"><code>ShadowRoot</code></a> object at the top of the <a href="#dfn-tree-stack">tree stack</a> of its <a href="#dfn-shadow-host">host</a></li>
-        <li>Return <a href="#api-shadow-root"><code>ShadowRoot</code></a> object</li>
+        <li>Return <a href="#api-shadow-root"><code>ShadowRoot</code></a> object.</li>
     </ol></li>
 </ol>
 </dd>
@@ -1138,13 +1138,27 @@ interface <dfn id="api-html-content-element">HTMLContentElement</dfn> : <a targe
 <dd>
     <pre><code>
 interface <dfn id="api-html-shadow-element">HTMLShadowElement</dfn> : <a target='_blank' href="http://dev.w3.org/html5/spec/Overview.html#htmlelement">HTMLElement</a> {
+    readonly attribute <a href="#api-shadow-root">ShadowRoot</a>? <a href="#api-html-shadow-element-older-shadow-root">olderShadowRoot</a>;
     attribute boolean <a href="#api-html-shadow-element-reset-style-inheritance">resetStyleInheritance</a>;
 }
     </code></pre>
     <dl>
         <dt>Attributes</dt>
-        <dt id="api-html-shadow-element-reset-style-inheritance"><code>resetStyleInheritance</code> of type <code>boolean</code></dt>
-        <dd><strong>Must</strong> <a target='_blank' href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-dom-interfaces.html#reflect">reflect</a> the <a href="#markup-shadow-reset-style-inheritance">reset-style-inheritance</a> attribute.</dd>
+        <dd><dl>
+            <dt id="api-html-shadow-element-older-shadow-root"><code>olderShadowRoot</code> of type <a href="#api-shadow-root"><code>ShadowRoot</code></a></dt>
+            <dd>Represents the <a href="#dfn-shadow-tree">shadow tree</a> that is <a href="#dfn-as-rendered">rendered</a> in place of this <a href="#dfn-shadow-insertion-point">shadow insertion point</a></dd>
+            <dd>On getting, the attribute <strong>must</strong> return a result that is <a href="#dfn-processing-equivalence">equivalent</a> to running the following steps:
+            <ol>
+                <li>Let <var>TREE</var> be the <a href="#dfn-shadow-tree">shadow tree</a> that contains the <a target='_blank' href="http://www.w3.org/TR/domcore/#context-object">context object</a></li>
+                <li>If <var>TREE</var> does not exist, return <strong>null</strong>.</li>
+                <li>If <a target='_blank' href="http://www.w3.org/TR/domcore/#context-object">context object</a>, in <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-tree-order">tree order</a>, is not the first instance of <a href="#dfn-shadow-element"><code>shadow</code></a> element in <var>TREE</var>, return <strong>null</strong>.</li>
+                <li>Let <var>HOST</var> be the <a href="#dfn-shadow-host">shadow host</a> of <var>TREE</var></li>
+                <li>From <var>HOST</var>'s <a href="#dfn-tree-stack">tree stack</a>, return the <a href="#dfn-older-tree">older tree</a> relative to <var>TREE</var>, or <strong>null</strong> if no such <a href="#dfn-shadow-tree">shadow tree</a> is accessible.</li>
+            </ol></dd>
+            <dd>For <a target='_blank' href="http://www.whatwg.org/specs/web-apps/current-work/multipage/semantics.html#semantics">HTML elements</a>, the <a href="#html-elements-and-their-shadow-trees">UA-provided</a> <a href="#dfn-shadow-tree">shadow trees</a> <strong>must not</strong> be accessible.</dd>
+            <dt id="api-html-shadow-element-reset-style-inheritance"><code>resetStyleInheritance</code> of type <code>boolean</code></dt>
+            <dd><strong>Must</strong> <a target='_blank' href="http://www.whatwg.org/specs/web-apps/current-work/multipage/common-dom-interfaces.html#reflect">reflect</a> the <a href="#markup-shadow-reset-style-inheritance">reset-style-inheritance</a> attribute.</dd>
+        </dl></dd>
     </dl>
 </dd>
 </dl>
