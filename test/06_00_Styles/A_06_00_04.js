@@ -20,8 +20,8 @@ var A_06_00_04 = {
 };
 
 //check querySelector method
-test(function () {
-    var d = newHTMLDocument();
+test(unit(function (ctx) {
+	var d = newRenderedHTMLDocument(ctx);
     var s = new SR(d.body);
     s.applyAuthorStyles = true;
 
@@ -39,15 +39,15 @@ test(function () {
     assert_equals(d.querySelector('#span_id'), null, 'elements in shadow DOM must not be accessible via the ' +
         'document host\'s #id selectors');
 
-}, 'A_06_00_04_T01', PROPS(A_06_00_04, {
+}), 'A_06_00_04_T01', PROPS(A_06_00_04, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));
 
 
 //check querySelectorAll method
-test(function () {
-    var d = newHTMLDocument();
+test(unit(function (ctx) {
+	var d = newRenderedHTMLDocument(ctx);
     var s = new SR(d.body);
     s.applyAuthorStyles = true;
 
@@ -70,7 +70,7 @@ test(function () {
     assert_equals(d.querySelectorAll('#span_id').length, 0, 'elements in shadow DOM must not be accessible via the ' +
         'document host\'s #id selectors');
 
-}, 'A_06_00_04_T02', PROPS(A_06_00_04, {
+}), 'A_06_00_04_T02', PROPS(A_06_00_04, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));
