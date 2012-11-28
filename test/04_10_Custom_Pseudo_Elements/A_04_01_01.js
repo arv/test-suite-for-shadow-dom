@@ -15,6 +15,6 @@ var A_04_10_01 = {
     highlight:''
 };
 
-// This is a placeholder for Custom Pseudo-Elements tests
+// FIXME This is a placeholder for Custom Pseudo-Elements tests
 // For now it's unclear how to work with these elements.
 // See https://www.w3.org/Bugs/Public/show_bug.cgi?id=19897
