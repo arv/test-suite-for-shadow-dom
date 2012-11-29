@@ -24,11 +24,9 @@ test(unit(function (ctx) {
 	var d = newRenderedHTMLDocument(ctx);
     
     d.head.innerHTML = '' + 
-    	'<style>' +
 			'@host {' +
-				'display:none;' +
-			'}' +
-		'</style>';
+				'div {display:none;}' +
+			'}';
 
     d.body.innerHTML = 
     	'<ul class="cls">' +
@@ -85,11 +83,9 @@ test(unit(function (ctx) {
 		
 	var style = d.createElement('style');
     style.innerHTML = '' + 
-		'<style>' +
 			'@host {' +
-				'display:none;' +
-			'}' +
-		'</style>';	
+				'div{display:none;}' +
+			'}';
 	s.appendChild(style);
 
 	assert_true(d.querySelector('#li1').offsetTop > 0,
@@ -127,11 +123,9 @@ test(unit(function (ctx) {
 	
 	var style = d.createElement('style');
     style.innerHTML = '' + 
-		'<style>' +
 			'@host {' +
-				'display:none;' +
-			'}' +
-		'</style>';	
+				'div{display:none;}' +
+			'}';
 	s2.appendChild(style);
 	
 	assert_equals(s1.querySelector('#shd1').offsetTop, 0,
