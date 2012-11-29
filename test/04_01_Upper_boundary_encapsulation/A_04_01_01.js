@@ -17,6 +17,15 @@ var A_04_01_01 = {
 };
 
 
+A_04_01_01.checkOwnerDocument = function (node, expectedOwnerDocument){
+	assert_equals(node.ownerDocument, expectedOwnerDocument, 'node '+node.nodeName+' ownerDocument is not correct');
+
+	var i;
+	for (i=0; i<node.childNodes.length; i++){
+		A_04_01_01.checkOwnerDocument(node.childNodes.item(i),expectedOwnerDocument);
+	}
+};
+
 // shadow host: top-level elements (documentElement, head, body)
 test(function () {
     var d = newHTMLDocument();
@@ -110,6 +119,8 @@ test(function () {
     assert_equals(e2.ownerDocument, d1, 'the ownerDocument of an adopted node child nodes ' +
     	'in a shadow tree must refer to the document of the shadow host');
 
+    A_04_01_01.checkOwnerDocument(e1, d1);
+
 }, 'A_04_01_01_T05', PROPS(A_04_01_01, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
     reviewer:'Aleksei Yu. Semenov'
@@ -134,4 +145,31 @@ test(function () {
 }, 'A_04_01_01_T06', PROPS(A_04_01_01, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
     reviewer:'Sergey G. Grekhov <sgrekhov@unipro.ru>'
+}));
+
+// shadow host: any HTML5 element
+// shadow tree: any HTML5 element
+test(function(){
+	var i;
+	for (i=0; i<HTML5_TAG.length; i++){
+		var d1 = newHTMLDocument();
+		var d2 = newHTMLDocument();
+
+		var hostElement = d1.createElement(HTML5_TAG[i]);
+		try {
+			var shadowRoot = new SR(hostElement);
+		} catch (e) {
+			// if shadow tree can not be added, can not check the test case.
+			continue;
+		}
+		var k;
+		for (k=0; k<HTML5_TAG.length; k++){
+			var shadowElement = d2.createElement(HTML5_TAG[k]);
+			shadowRoot.appendChild(shadowElement);
+			A_04_01_01.checkOwnerDocument(shadowElement, d1);
+		}
+	}
+
+}, 'A_04_01_01_T07', PROPS(A_04_01_01, {
+    author:'Aleksei Yu. Semenov'
 }));
