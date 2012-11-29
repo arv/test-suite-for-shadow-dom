@@ -35,6 +35,8 @@ test(unit(function (ctx) {
     namedElements.forEach(function (tagName) {
         var element = d.createElement(tagName);
         element.name = 'named_' + tagName;
+        d.body.appendChild(element);
+
         s.appendChild(element);
 
         assert_false(element.name in f.contentWindow,
@@ -59,12 +61,40 @@ test(unit(function (ctx) {
 
     var div2 = d.createElement('div');
     div2.id = 'divWithId';
+    d.body.appendChild(div2);
+
     s.appendChild(div2);
 
     assert_false('divWithId' in f.contentWindow,
-        'element with ID must not appear in window object named properties');
+        'DIV element with ID must not appear in window object named properties');
 
 }), 'A_04_01_03_T2', PROPS(A_04_01_03, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:'Mikhail Fursov <mfursov@unipro.ru>'
 }));
+
+//check that any HTML5 element with ID does not appear in window object named properties
+test(unit(function (ctx) {
+    var f = newIFrame(ctx);
+    var d = f.contentWindow.document;
+    var s = new SR(d.documentElement);
+
+    var i;
+    for (i=0; i<HTML5_TAG.length; i++){
+    	var shadowElement = d.createElement(HTML5_TAG[i]);
+    	var id = 'id of '+ HTML5_TAG[i];
+    	shadowElement.id = id;
+    	d.body.appendChild(shadowElement);
+
+    	s.appendChild(shadowElement);
+
+    	assert_false(id in f.contentWindow, 'element '+HTML5_TAG[i]+' with id must not appear in window object named properties');
+    }
+
+
+}), 'A_04_01_03_T3', PROPS(A_04_01_03, {
+    author:'Aleksei Yu. Semenov<a.semenov@unipro.ru>'
+}));
+
+
+
