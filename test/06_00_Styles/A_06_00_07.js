@@ -10,7 +10,7 @@ policies and contribution forms [3].
 
 var A_06_00_07 = {
     name:'A_06_00_07',
-    assert:'Events:' +
+    assert:'Styles:' +
         'Rules that contain select reference combinators match elements in the enclosing trees',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#styles',
     highlight:'Rules that contain select reference combinators match elements in the enclosing trees'

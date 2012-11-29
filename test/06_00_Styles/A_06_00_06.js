@@ -10,7 +10,7 @@ policies and contribution forms [3].
 
 var A_06_00_06 = {
     name:'A_06_00_06',
-    assert:'Events:' +
+    assert:'Styles:' +
         'CSS rules declared in a shadow root style sheets must not apply in the document tree,',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#styles',
     highlight:'[[Conversely, to enforce lower-boundary encapsulation, CSS rules declared in ' +

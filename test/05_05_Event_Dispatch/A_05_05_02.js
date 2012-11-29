@@ -11,8 +11,8 @@ policies and contribution forms [3].
 var A_05_05_02 = {
     name:'A_05_05_02',
     assert:'Event Dispatch: ' +
-		'The UIEvent relatedTarget attribute must return the adjusted related target',
-    highlight:'The UIEvent relatedTarget attribute must return the adjusted related target'
+		'The MouseEvent relatedTarget attribute must return the adjusted related target',
+    highlight:'The MouseEvent relatedTarget attribute must return the adjusted related target'
 };
 
 

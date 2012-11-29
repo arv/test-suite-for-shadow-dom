@@ -10,7 +10,7 @@ policies and contribution forms [3].
 
 var A_06_00_04 = {
     name:'A_06_00_04',
-    assert:'Events:' +
+    assert:'Styles:' +
         'When the apply-author-styles is set, the selectors still must not cross the shadow ' +
         'boundary per scoping constraints',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#styles',
