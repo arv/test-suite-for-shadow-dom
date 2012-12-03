@@ -42,7 +42,7 @@ test(unit(function (ctx) {
     assert_equals(sl.toString(), 'Som', 'The getSelection() method of the shadow root object must return ' +
     		'the current selection in this shadow tree');
 	
-}), 'A_07_07_02_T01', PROPS(A_07_01_02, {
+}), 'A_07_01_02_T01', PROPS(A_07_01_02, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));
