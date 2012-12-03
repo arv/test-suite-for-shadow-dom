@@ -85,3 +85,7 @@ include("06_00_Styles/A_06_00_12.js");
 include("06_00_Styles/A_06_00_13.js");
 include("06_01_CSS_variables/A_06_01_01.js");
 include("06_03_At_Host_At_rule/A_06_03_01.js");
+include("07_01_Ranges_and_Selections/A_07_01_01.js");
+include("07_01_Ranges_and_Selections/A_07_01_02.js");
+include("07_03_Active_Element/A_07_03_01.js");
+include("07_03_Active_Element/A_07_03_02.js");
