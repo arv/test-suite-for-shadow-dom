@@ -12,7 +12,7 @@ var A_04_10_01 = {
     name:'A_04_10_01',
     assert:'Custom Pseudo-Elements: test valid pseudo-element',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#custom-pseudo-elements',
-    highlight:' The custom pseudo-element value must be considered valid if it starts with ' +
+    highlight:'The custom pseudo-element value must be considered valid if it starts with ' +
     	'a U+0078 LATIN SMALL LETTER X, followed by U+002D HYPHEN-MINUS.'
 };
 
