@@ -190,3 +190,12 @@ function createTestMediaPlayer(d) {
 		'volumeShadowRoot': volumeShadowRoot
 		};
 }
+
+//FIXME This call of initKeyboardEvent works for WebKit-only. 
+//See https://bugs.webkit.org/show_bug.cgi?id=16735
+// and https://bugs.webkit.org/show_bug.cgi?id=13368. Add check for browser here
+function fireKeyboardEvent(doc, element, key) {
+    var event = doc.createEvent('KeyboardEvent');
+    event.initKeyboardEvent("keydown", true, true, doc.defaultView, key, 0, false, false, false, false);
+    element.dispatchEvent(event);
+}
