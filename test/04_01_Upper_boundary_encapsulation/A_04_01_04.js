@@ -11,7 +11,7 @@ policies and contribution forms [3].
 var A_04_01_04 = {
     name:'A_04_01_04',
     assert:'Upper-boundary encapsulation: ' +
-        'The nodes are not present the document\'s NodeList collection instances',
+        'The shadow tree nodes are not present the document\'s NodeList, HTMLCollection or DOMElementMap collection instances',
     link:'http://www.w3.org/TR/shadow-dom/#upper-boundary-encapsulation',
     highlight:'The nodes are not present in any of the document\'s NodeList, HTMLCollection, ' +
         'or DOMElementMap instances'
@@ -22,7 +22,8 @@ test(function () {
     var d = newHTMLDocument();
     var s = new SR(d.body);
 
-    var span = document.createElement('span');
+    var span = d.createElement('span');
+    d.body.appendChild(span);
     s.appendChild(span);
 
     var nodeList = d.getElementsByTagName('span');
@@ -39,7 +40,8 @@ test(function () {
     var d = newHTMLDocument();
     var s = new SR(d.body);
 
-    var span = document.createElement('span');
+    var span = d.createElement('span');
+    d.body.appendChild(span);
     s.appendChild(span);
 
     // getElementsByTagNameNS
@@ -57,10 +59,12 @@ test(function () {
     var d = newHTMLDocument();
     var s = new SR(d.body);
 
-    var span = document.createElement('span');
+    var span = d.createElement('span');
+    span.setAttribute('class', 'shadowy');
+    d.body.appendChild(span);
+
     s.appendChild(span);
 
-    span.setAttribute('class', 'shadowy');
     var nodeList = d.getElementsByClassName('shadowy');
     assert_equals(nodeList.length, 0, 'elements in shadow DOM must not be exposed via ' +
         'document.getElementsByClassName');
@@ -75,12 +79,14 @@ test(function () {
     var d = newHTMLDocument();
     var s = new SR(d.body);
 
-    var span = document.createElement('span');
-    s.appendChild(span);
+    var span = d.createElement('span');
 
     // querySelectorAll
     span.setAttribute('id', 'span_id');
     span.setAttribute('class', 'span_class');
+    d.body.appendChild(span);
+
+    s.appendChild(span);
 
     var nodeList1 = d.querySelectorAll('#span_id');
     assert_equals(nodeList1.length, 0, 'elements in shadow DOM must not be exposed via ' +
@@ -104,17 +110,22 @@ test(function () {
     var d = newHTMLDocument();
     var s = new SR(d.body);
 
-    var htmlCollections = ['anchors', 'embeds', 'forms', 'images', 'links', 'plugins', 'scripts'];
-    var htmlCollectionsElements = ['a', 'object', 'form', 'img', 'area', 'embed', 'script'];
+    var htmlCollections =         ['anchors', 'links', 'embeds', 'forms', 'images', 'links', 'plugins','scripts'];
+    var htmlCollectionsElements = ['a',       'a',     'embed',  'form',  'img',    'area',  'embed',   'script'];
     var cnt = 0;
     htmlCollectionsElements.forEach(function (tagName) {
         var e = d.createElement(tagName);
+        if (tagName=='a' || tagName=='area'){
+        	e.setAttribute('href', 'http://www.w3.org/');
+        }
+        d.body.appendChild(e);
+
         s.appendChild(e);
         var collection = null;
         collection = d[htmlCollections[cnt]];
         if (collection) {
             assert_equals(collection.length, 0, 'Elements in shadow DOM must not be exposed via ' +
-                'document.' + htmlCollections[cnt] + ' collection');
+                'document.' + htmlCollections[cnt] + ' collection cnt:'+cnt);
         }
         cnt++;
     })
