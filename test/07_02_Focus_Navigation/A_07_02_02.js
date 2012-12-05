@@ -19,7 +19,7 @@ var A_07_02_02 = {
 };
 
 
-var A_07_02_02_T01 = async_test('A_07_02_01_T01', PROPS(A_07_02_02, {
+var A_07_02_02_T01 = async_test('A_07_02_02_T01', PROPS(A_07_02_02, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));
@@ -27,6 +27,8 @@ var A_07_02_02_T01 = async_test('A_07_02_01_T01', PROPS(A_07_02_02, {
 A_07_02_02_T01.step(unit(function (ctx) {
 	
 	var counter = 0;
+	
+	var invoked = [];
 	
 	var d = newRenderedHTMLDocument(ctx);	
 	
@@ -37,7 +39,7 @@ A_07_02_02_T01.step(unit(function (ctx) {
 	chb1.setAttribute('type', 'checkbox');
 	chb1.setAttribute('id', 'chb1');
 	chb1.addEventListener('focus', A_07_02_02_T01.step_func(function(event) {
-		assert_true(false, 'Element shouldd\'t be rendered');  	
+		assert_true(false, 'Element shouldn\'t be rendered');  	
 	}), false);
 	host.appendChild(chb1);
 	
@@ -46,8 +48,10 @@ A_07_02_02_T01.step(unit(function (ctx) {
 	chb2.setAttribute('id', 'chb2');
 	chb2.setAttribute('class', 'shadow');
 	chb2.addEventListener('focus', A_07_02_02_T01.step_func(function(event) {
-		assert_equals(counter++, 0, 'Point 1: wrong focus navigation order');  	
+		assert_equals(counter++, 0, 'Point 1: wrong focus navigation order');
+		invoked[1] = true;
 	}), false);	
+	invoked[1] = false;
 	host.appendChild(chb2);
 	
 	var chb3 = d.createElement('input');
@@ -56,7 +60,9 @@ A_07_02_02_T01.step(unit(function (ctx) {
 	chb3.setAttribute('class', 'shadow');
 	chb3.addEventListener('focus', A_07_02_02_T01.step_func(function(event) {
 		assert_equals(counter++, 1, 'Point 2: wrong focus navigation order');
-	}), false);	
+		invoked[2] = true;
+	}), false);
+	invoked[2] = false;
 	host.appendChild(chb3);
 	
 	var s = new SR(host);
@@ -71,7 +77,9 @@ A_07_02_02_T01.step(unit(function (ctx) {
 	inp1.setAttribute('value', 'Input 1');
 	inp1.addEventListener('focus', A_07_02_02_T01.step_func(function(event) {
 		assert_equals(counter++, 2, 'Point 3: wrong focus navigation order');
+		invoked[3] = true;
 	}), false);
+	invoked[3] = false;
 	s.appendChild(inp1);
 	
 	var inp2 = d.createElement('input');
@@ -80,7 +88,9 @@ A_07_02_02_T01.step(unit(function (ctx) {
 	inp2.setAttribute('value', 'Input 2');
 	inp2.addEventListener('focus', A_07_02_02_T01.step_func(function(event) {
 		assert_equals(counter++, 3, 'Point 4: wrong focus navigation order');
-	}), false);	
+		invoked[4] = true;
+	}), false);
+	invoked[4] = false;
 	s.appendChild(inp2);
 	
 	var chb4 = d.createElement('input');
@@ -88,7 +98,9 @@ A_07_02_02_T01.step(unit(function (ctx) {
 	chb4.setAttribute('id', 'chb2');
 	chb4.addEventListener('focus', A_07_02_02_T01.step_func(function(event) {
 		assert_equals(counter++, 4, 'Point 5: wrong focus navigation order');
-	}), false);	
+		invoked[5] = true;
+	}), false);
+	invoked[5] = false;
 	d.body.appendChild(chb4);
 	
 	chb2.focus();
@@ -103,6 +115,12 @@ A_07_02_02_T01.step(unit(function (ctx) {
 	fireKeyboardEvent(d, inp2, 'U+0009');
 	
 	fireKeyboardEvent(d, chb4, 'U+0009');
-	    
+	
+	for (var i = 1; i < invoked.length; i++) {
+		if (!invoked[i]) {
+			assert_true(false, 'Piont ' + i + ' event listener was not invoked');
+		}
+	}
+		    
     A_07_02_02_T01.done();
 }));
