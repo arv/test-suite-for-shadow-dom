@@ -12,10 +12,10 @@ var A_07_02_02 = {
     name:'A_07_02_02',
     assert:'User Interaction: ' +
         'The navigation order within a shadow tree must be computed as a list of focusable elements ' +
-    	'in tree order as-rendered',
+    	'in tree order as-rendered  with the exception of any elements, distributed its insertion points, ' +
+    	'and is called shadow DOM navigation order.',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#focus-navigation',
-    highlight: 'The navigation order within a shadow tree must be computed as a list of focusable elements ' +
-    	'in tree order as-rendered'
+    highlight: 'with the exception of any elements, distributed its insertion points,'
 };
 
 
