@@ -29,6 +29,7 @@ test(function () {
     var input = d.createElement('input');
     input.setAttribute('type', 'text');
     input.setAttribute('id', 'input_id');
+    d.body.appendChild(input);
     s.appendChild(input);
 
     // node in host with a reference to host element with id
@@ -56,13 +57,14 @@ test(function () {
         s = new SR(div);
 
         var form = d.createElement('form');
-        var el = d.createElement(tagName);
-
         form.setAttribute('id', 'form_id');
+        d.body.appendChild(form);
+
+        var el = d.createElement(tagName);
         el.setAttribute('form', 'form_id');
+        d.body.appendChild(el);
 
         s.appendChild(form);
-        d.body.appendChild(el);
 
         assert_equals(el.form, null, 'Elements in shadow DOM must not be accessible from ' +
             'owner\'s document ' + tagName + '.form attribute');
