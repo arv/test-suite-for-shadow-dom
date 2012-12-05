@@ -12,7 +12,9 @@ var A_07_02_03 = {
     name:'A_07_02_03',
     assert:'User Interaction: ' +
         'For sequential focus navigation, the shadow DOM navigation order sequence must be ' +
-        'inserted into the document navigation order',
+        'inserted into the document navigation order in place of the shadow host as if ' +
+        'the shadow host were assigned the value of auto for determining its position and shadow host ' +
+        'is not focusable',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#focus-navigation',
     highlight: '[[For sequential focus navigation, the shadow DOM navigation order sequence must be ' +
     	'inserted into the document navigation order]][\\s\\S]*[[in place of the shadow host as if the ' +
@@ -93,7 +95,6 @@ A_07_02_03_T01.step(unit(function (ctx) {
 	chb3.setAttribute('id', 'chb3');
 	//chb3.setAttribute('nav-index', '5');
 	chb3.setAttribute('tabindex', '5');
-	chb3.setAttribute('title', '5');
 	chb3.addEventListener('focus', A_07_02_03_T01.step_func(function(event) {
 		assert_equals(counter++, 2, 'Point 5: wrong focus navigation order');
 		invoked[5] = true;
@@ -129,7 +130,7 @@ var A_07_02_03_T02 = async_test('A_07_02_03_T02', PROPS(A_07_02_03, {
 	reviewer:''
 }));
 
-A_07_02_03_T02.step(unit(function (ctx) {ctx.debug = true;
+A_07_02_03_T02.step(unit(function (ctx) {
 	
 	var counter = 0;
 	
