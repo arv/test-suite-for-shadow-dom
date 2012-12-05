@@ -48,6 +48,7 @@ A_07_02_04_T01.step(unit(function (ctx) {
 	d.body.appendChild(chb1);
 	
 	var host = d.createElement('div');
+	//make shadow host focusable
 	host.setAttribute('tabindex', '3');
 	d.body.appendChild(host);
 	var s = new SR(host);
