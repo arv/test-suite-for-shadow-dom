@@ -20,7 +20,7 @@ def copy_files(src, dst)
     copy_file(s, d) if File.file?(s) and not DONT_COPY.include?(s.sub(src, ""))
   end
 
-  copy_file(File.join(src, "/spec_coverage.html"), File.join(dst, "/index.html"))
+  copy_file(File.join(src, "/test.html"), File.join(dst, "/index.html"))
 end
 
 def copy_file(src, dst)
@@ -41,5 +41,15 @@ def remove_missings(src, dst)
   end
 end
 
+def commit_message
+  Dir.chdir(SRC_DIR) do
+    gitlog = `git log -1`
+    hash = /commit (\w+)\n/.match(gitlog)[1]
+    "Imported Shadow DOM test suite https://code.google.com/p/test-suite-for-shadow-dom/ @#{hash}"
+  end
+end
+
 copy_files(SRC_DIR, DST_DIR)
 remove_missings(SRC_DIR, DST_DIR)
+system("hg addremove")
+system("hg commit -m '#{commit_message}'")
