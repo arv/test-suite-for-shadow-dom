@@ -39,25 +39,26 @@ A_04_01_11_T1.step(function () {
 
 
 // check that <link> element added to head is not exposed
-var A_04_01_11_T2 = async_test('A_04_01_11_T02', PROPS(A_04_01_11, {
-    author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:'Mikhail Fursov <mfursov@unipro.ru>'
+test(unit(function (ctx) {
+
+	var d = newRenderedHTMLDocument(ctx);
+	
+	var link = d.createElement('link');
+	link.setAttribute('href', 'testharness.css');
+	link.setAttribute('rel', 'stylesheet');
+	
+	//create Shadow root
+	var root = d.createElement('div');
+	d.body.appendChild(root);    
+	var s = new SR(root);
+	
+	s.appendChild(link);
+	
+	assert_equals(d.styleSheets.length, 0, 'stylesheet link elements in shadow DOM must not be ' +
+            'exposed via the document.styleSheets collection');       
+
+
+}), 'A_04_01_11_T2', PROPS(A_04_01_11, {
+	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+	reviewer:''
 }));
-
-A_04_01_11_T2.step(function () {
-    var ctx = newContext();
-    var iframe = newIFrame(ctx, 'resources/blank.html');
-    iframe.onload = A_04_01_11_T2.step_func(step_unit(function () {
-        var d = iframe.contentDocument;
-        var s = new SR(d.head);
-
-        var link = d.createElement('link');
-        link.setAttribute('rel', 'stylesheet');
-        link.setAttribute('href', 'testharness.css');
-        s.appendChild(link);
-        assert_equals(d.styleSheets.length, 0, 'stylesheet link elements in shadow DOM must not be ' +
-            'exposed via the document.styleSheets collection');
-
-    }, ctx, A_04_01_11_T2));
-});
-
