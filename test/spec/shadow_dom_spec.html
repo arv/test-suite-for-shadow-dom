@@ -355,14 +355,14 @@ Despite being distributed to more than one insertion point during reprojection, 
 
 <ol>
     <li>Let <var>TREE</var> be the <a href="#dfn-youngest-tree">youngest tree</a> in the <var>HOST</var>'s <a href="#dfn-tree-stack">tree stack</a>
-    <li>Let <var>POOL</var> be the list of nodes</li>
+    <li>Let <var>POOL</var> be an empty list of nodes</li>
     <li>For each child <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-node">node</a> of <var>HOST</var>:
     <ol>
         <li>Let <var>CHILD</var> be this node</li>
         <li>If <var>CHILD</var> is an <a href="#dfn-insertion-point">insertion point</a>:
         <ol>
             <li>Let <var>REPROJECTED</var> be the list of nodes, distributed into this <a href="#dfn-insertion-point">insertion point</a> as a result of running <a href="#dfn-tree-composition">tree composition algorithm</a> on this <a href="#dfn-insertion-point">insertion point</a>'s <a href="#dfn-shadow-tree">shadow tree</a></li>
-            <li>If <var>RERPOJECTED</var> is an empty list, set it to list of all child <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-node">nodes</a> of <var>CHILD</var>
+            <li>If <var>REPROJECTED</var> is an empty list, set it to the list of all child <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-node">nodes</a> of <var>CHILD</var>
             <li>Add all <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-node">nodes</a> in <var>REPROJECTED</var> into <var>POOL</var></li>
         </ol></li>
         <li>Otherwise, add <var>CHILD</var> to <var>POOL</var></li>
@@ -623,6 +623,7 @@ div::x-thumb {
 <ul>
     <li>The <a target='_blank' href="http://www.w3.org/TR/domcore/#event"><code>Event</code></a> <a target='_blank' href="http://www.w3.org/TR/domcore/#dom-event-target"><code>target</code></a> and <a target='_blank' href="http://www.w3.org/TR/domcore/#dom-event-currenttarget"><code>currentTarget</code></a> attributes <strong>must</strong> return the <a href="#dfn-relative-target">relative target</a> for the <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-node">node</a> on which event listeners are <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-event-listener-invoke">invoked</a></li>
     <li>The <a target='_blank' href="http://www.w3.org/TR/DOM-Level-3-Events/#events-MouseEvent"><code>MouseEvent</code></a> <a target='_blank' href="http://www.w3.org/TR/DOM-Level-3-Events/#events-MouseEvent-relatedTarget"><code>relatedTarget</code></a> attribute <strong>must</strong> return the <a href="#dfn-adjusted-related-target">adjusted related target</a></li>
+    <li>The <a target='_blank' href="http://www.w3.org/TR/DOM-Level-3-Events/#events-MouseEvent"><code>MouseEvent</code></a> <a target='_blank' href="http://dev.w3.org/csswg/cssom-view/#widl-MouseEvent-offsetX"><code>offsetX</code></a> and <a target='_blank' href="http://dev.w3.org/csswg/cssom-view/#widl-MouseEvent-offsetY"><code>offsetY</code></a> attributes <strong>must</strong> return the coordinates relative to the origin of the <a target='_blank' href="http://dev.w3.org/csswg/cssom-view/#padding-edge">padding edge</a> of the <a href="#dfn-relative-target">relative target</a></li>
     <li>If the <a target='_blank' href="http://www.w3.org/TR/DOM-Level-3-Events/#events-MouseEvent-relatedTarget"><code>relatedTarget</code></a> and <a target='_blank' href="http://www.w3.org/TR/domcore/#dom-event-target"><code>target</code></a> are the same for a given node, its the event listeners <strong>must not</strong> be invoked</li>
     <li>When <em>capturing</em>, which entails processing step 3 of the <a target='_blank' href="http://www.w3.org/TR/domcore/#dispatching-events">event dispatch algorithm</a>, the <a target='_blank' href="http://www.w3.org/TR/domcore/#event"><code>Event</code></a> <a target='_blank' href="http://www.w3.org/TR/domcore/#dom-event-eventphase">eventPhase</a> attribute <strong>must</strong> return <a target='_blank' href="http://www.w3.org/TR/domcore/#dom-event-at_target">AT_TARGET</a> <strong>if</strong> the <a href="#dfn-relative-target">relative target</a> is same as the <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-node">node</a> on which event listeners are <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-event-listener-invoke">invoked</a></li>
     <li>When <em>bubbling</em>, which entails processing step 6 of the <a target='_blank' href="http://www.w3.org/TR/domcore/#dispatching-events">event dispatch algorithm</a>, the event listeners <strong>must not</strong> be <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-event-listener-invoke">invoked</a> on a <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-node">node</a> <strong>if</strong> it is the same as its <a href="#dfn-relative-target">relative target</a></li>
@@ -1190,7 +1191,7 @@ interface <dfn id="api-html-shadow-element">HTMLShadowElement</dfn> : <a target=
             <ol>
                 <li>Let <var>TREE</var> be the <a href="#dfn-shadow-tree">shadow tree</a> that contains the <a target='_blank' href="http://www.w3.org/TR/domcore/#context-object">context object</a></li>
                 <li>If <var>TREE</var> does not exist, return <strong>null</strong>.</li>
-                <li>If <a target='_blank' href="http://www.w3.org/TR/domcore/#context-object">context object</a>, in <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-tree-order">tree order</a>, is not the first instance of <a href="#dfn-shadow-element"><code>shadow</code></a> element in <var>TREE</var>, return <strong>null</strong>.</li>
+                <li>If <a target='_blank' href="http://www.w3.org/TR/domcore/#context-object">context object</a>, in <a target='_blank' href="http://www.w3.org/TR/domcore/#concept-tree-order">tree order</a>, is not the first <a href="#dfn-active-insertion-point">active</a> instance of <a href="#dfn-shadow-element"><code>shadow</code></a> element in <var>TREE</var>, return <strong>null</strong>.</li>
                 <li>Let <var>HOST</var> be the <a href="#dfn-shadow-host">shadow host</a> of <var>TREE</var></li>
                 <li>From <var>HOST</var>'s <a href="#dfn-tree-stack">tree stack</a>, return the <a href="#dfn-older-tree">older tree</a> relative to <var>TREE</var>, or <strong>null</strong> if no such <a href="#dfn-shadow-tree">shadow tree</a> is accessible.</li>
             </ol></dd>
