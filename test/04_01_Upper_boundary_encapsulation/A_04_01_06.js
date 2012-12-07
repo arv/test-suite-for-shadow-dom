@@ -24,7 +24,7 @@ test(function () {
     var e = d.createElement('img');
     s.appendChild(e);
 
-    assert_equals(s.getElementsByTagName('img').length, 1, 'elements in shadow DOM must be accessible via the ' +
+    assert_equals(s.getElementsByTagName('img').length, 1, 'elementsin shadow DOM must be accessible via the ' +
         'shadow root .getElementsByTagName DOM accessor');
 
 }, 'A_04_01_06_T01', PROPS(A_04_01_06, {
@@ -107,7 +107,7 @@ test(function () {
 
 }, 'A_04_01_06_T05', PROPS(A_04_01_06, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 // querySelectorAll accessor by element type
@@ -134,7 +134,7 @@ test(function () {
 
 }, 'A_04_01_06_T07', PROPS(A_04_01_06, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 
@@ -152,7 +152,7 @@ test(function () {
     e1.appendChild(e2);
 
     var res = s.querySelectorAll("#span_id");
-    assert_equals(res.length, 2, 'elements in shadow DOM must be accessible via the ' +
+    assert_equals(res.length, 1, 'elements in shadow DOM must be accessible via the ' +
         'shadow root .querySelectorAll DOM accessor (by id)');
 
     assert_true(res.item(0) == e1 || res.item(1) == e1, 'elements in shadow DOM must be accessible via the ' +
@@ -164,7 +164,7 @@ test(function () {
 
 }, 'A_04_01_06_T08', PROPS(A_04_01_06, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 // querySelectorAll accessor for class
@@ -192,5 +192,5 @@ test(function () {
 
 }, 'A_04_01_06_T09', PROPS(A_04_01_06, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
