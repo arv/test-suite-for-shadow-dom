@@ -15,7 +15,7 @@ var A_07_02_02 = {
     	'in tree order as-rendered  with the exception of any elements, distributed its insertion points, ' +
     	'and is called shadow DOM navigation order.',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#focus-navigation',
-    highlight: 'with the exception of any elements, distributed its insertion points,'
+    highlight: 'with the exception of any elements, distributed into insertion points,'
 };
 
 
