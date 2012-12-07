@@ -52,7 +52,7 @@ test(function () {
 
     formAssociatedElements.forEach(function (tagName) {
         var d = newHTMLDocument();
-        div = d.createElement('div');
+        var div = d.createElement('div');
         d.body.appendChild(div);
         s = new SR(div);
 
