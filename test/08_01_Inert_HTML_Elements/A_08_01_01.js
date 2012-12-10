@@ -24,7 +24,7 @@ var A_08_01_01_T01 = async_test('A_08_01_01_T01', PROPS(A_08_01_01, {
 }));
 
 A_08_01_01_T01.checkIframeContent = A_08_01_01_T01.step_func(function () {
-	//remember vlue to check before cleaning the context (i'll destroy the iframe)
+	//remember value to check before cleaning the context (it'll destroy the iframe)
 	var valueToCheck = A_08_01_01_T01.iframe.contentWindow;		
 	cleanContext(A_08_01_01_T01.ctx);
 		
