@@ -93,4 +93,7 @@ include("07_02_Focus_Navigation/A_07_02_03.js");
 include("07_02_Focus_Navigation/A_07_02_04.js");
 include("07_03_Active_Element/A_07_03_01.js");
 include("07_03_Active_Element/A_07_03_02.js");
+include("08_01_Inert_HTML_Elements/A_08_01_01.js");
 include("08_01_Inert_HTML_Elements/A_08_01_02.js");
+include("08_02_HTML_Forms/A_08_02_01.js");
+include("08_02_HTML_Forms/A_08_02_02.js");
