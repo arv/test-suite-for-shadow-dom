@@ -97,3 +97,4 @@ include("08_01_Inert_HTML_Elements/A_08_01_01.js");
 include("08_01_Inert_HTML_Elements/A_08_01_02.js");
 include("08_02_HTML_Forms/A_08_02_01.js");
 include("08_02_HTML_Forms/A_08_02_02.js");
+include("08_02_HTML_Forms/A_08_02_03.js");
