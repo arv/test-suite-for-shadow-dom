@@ -128,7 +128,7 @@ test(function () {
                 'document.' + htmlCollections[cnt] + ' collection cnt:'+cnt);
         }
         cnt++;
-    })
+    });
 }, 'A_04_01_04_T05', PROPS(A_04_01_04, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:'Mikhail Fursov <mfursov@unipro.ru>'

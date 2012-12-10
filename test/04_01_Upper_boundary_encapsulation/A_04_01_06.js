@@ -132,37 +132,37 @@ test(function () {
         'shadow root .querySelectorAll DOM accessor (e2 by element type)');
 
 
-}, 'A_04_01_06_T07', PROPS(A_04_01_06, {
+}, 'A_04_01_06_T06', PROPS(A_04_01_06, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
     reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 
-// querySelectorAll accessor for ID
+// querySelectorAll accessor with attribute value
 test(function () {
     var d = newHTMLDocument();
     var s = new SR(d.body);
 
     var e1 = d.createElement('span');
-    e1.setAttribute('id', 'span_id');
+    e1.setAttribute('test', 'span_id');
     s.appendChild(e1);
 
     var e2 = d.createElement('span');
-    e2.setAttribute('id', 'span_id');
+    e2.setAttribute('test', 'span_id');
     e1.appendChild(e2);
 
-    var res = s.querySelectorAll("#span_id");
-    assert_equals(res.length, 1, 'elements in shadow DOM must be accessible via the ' +
-        'shadow root .querySelectorAll DOM accessor (by id)');
+    var res = s.querySelectorAll("[test=span_id]");
+    assert_equals(res.length, 2, 'elements in shadow DOM must be accessible via the ' +
+        'shadow root .querySelectorAll DOM accessor (by attribute value)');
 
     assert_true(res.item(0) == e1 || res.item(1) == e1, 'elements in shadow DOM must be accessible via the ' +
-        'shadow root .querySelectorAll DOM accessor (e1 by id)');
+        'shadow root .querySelectorAll DOM accessor (e1 by attribute value)');
 
     assert_true(res.item(0) == e2 || res.item(1) == e2, 'elements in shadow DOM must be accessible via the ' +
-        'shadow root .querySelectorAll DOM accessor (e2 by id)');
+        'shadow root .querySelectorAll DOM accessor (e2 by attribute value)');
 
 
-}, 'A_04_01_06_T08', PROPS(A_04_01_06, {
+}, 'A_04_01_06_T07', PROPS(A_04_01_06, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
     reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
@@ -189,6 +189,31 @@ test(function () {
 
     assert_true(res.item(0) == e2 || res.item(1) == e2, 'elements in shadow DOM must be accessible via the ' +
         'shadow root .querySelectorAll DOM accessor (e2 by class name)');
+
+}, 'A_04_01_06_T08', PROPS(A_04_01_06, {
+    author:'Mikhail Fursov <mfursov@unipro.ru>',
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
+}));
+
+//querySelector accessor by ID
+test(function () {
+    var d = newHTMLDocument();
+    var s = new SR(d.body);
+
+    var e1 = d.createElement('span');
+    e1.setAttribute('id', 'span_id');
+    s.appendChild(e1);
+
+    var e2 = d.createElement('div');
+    e2.setAttribute('class', 'div_class');
+    e1.appendChild(e2);
+
+    var res = s.querySelectorAll("#span_id");
+    assert_equals(res.length, 1, 'elements in shadow DOM must be accessible via the ' +
+            'shadow root .querySelectorAll DOM accessor (by id)');
+
+    assert_equals(res.item(0), e1, 'elements in shadow DOM must be accessible via the ' +
+        'shadow root .querySelectorAll DOM accessor (by id)');
 
 }, 'A_04_01_06_T09', PROPS(A_04_01_06, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
