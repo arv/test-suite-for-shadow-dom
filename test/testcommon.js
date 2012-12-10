@@ -2,14 +2,19 @@
 
 "use strict";
 
-var HTML5_TAG = new Array(
+var HTML5_TAG = [
 		'a','abbr','address','area','article','aside','audio','b','base','bdi','bdo','blockquote','body','br','button',
 		'canvas','caption','cite','code','col','colgroup','command','datalist','dd','del','details','dfn','dialog','div',
 		'dl','dt','em','embed','fieldset','figcaption','figure','footer','form','h1','h2','h3','h4','h5','h6','head','header',
 		'hgroup','hr','html','i','iframe','img','input','ins','kbd','keygen','label','legend','li','link','map','mark','menu',
 		'meta','meter','nav','noscript','object','ol','optgroup','option','output','p','param','pre','progress','q','rp','rt',
 		'ruby','s','samp','script','section','select','small','source','span','strong','style','sub','table','tbody','td','textarea',
-		'tfoot','th','thead','time','title','tr','track','u','ul','var','video','wbr');
+		'tfoot','th','thead','time','title','tr','track','u','ul','var','video','wbr'];
+
+
+// http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html#form-associated-element
+var HTML5_FORM_ASSOCIATED_ELEMENTS = ['button', 'fieldset', 'input', 'keygen', 'label',
+                                      'object', 'output', 'select', 'textarea'];
 
 function ShadowDomNotSupportedError() {
     this.message = "Shadow DOM is not supported";
@@ -191,7 +196,7 @@ function createTestMediaPlayer(d) {
 		};
 }
 
-//FIXME This call of initKeyboardEvent works for WebKit-only. 
+//FIXME This call of initKeyboardEvent works for WebKit-only.
 //See https://bugs.webkit.org/show_bug.cgi?id=16735
 // and https://bugs.webkit.org/show_bug.cgi?id=13368. Add check for browser here
 function fireKeyboardEvent(doc, element, key) {
