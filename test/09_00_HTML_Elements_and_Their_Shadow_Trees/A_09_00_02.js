@@ -18,7 +18,7 @@ var A_09_00_02 = {
     bug: ['https://bugs.webkit.org/show_bug.cgi?id=102864']
 };
 
-//test insertion point that matches nothing
+//test img
 test(unit(function (ctx) {
 	
 	var d = newRenderedHTMLDocument(ctx);		
