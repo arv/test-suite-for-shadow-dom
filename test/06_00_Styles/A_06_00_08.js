@@ -47,12 +47,13 @@ test(unit(function (ctx) {
 	div.innerHTML ='<ul><content select=".shadow"></content></ul>'; 
 	s.appendChild(div);
 	
-	assert_equals(d.querySelector('#li1').offsetTop, 0,
-		'Point 1: element should not be rendered');
-	assert_equals(d.querySelector('#li3').offsetTop, 0,
-		'Point 2: element should not be rendered');
-	assert_equals(d.querySelector('#li5').offsetTop, 0,
-		'Point 3: element should not be rendered');
+	//@host rule shouldn't take any effect
+	assert_true(d.querySelector('#li1').offsetTop > 0,
+		'Point 1: element should be rendered');
+	assert_true(d.querySelector('#li3').offsetTop > 0,
+		'Point 2: element should be rendered');
+	assert_true(d.querySelector('#li5').offsetTop > 0,
+		'Point 3: element should be rendered');
 
 	
 }), 'A_06_00_08_T01', PROPS(A_06_00_08, {
@@ -85,15 +86,15 @@ test(unit(function (ctx) {
 	var style = d.createElement('style');
     style.innerHTML = '' + 
 			'@host {' +
-				'div{display:none;}' +
+				'ul {display:none;}' +
 			'}';
 	s.appendChild(style);
 
-	assert_true(d.querySelector('#li1').offsetTop > 0,
+	assert_true(d.querySelector('#li1').offsetTop, 0,
 		'Point 1: element should be rendered');
-	assert_true(d.querySelector('#li3').offsetTop > 0,
+	assert_true(d.querySelector('#li3').offsetTop, 0,
 		'Point 2: element should be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0,
+	assert_true(d.querySelector('#li5').offsetTop, 0,
 		'Point 3: element should be rendered');
 	
 	
