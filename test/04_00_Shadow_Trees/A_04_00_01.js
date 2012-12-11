@@ -14,7 +14,8 @@ var A_04_00_01 = {
     link:'http://www.w3.org/TR/shadow-dom/#shadow-dom-subtrees',
     highlight:'The existence of multiple DOM trees is enabled by letting any element in the ' +
         'document tree to host one or more additional DOM trees',
-    seealso:'http://www.w3.org/TR/html4/index/elements.html'
+    seealso:'http://www.w3.org/TR/html4/index/elements.html',
+    bug: ['https://bugs.webkit.org/show_bug.cgi?id=102864']
 };
 
 
