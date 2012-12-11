@@ -28,7 +28,7 @@ test(function () {
 
     var div = d.createElement('div');
     d.body.appendChild(div);
-    s = new SR(div);
+    var s = new SR(div);
 
 
     HTML5_FORM_ASSOCIATED_ELEMENTS.forEach(function (tagName) {
