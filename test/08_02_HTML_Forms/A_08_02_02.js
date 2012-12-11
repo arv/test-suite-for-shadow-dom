@@ -20,27 +20,24 @@ var A_08_02_02 = {
 //test form-associated elements
 test(function () {
 	var d = newHTMLDocument();
-	
+
     var form = d.createElement('form');
     form.setAttribute('id', 'form_id');
     d.body.appendChild(form);
-	
+
     var div = d.createElement('div');
     d.body.appendChild(div);
     s = new SR(div);
 
-	
-    var formAssociatedElements = ['button', 'fieldset', 'input', 'keygen', 'label', 'object',
-        'output', 'select', 'textarea'];
 
-    formAssociatedElements.forEach(function (tagName) {
-        
+    HTML5_FORM_ASSOCIATED_ELEMENTS.forEach(function (tagName) {
+
         var el = d.createElement(tagName);
         el.setAttribute('form', 'form_id');
         el.setAttribute('id', tagName + '_id');
         s.appendChild(el);
 
-        assert_equals(s.querySelector('#' + tagName + '_id').getAttribute('id'), tagName + '_id', 
+        assert_equals(s.querySelector('#' + tagName + '_id').getAttribute('id'), tagName + '_id',
         	'Form-associated element ' + tagName + ' in shadow tree must be accessible shadow tree accessors');
     });
 }, 'A_08_02_02_T01', PROPS(A_08_02_02, {
@@ -52,24 +49,21 @@ test(function () {
 //test form elements
 test(function () {
 	var d = newHTMLDocument();
-	
+
     var form = d.createElement('form');
     d.body.appendChild(form);
-	
+
     var div = d.createElement('div');
     form.appendChild(div);
     s = new SR(div);
-	
-    var formAssociatedElements = ['button', 'fieldset', 'input', 'keygen', 'label', 'object',
-        'output', 'select', 'textarea'];
 
-    formAssociatedElements.forEach(function (tagName) {
-        
+    HTML5_FORM_ASSOCIATED_ELEMENTS.forEach(function (tagName) {
+
         var el = d.createElement(tagName);
         el.setAttribute('id', tagName + '_id');
         s.appendChild(el);
 
-        assert_equals(s.querySelector('#' + tagName + '_id').getAttribute('id'), tagName + '_id', 
+        assert_equals(s.querySelector('#' + tagName + '_id').getAttribute('id'), tagName + '_id',
         	'Form element ' + tagName +	' in shadow tree must be accessible shadow tree accessors');
     });
 }, 'A_08_02_02_T02', PROPS(A_08_02_02, {

@@ -47,10 +47,8 @@ test(function () {
 
 // check form associated elements
 test(function () {
-    var formAssociatedElements = ['button', 'fieldset', 'input', 'keygen', 'label', 'object',
-        'output', 'select', 'textarea'];
 
-    formAssociatedElements.forEach(function (tagName) {
+    HTML5_FORM_ASSOCIATED_ELEMENTS.forEach(function (tagName) {
         var d = newHTMLDocument();
         var div = d.createElement('div');
         d.body.appendChild(div);
