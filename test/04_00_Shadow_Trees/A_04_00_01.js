@@ -69,6 +69,14 @@ test(function () {
   reviewer:'Sergey G. Grekhov <sgrekhov@unipro.ru>, Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
+
+test(function () {
+	A_04_00_01_test('AUDIO');
+}, 'A_04_00_01_T05_01', PROPS(A_04_00_01, {
+  author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+  reviewer:''
+}));
+
 test(function () {
 	A_04_00_01_test('B');
 }, 'A_04_00_01_T06', PROPS(A_04_00_01, {
@@ -138,6 +146,14 @@ test(function () {
   author:'Mikhail Fursov <mfursov@unipro.ru>',
   reviewer:'Sergey G. Grekhov <sgrekhov@unipro.ru>, Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
+
+test(function () {
+	A_04_00_01_test('CANVAS');
+}, 'A_04_00_01_T14_01', PROPS(A_04_00_01, {
+  author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+  reviewer:''
+}));
+
 
 test(function () {
 	A_04_00_01_test('CENTER');
@@ -228,6 +244,13 @@ test(function () {
 }, 'A_04_00_01_T27', PROPS(A_04_00_01, {
   author:'Mikhail Fursov <mfursov@unipro.ru>',
   reviewer:'Sergey G. Grekhov <sgrekhov@unipro.ru>, Aleksei Yu. Semenov <a.semenov@unipro.ru>'
+}));
+
+test(function () {
+	A_04_00_01_test('EMBED');
+}, 'A_04_00_01_T27_01', PROPS(A_04_00_01, {
+  author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+  reviewer:''
 }));
 
 test(function () {
@@ -428,6 +451,14 @@ test(function () {
 }));
 
 test(function () {
+	A_04_00_01_test('METER');
+}, 'A_04_00_01_T55_01', PROPS(A_04_00_01, {
+  author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+  reviewer:''
+}));
+
+
+test(function () {
 	A_04_00_01_test('NOFRAMES');
 }, 'A_04_00_01_T56', PROPS(A_04_00_01, {
   author:'Mikhail Fursov <mfursov@unipro.ru>',
@@ -488,6 +519,13 @@ test(function () {
 }, 'A_04_00_01_T64', PROPS(A_04_00_01, {
   author:'Mikhail Fursov <mfursov@unipro.ru>',
   reviewer:'Sergey G. Grekhov <sgrekhov@unipro.ru>, Aleksei Yu. Semenov <a.semenov@unipro.ru>'
+}));
+
+test(function () {
+	A_04_00_01_test('PROGRESS');
+}, 'A_04_00_01_T64_01', PROPS(A_04_00_01, {
+  author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+  reviewer:''
 }));
 
 test(function () {
