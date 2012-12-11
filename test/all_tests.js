@@ -98,3 +98,6 @@ include("08_01_Inert_HTML_Elements/A_08_01_02.js");
 include("08_02_HTML_Forms/A_08_02_01.js");
 include("08_02_HTML_Forms/A_08_02_02.js");
 include("08_02_HTML_Forms/A_08_02_03.js");
+include("09_00_HTML_Elements_and_Their_Shadow_Trees/A_09_00_01.js");
+include("09_00_HTML_Elements_and_Their_Shadow_Trees/A_09_00_02.js");
+include("09_00_HTML_Elements_and_Their_Shadow_Trees/A_09_00_03.js");
