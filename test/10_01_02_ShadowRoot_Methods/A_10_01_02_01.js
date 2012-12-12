@@ -8,13 +8,13 @@ policies and contribution forms [3].
 [3] http://www.w3.org/2004/10/27-testcases
 */
 
-var A_10_01_01 = {
-    name:'A_10_01_01',
+var A_10_01_02_01 = {
+    name:'A_10_01_02_01',
     assert:'ShadowRoot Object: ' +
     	'HTMLElement getElementById(DOMString elementId) method',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-object',
-    highlight: '[[The ShadowRoot object represents the shadow root.]]' +
-    	'[\\s\\S]*[[HTMLElement getElementById(DOMString elementId);]]'
+    highlight: '[[getElementById]]' +
+    	'[\\s\\S]*[[Must behave exactly like document.getElementById, except scoped to the shadow tree.]]'
 };
 
 test(function () {
@@ -35,7 +35,7 @@ test(function () {
     assert_equals(s.getElementById('span_id').getAttribute('id'), 'span_id', 'Point 2: ' +
     		'ShadowRoot getElementById() method should return child element');
         
-}, 'A_10_01_01_T01', PROPS(A_10_01_01, {
+}, 'A_10_01_02_01_T01', PROPS(A_10_01_02_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));
@@ -54,7 +54,7 @@ test(function () {
     assert_true(s.getElementById('span_id') == null, ' ShadowRoot getElementById() ' +
     		'method should return null if matching element not found');
         
-}, 'A_10_01_01_T02', PROPS(A_10_01_01, {
+}, 'A_10_01_02_01_T02', PROPS(A_10_01_02_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));

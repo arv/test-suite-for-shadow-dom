@@ -8,13 +8,13 @@ policies and contribution forms [3].
 [3] http://www.w3.org/2004/10/27-testcases
 */
 
-var A_10_01_02 = {
-    name:'A_10_01_02',
+var A_10_01_02_05 = {
+    name:'A_10_01_02_05',
     assert:'ShadowRoot Object: ' +
-    	'NodeList getElementsByClassName(DOMString tagName) method',
+    	'NodeList getElementsBytagName(DOMString tagName) method',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-object',
-    highlight: '[[The ShadowRoot object represents the shadow root.]]' +
-    	'[\\s\\S]*[[NodeList getElementsByClassName(DOMString tagName);]]'
+    highlight: '[[getElementsByTagName]]' +
+    	'[\\s\\S]*[[Must behave exactly like document.getElementsByTagName, except scoped to the shadow tree.]]'
 };
 
 test(function () {
@@ -26,10 +26,10 @@ test(function () {
     
     var s = new SR(el);
     
-    assert_equals(s.getElementsByClassName('clazz').length, 0, 'ShadowRoot getElementsByClassName() ' +
+    assert_equals(s.getElementsByTagName('span').length, 0, 'ShadowRoot getElementsByTagName() ' +
     		'method should return empty list if there\'s no matching child elements');
         
-}, 'A_10_01_02_T01', PROPS(A_10_01_02, {
+}, 'A_10_01_02_05_T01', PROPS(A_10_01_02_05, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));
@@ -46,13 +46,12 @@ test(function () {
     var s = new SR(el);
     
     var child = d.createElement('span');
-    child.setAttribute('class', 'clazz');
     s.appendChild(child);
 
-    assert_equals(s.getElementsByClassName('clazz').length, 1, 'ShadowRoot getElementsByClassName() ' +
+    assert_equals(s.getElementsByTagName('span').length, 1, 'ShadowRoot getElementsByTagName() ' +
     		'method should return matching child element');
         
-}, 'A_10_01_02_T02', PROPS(A_10_01_02, {
+}, 'A_10_01_02_05_T02', PROPS(A_10_01_02_05, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));
@@ -68,17 +67,15 @@ test(function () {
     var s = new SR(el);
     
     var child = d.createElement('span');
-    child.setAttribute('class', 'clazz');
     s.appendChild(child);
 
     var child2 = d.createElement('span');
-    child2.setAttribute('class', 'clazz');
     s.appendChild(child2);
     
-    assert_equals(s.getElementsByClassName('clazz').length, 2, 'ShadowRoot getElementsByClassName() ' +
+    assert_equals(s.getElementsByTagName('span').length, 2, 'ShadowRoot getElementsByTagName() ' +
     		'method should return matching child elements');
         
-}, 'A_10_01_02_T03', PROPS(A_10_01_02, {
+}, 'A_10_01_02_05_T03', PROPS(A_10_01_02_05, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));
