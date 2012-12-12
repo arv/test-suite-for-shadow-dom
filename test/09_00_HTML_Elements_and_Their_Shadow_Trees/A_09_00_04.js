@@ -58,7 +58,7 @@ test(unit(function (ctx) {
     d.body.appendChild(el);
         
     el.innerHTML = '' +
-    	'<summary>'
+    	'<summary>' +
     	'<span id="shadow">This is a node that should be distributed</span>' +
     	'</summary>' +
     	'<span id="flbk">Unlucky content</span>';
