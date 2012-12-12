@@ -11,7 +11,7 @@ policies and contribution forms [3].
 var A_09_00_03 = {
     name:'A_09_00_03',
     assert:'HTML Elements and Their Shadow Trees: ' +
-    	'Check that fielsset can contain at least two insertion points with matching criteria ' +
+    	'Check that fieldset can contain at least two insertion points with matching criteria ' +
     	'\'legend:first-of-type\' and \'universal selector\'',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#html-elements-and-their-shadow-trees',
     highlight: '[[Contains two insertion points with the following matching criteria:]]' +
@@ -36,7 +36,7 @@ test(unit(function (ctx) {
     var s = new SR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'Iframe should allow at least one insertion point');
+    assert_true(d.querySelector('#shadow').offsetTop > 0, 'fieldset should allow at least one insertion point');
     assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_03_T01', PROPS(A_09_00_03, {
@@ -55,9 +55,6 @@ test(unit(function (ctx) {
     var el = d.createElement('fieldset');
     d.body.appendChild(el);
     
-    var lgd = d.createElement('legend');
-    d.body.appendChild(lgd);
-    
     el.innerHTML = '' +
     	'<legend>'
     	'<span id="shadow">This is a node that should be distributed</span>' +
@@ -67,7 +64,8 @@ test(unit(function (ctx) {
     var s = new SR(el);
     s.innerHTML = '<content select="legend:first-of-type"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'Iframe should allow at least one insertion point');
+    assert_true(d.querySelector('#shadow').offsetTop > 0, 'fieldset should allow insertion point ' +
+    		'with legend:first-of-type matching criteria');
     assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_03_T02', PROPS(A_09_00_03, {
