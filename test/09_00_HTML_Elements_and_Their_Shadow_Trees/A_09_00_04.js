@@ -16,8 +16,7 @@ var A_09_00_04 = {
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#html-elements-and-their-shadow-trees',
     highlight: '[[Contains two insertion points with the following matching criteria:]]' +
     	'[\\s\\S]*[[summary:first-of-type]]' +
-    	'[\\s\\S]*[[universal selector]]',
-    bug: ['https://bugs.webkit.org/show_bug.cgi?id=102864']
+    	'[\\s\\S]*[[universal selector]]'
 };
 
 //test universal selector
