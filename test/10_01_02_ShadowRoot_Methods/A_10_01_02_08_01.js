@@ -12,7 +12,7 @@ var A_10_01_02_08_01 = {
     name:'A_10_01_02_08_01',
     assert:'ShadowRoot Object: ' +
     	'CSSStyleSheet removeStyleSheet(CSSStyleSheet styleSheet) method',
-    link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-object',
+    link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-methods',
     highlight: '[[removeStyleSheet]]' +
     	'[\\s\\S]*[[Removes a style sheet, added with addStyleSheet.]][\\s\\S]*[[Otherwise, ' +
     	'throw a NoModificationAllowedError exception.]]',

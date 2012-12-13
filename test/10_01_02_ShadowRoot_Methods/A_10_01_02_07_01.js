@@ -12,7 +12,7 @@ var A_10_01_02_07_01 = {
     name:'A_10_01_02_07_01',
     assert:'ShadowRoot Object: ' +
     	'CSSStyleSheet addStyleSheet(HTMLElement element) method',
-    link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-object',
+    link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-methods',
     highlight: '[[addStyleSheet]]' +
     	'[\\s\\S]*[[If the parameter is an HTMLLinkElement:]][[Follow requirements for implementing ' +
     	'the HTTP link header with the exception that the newly created style sheet must be appended ' +

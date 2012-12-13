@@ -12,7 +12,7 @@ var A_10_01_02_06_01 = {
     name:'A_10_01_02_06_01',
     assert:'ShadowRoot Object: ' +
     	'Element? elementFromPoint(float x, float y) method',
-    link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-object',
+    link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-methods',
     highlight: '[[elementFromPoint]]' +
     	'[\\s\\S]*[[If context object is not a ShadowRoot instance, throw a TypeMismatchError.]]'
 };

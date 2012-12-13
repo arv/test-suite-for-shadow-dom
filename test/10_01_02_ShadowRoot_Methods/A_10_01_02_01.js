@@ -12,7 +12,7 @@ var A_10_01_02_01 = {
     name:'A_10_01_02_01',
     assert:'ShadowRoot Object: ' +
     	'HTMLElement getElementById(DOMString elementId) method',
-    link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-object',
+    link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-methods',
     highlight: '[[getElementById]]' +
     	'[\\s\\S]*[[Must behave exactly like document.getElementById, except scoped to the shadow tree.]]'
 };

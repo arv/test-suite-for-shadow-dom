@@ -12,7 +12,7 @@ var A_10_01_02_04 = {
     name:'A_10_01_02_04',
     assert:'ShadowRoot Object: ' +
     	'Selection? getSelection() method',
-    link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-object',
+    link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-methods',
     highlight: '[[getSelection]]' +
     	'[\\s\\S]*[[When invoked, it must return the selection in the shadow host\'s tree.]]'
 };
