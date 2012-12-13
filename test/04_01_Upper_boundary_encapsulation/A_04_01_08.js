@@ -11,8 +11,7 @@ policies and contribution forms [3].
 var A_04_01_08 = {
     name:'A_04_01_08',
     assert:'Upper-boundary encapsulation:' +
-        'The selectors must not cross the shadow boundary from the document' +
-        'tree into the shadow DOM subtree',
+        'Methods Document.querySelector and Document.querySelectorAll return only not shadowed elements',
     link:'http://www.w3.org/TR/shadow-dom/#upper-boundary-encapsulation',
     highlight:'The selectors must not cross the shadow boundary from the document ' +
         'tree into the shadow tree'
