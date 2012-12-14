@@ -13,8 +13,7 @@ var A_10_01_02_01 = {
     assert:'ShadowRoot Object: ' +
     	'attribute bool resetStyleInheritance. If false, the properties continue to inherit CSS styles',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-attributes',
-    highlight: '[[resetStyleInheritance]]' +
-    	'[\\s\\S]*[[If false (default value), the properties continue to inherit]]'
+    highlight: '[[If false (default value), the properties continue to inherit]]'
 };
 
 //test default value

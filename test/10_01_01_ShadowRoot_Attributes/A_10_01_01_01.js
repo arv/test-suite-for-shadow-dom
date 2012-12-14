@@ -14,8 +14,7 @@ var A_10_01_01_01 = {
     	'attribute bool applyAuthorStyles attribute. If false, the author styles are not applied ' +
     	'to the shadow tree',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-attributes',
-    highlight: '[[applyAuthorStyles ]]' +
-    	'[\\s\\S]*[[If false (default value), the author styles are not applied to the shadow tree]]'
+    highlight: '[[If false (default value), the author styles are not applied to the shadow tree]]'
 };
 
 //test default value
