@@ -14,7 +14,8 @@ var A_04_01_11 = {
         'are not accessible using shadow host document\'s CSSOM extensions',
     link:'http://www.w3.org/TR/shadow-dom/#upper-boundary-encapsulation',
     highlight:'The style sheets, represented by the nodes are not accessible using ' +
-        'shadow host document\'s CSSOM extensions'
+        'shadow host document\'s CSSOM extensions',
+    bug: ['https://bugs.webkit.org/show_bug.cgi?id=103393']
 };
 
 // check that <style> element added to head is not exposed
