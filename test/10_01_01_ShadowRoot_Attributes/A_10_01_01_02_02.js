@@ -8,12 +8,12 @@ policies and contribution forms [3].
 [3] http://www.w3.org/2004/10/27-testcases
 */
 
-var A_10_01_02_02 = {
-    name:'A_10_01_02_02',
+var A_10_01_01_02_02 = {
+    name:'A_10_01_01_02_02',
     assert:'ShadowRoot Object: ' +
     	'attribute bool resetStyleInheritance.  If true, the properties are set to initial value.',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-attributes',
-    highlight: '[[resetStyleInheritance]]' +
+    highlight: '[[resetStyleInheritance of type bool]]' +
     	'[\\s\\S]*[[ If true, the properties are set to initial value.]]'
 };
 
@@ -80,7 +80,7 @@ test(unit(function (ctx) {
 	assert_equals(d.querySelector('#li5').offsetHeight, defHeight5, 'Point 23: Inherited ' +
 			'element style should be reset');
 	
-}), 'A_10_01_02_02_T01', PROPS(A_10_01_02_02, {
+}), 'A_10_01_01_02_02_T01', PROPS(A_10_01_01_02_02, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));

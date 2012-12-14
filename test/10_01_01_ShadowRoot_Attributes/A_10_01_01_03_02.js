@@ -8,13 +8,13 @@ policies and contribution forms [3].
 [3] http://www.w3.org/2004/10/27-testcases
 */
 
-var A_10_01_03_02 = {
-    name:'A_10_01_03_02',
+var A_10_01_01_03_02 = {
+    name:'A_10_01_01_03_02',
     assert:'ShadowRoot Object: ' +
     	'readonly attribute Element? activeElement; null value',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-attributes',
-    highlight: '[[activeElement]]' +
-    	'[\\s\\S]*[[Represents the currently focused element in the shadow tree.]][\\s\\S]*' +
+    highlight: '[[activeElement of type Element, readonly]][\\s\\S]*' + 
+    	'[[Represents the currently focused element in the shadow tree.]][\\s\\S]*' +
     	'[[or null, if there is none.]]'
 };
 
@@ -31,7 +31,7 @@ test(unit(function (ctx) {
     assert_equals(s.activeElement, null, 'activeElement attribute of the ShadowRoot ' +
     		'must return null if there\'s no focused element');
 
-}), 'A_10_01_03_02_T01', PROPS(A_10_01_03_02, {
+}), 'A_10_01_01_03_02_T01', PROPS(A_10_01_01_03_02, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));
@@ -57,7 +57,7 @@ test(unit(function (ctx) {
     assert_equals(s.activeElement, null, 'activeElement attribute of the ShadowRoot ' +
     		'must return null if there\'s no focused element in the shadow tree');
 
-}), 'A_10_01_03_02_T02', PROPS(A_10_01_03_02, {
+}), 'A_10_01_01_03_02_T02', PROPS(A_10_01_01_03_02, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));
@@ -88,7 +88,7 @@ test(unit(function (ctx) {
     assert_equals(s.activeElement, null, 'activeElement attribute of the ShadowRoot ' +
     		'must return null if there\'s no focused element in the shadow tree');
 
-}), 'A_10_01_03_02_T02', PROPS(A_10_01_03_02, {
+}), 'A_10_01_01_03_02_T02', PROPS(A_10_01_01_03_02, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));

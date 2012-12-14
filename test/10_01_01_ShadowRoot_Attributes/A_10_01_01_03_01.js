@@ -8,13 +8,13 @@ policies and contribution forms [3].
 [3] http://www.w3.org/2004/10/27-testcases
 */
 
-var A_10_01_03_01 = {
-    name:'A_10_01_03_01',
+var A_10_01_01_03_01 = {
+    name:'A_10_01_01_03_01',
     assert:'ShadowRoot Object: ' +
     	'readonly attribute Element? activeElement; actual value',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-attributes',
-    highlight: '[[activeElement]]' +
-    	'[\\s\\S]*[[Represents the currently focused element in the shadow tree.]][\\s\\S]*' +
+    highlight: '[[activeElement of type Element, readonly]][\\s\\S]*' + 
+    	'[[Represents the currently focused element in the shadow tree.]][\\s\\S]*' +
     	'[[On getting, the attribute must return the currently focused element in the shadow tree]]'
 };
 
@@ -41,7 +41,7 @@ test(unit(function (ctx) {
     assert_equals(s.activeElement.tagName, 'INPUT', 'Point 2: activeElement attribute of the ShadowRoot ' +
     		'must return the currently focused element in the shadow tree');
 
-}), 'A_10_01_03_01_T01', PROPS(A_10_01_03_01, {
+}), 'A_10_01_01_03_01_T01', PROPS(A_10_01_01_03_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));

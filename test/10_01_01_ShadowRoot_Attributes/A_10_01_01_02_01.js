@@ -8,8 +8,8 @@ policies and contribution forms [3].
 [3] http://www.w3.org/2004/10/27-testcases
 */
 
-var A_10_01_02_01 = {
-    name:'A_10_01_02_01',
+var A_10_01_01_02_01 = {
+    name:'A_10_01_01_02_01',
     assert:'ShadowRoot Object: ' +
     	'attribute bool resetStyleInheritance. If false, the properties continue to inherit CSS styles',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-root-attributes',
@@ -79,7 +79,7 @@ test(unit(function (ctx) {
 	assert_equals(d.querySelector('#li4').offsetHeight, 0, 'Point 25: Element shouldn\'t be rendered');
 	assert_equals(d.querySelector('#li6').offsetHeight, 0, 'Point 26: Element shouldn\'t be rendered');
 	
-}), 'A_10_01_02_01_T01', PROPS(A_10_01_02_01, {
+}), 'A_10_01_01_02_01_T01', PROPS(A_10_01_01_02_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));
@@ -148,7 +148,7 @@ test(unit(function (ctx) {
 	assert_equals(d.querySelector('#li4').offsetHeight, 0, 'Point 25: Element shouldn\'t be rendered');
 	assert_equals(d.querySelector('#li6').offsetHeight, 0, 'Point 26: Element shouldn\'t be rendered');
 	
-}), 'A_10_01_02_01_T02', PROPS(A_10_01_02_01, {
+}), 'A_10_01_01_02_01_T02', PROPS(A_10_01_01_02_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));
