@@ -8,8 +8,8 @@ policies and contribution forms [3].
 [3] http://www.w3.org/2004/10/27-testcases
 */
 
-var A_10_02_04 = {
-    name:'A_10_02_04',
+var A_10_02_01_04 = {
+    name:'A_10_02_01_04',
     assert:'Extensions to Element Interface: ' +
     	'pseudo of type DOMString attribute; Test setter',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-aware-attributes',
@@ -36,8 +36,7 @@ test(unit(function (ctx) {
     var thumb = d.createElement('span');
     thumb.innerHTML = 'This is a pseudo-element';
    
-  //FIXME replace webkitPseudo by pseudo
-    thumb.webkitPseudo = 'x-thumb';
+    thumb.pseudo = 'x-thumb';
     s.appendChild(thumb);
     
     var height = thumb.offsetHeight;
@@ -52,12 +51,11 @@ test(unit(function (ctx) {
     d.body.appendChild(style);
     
     assert_true(thumb.offsetHeight > height, 'Pseudo-element style should be applied');
-  //FIXME replace webkitPseudo by pseudo
-    thumb.webkitPseudo = null;
+    thumb.pseudo = null;
     
     assert_equals(thumb.offsetHeight, height, 'Pseudo-element style should be discarded by new setter');
     
-}), 'A_10_02_04_T01', PROPS(A_10_02_04, {
+}), 'A_10_02_01_04_T01', PROPS(A_10_02_01_04, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));
@@ -75,17 +73,15 @@ test(unit(function (ctx) {
     var thumb = d.createElement('span');
     thumb.innerHTML = 'This is a pseudo-element';
    
-  //FIXME replace webkitPseudo by pseudo
-    thumb.webkitPseudo = 'x-thumb';
+    thumb.pseudo = 'x-thumb';
     s.appendChild(thumb);
         
-    assert_equals(thumb.webkitPseudo,  'x-thumb', 'Pseudo-element style attribute should be set');
-  //FIXME replace webkitPseudo by pseudo
-    thumb.webkitPseudo = 'x-thumb2';
+    assert_equals(thumb.pseudo,  'x-thumb', 'Pseudo-element style attribute should be set');
+    thumb.pseudo = 'x-thumb2';
     
-    assert_equals(thumb.webkitPseudo, 'x-thumb2', 'New pseudo-element style should be set by setter');
+    assert_equals(thumb.pseudo, 'x-thumb2', 'New pseudo-element style should be set by setter');
     
-}), 'A_10_02_04_T02', PROPS(A_10_02_04, {
+}), 'A_10_02_01_04_T02', PROPS(A_10_02_01_04, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));
@@ -109,8 +105,7 @@ test(unit(function (ctx) {
     var thumb = d.createElement('span');
     thumb.innerHTML = 'This is a pseudo-element';
    
-  //FIXME replace webkitPseudo by pseudo
-    thumb.webkitPseudo = 'x-thumb';
+    thumb.pseudo = 'x-thumb';
     s.appendChild(thumb);
     
     var height = thumb.offsetHeight;
@@ -132,13 +127,12 @@ test(unit(function (ctx) {
     
     assert_true(height2 > height, 'Pseudo-element style should be applied');
     
-  //FIXME replace webkitPseudo by pseudo
-    thumb.webkitPseudo = 'x-thumb2';
+    thumb.pseudo = 'x-thumb2';
     
     assert_true(thumb.offsetHeight > height && thumb.offsetHeight < height2, 
     		'New pseudo-element style should be applied by setter');
     
-}), 'A_10_02_04_T03', PROPS(A_10_02_04, {
+}), 'A_10_02_01_04_T03', PROPS(A_10_02_01_04, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));

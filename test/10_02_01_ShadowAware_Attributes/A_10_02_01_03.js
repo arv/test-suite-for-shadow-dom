@@ -8,8 +8,8 @@ policies and contribution forms [3].
 [3] http://www.w3.org/2004/10/27-testcases
 */
 
-var A_10_02_03 = {
-    name:'A_10_02_03',
+var A_10_02_01_03 = {
+    name:'A_10_02_01_03',
     assert:'Extensions to Element Interface: ' +
     	'pseudo of type DOMString attribute; Test setter',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-aware-attributes',
@@ -35,8 +35,7 @@ test(unit(function (ctx) {
     var thumb = d.createElement('span');
     thumb.innerHTML = 'This is a pseudo-element';
    
-  //FIXME replace webkitPseudo by pseudo
-    thumb.webkitPseudo = 'x-thumb';
+    thumb.pseudo = 'x-thumb';
     s.appendChild(thumb);
     
     var height = thumb.offsetHeight;
@@ -50,12 +49,11 @@ test(unit(function (ctx) {
     d.body.appendChild(style);
     
     assert_true(thumb.offsetHeight > height, 'Pseudo-element style should be applied');
-  //FIXME replace webkitPseudo by pseudo
-    thumb.webkitPseudo = 'x-thumb2';
+    thumb.pseudo = 'x-thumb2';
     
     assert_equals(thumb.offsetHeight, height, 'Pseudo-element style should be discarded by new setter');
     
-}), 'A_10_02_03_T01', PROPS(A_10_02_03, {
+}), 'A_10_02_01_03_T01', PROPS(A_10_02_01_03, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));

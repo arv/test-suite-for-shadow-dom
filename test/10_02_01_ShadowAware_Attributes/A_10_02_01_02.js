@@ -8,15 +8,39 @@ policies and contribution forms [3].
 [3] http://www.w3.org/2004/10/27-testcases
 */
 
-var A_10_02_01 = {
-    name:'A_10_02_01',
+var A_10_02_01_02 = {
+    name:'A_10_02_01_02',
     assert:'Extensions to Element Interface: ' +
-    	'pseudo of type DOMString attribute. Test getter when there is a custom pseudo-element ' +
+    	'pseudo of type DOMString attribute. Test getter when there\'s no custom pseudo-element ' +
     	'associated with this element',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-aware-attributes',
     highlight: '[[pseudo of type DOMString]]' +
-    	'[\\s\\S]*[[On getting, the attribute must return the current custom pseudo-element value]]'
+    	'[\\s\\S]*[[empty string if there is no custom pseudo-element associated with this element.]]'
 };
+
+test(function () {
+	
+	var d = newHTMLDocument();
+	    
+    var widget = d.createElement('div');
+    d.body.appendChild(widget);
+    
+    var s = new SR(widget);
+    
+    var thumb = d.createElement('span');
+    thumb.innerHTML = 'This is a pseudo-element';
+    s.appendChild(thumb);
+    
+    assert_true(widget.pseudo != null, 'attribute \'pseudo\' must not be null');
+    
+    assert_equals(widget.pseudo, '', 'attribute \'pseudo\' must return ' +
+    		'empty string if there is no custom pseudo-element associated with this element')
+        
+}, 'A_10_02_01_02_T01', PROPS(A_10_02_01_02, {
+	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+	reviewer:''
+}));
+
 
 test(function () {
 	
@@ -42,14 +66,12 @@ test(function () {
     	'}';
     d.body.appendChild(style);
     
-    //FIXME replace webkitPseudo by pseudo
-    assert_true(thumb.webkitPseudo != null, 'attribute \'pseudo\' must not be null');
+    assert_true(widget.pseudo != null, 'attribute \'pseudo\' must not be null');
     
-    assert_equals(thumb.webkitPseudo, 'x-thumb', 'attribute \'pseudo\' must return ' +
-    		'the current custom pseudo-element value')
+    assert_equals(widget.pseudo, '', 'attribute \'pseudo\' must return ' +
+    		'empty string if there is no custom pseudo-element associated with this element')
         
-}, 'A_10_02_01_T01', PROPS(A_10_02_01, {
+}, 'A_10_02_01_02_T02', PROPS(A_10_02_01_02, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));
-
