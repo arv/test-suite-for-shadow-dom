@@ -41,7 +41,7 @@ test(unit(function (ctx) {
     		'the ShadowRoot object at the top of the tree stack of its host');
     assert_equals(s1.querySelector('#sp1'), 0, 'Point 2:createShadowRoot() method should add ' +
 		'the ShadowRoot object at the top of the tree stack of its host');
-    assert_true(s2.querySelector('#sp2') > 0, 'createShadowRoot() method should add ' +
+    assert_true(s2.querySelector('#sp2') > 0, 'Point 3:createShadowRoot() method should add ' +
 		'the ShadowRoot object at the top of the tree stack of its host');
     
     
