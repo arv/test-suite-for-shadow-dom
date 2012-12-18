@@ -21,7 +21,7 @@ var A_06_00_11 = {
 
 
 // Test fails. See https://bugs.webkit.org/show_bug.cgi?id=103625
-test(unit(function (ctx) {ctx.debug = true;
+test(unit(function (ctx) {
 	var d = newRenderedHTMLDocument(ctx);
     
     var host = d.createElement('div');

@@ -35,7 +35,7 @@ A_08_01_01_T01.checkIframeContent = A_08_01_01_T01.step_func(function () {
 });
 
 
-A_08_01_01_T01.step(function () {//ctx.debug = true;
+A_08_01_01_T01.step(function () {
 	
 	A_08_01_01_T01.ctx = newContext(); 
     var d = newRenderedHTMLDocument(A_08_01_01_T01.ctx);
