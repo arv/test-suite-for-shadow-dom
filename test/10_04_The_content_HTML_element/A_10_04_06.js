@@ -84,7 +84,7 @@ test(unit(function (ctx) {
 		'Point 3: wrong element in distributed nodes collection');
 
     
-}), 'A_10_04_06_T01', PROPS(A_10_04_06, {
+}), 'A_10_04_06_T02', PROPS(A_10_04_06, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));
