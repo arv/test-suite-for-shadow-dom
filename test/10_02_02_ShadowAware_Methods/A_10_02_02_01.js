@@ -15,7 +15,7 @@ var A_10_02_02_01 = {
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-aware-methods',
     highlight: '[[createShadowRoot]]' +
     	'[\\s\\S]*[[Create a new instance of the ShadowRoot object]]',
-    bug:['https://bugs.webkit.org/show_bug.cgi?id=105397']
+    bug:['https://bugs.webkit.org/show_bug.cgi?id=105385']
 };
 
 test(function () {
