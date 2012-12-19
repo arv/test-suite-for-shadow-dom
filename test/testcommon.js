@@ -20,17 +20,23 @@ function ShadowDomNotSupportedError() {
     this.message = "Shadow DOM is not supported";
 }
 
-function ShadowDomNotSupported() {
-    throw new ShadowDomNotSupportedError();
+function ShadowRootImplementation (host) {
+	if (window.ShadowRoot) {
+		return window.ShadowRoot;
+	} else if (window.WebKitShadowRoot) {
+		return window.WebKitShadowRoot;
+	} else {
+		  if (host.createShadowRoot) {
+			  return host.createShadowRoot(); 
+		  } else if (host.webkitCreateShadowRoot) {
+			  return host.webkitCreateShadowRoot();
+		  } else {
+			throw new ShadowDomNotSupportedError();   
+		  }		
+	}
 }
 
-// Alias the constructor so vendor-prefixed implementations can run
-// most of the test suite.
-var SR = window.ShadowRoot ||
-    window.WebKitShadowRoot ||
-    // Add other vendor prefixes here.
-    ShadowDomNotSupported;
-
+var SR = ShadowRootImplementation;
 
 function PROPS(assertion, properties) {
     var res = Object(), attr;
@@ -60,7 +66,7 @@ function newDocument() {
 }
 
 function newHTMLDocument() {
-    return document.implementation.createHTMLDocument();
+    return document.implementation.createHTMLDocument('Test Document');
 }
 
 function newIFrame(ctx, src) {
