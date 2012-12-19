@@ -147,7 +147,6 @@ test(function () {
     reviewer:'Sergey G. Grekhov <sgrekhov@unipro.ru>'
 }));
 
-// shadow host: any HTML5 element
 // shadow tree: any HTML5 element
 test(function(){
 	var i;
@@ -160,7 +159,7 @@ test(function(){
 			var shadowRoot = new SR(hostElement);
 		} catch (e) {
 			// if shadow tree can not be added, can not check the test case.
-			continue;
+			continue;			
 		}
 		var k;
 		for (k=0; k<HTML5_TAG.length; k++){
