@@ -31,17 +31,17 @@ test(unit(function (ctx) {
     
     //old tree
     var s1 = host.createShadowRoot();
-    s1.innerHtml = '<span id="sp1">Span 1</span>';
+    s1.innerHTML = '<span id="sp1">Span 1</span>';
     //young tree
     var s2 = host.createShadowRoot();
-    s2.innerHtml = '<span id="sp2">Span 2</span>';
+    s2.innerHTML = '<span id="sp2">Span 2</span>';
     
     // span should become invisible as shadow root content
     assert_equals(span.offsetTop, 0, 'Point 1:createShadowRoot() method should add ' +
     		'the ShadowRoot object at the top of the tree stack of its host');
-    assert_equals(s1.querySelector('#sp1'), 0, 'Point 2:createShadowRoot() method should add ' +
+    assert_equals(s1.querySelector('#sp1').offsetTop, 0, 'Point 2:createShadowRoot() method should add ' +
 		'the ShadowRoot object at the top of the tree stack of its host');
-    assert_true(s2.querySelector('#sp2') > 0, 'Point 3:createShadowRoot() method should add ' +
+    assert_true(s2.querySelector('#sp2').offsetTop > 0, 'Point 3:createShadowRoot() method should add ' +
 		'the ShadowRoot object at the top of the tree stack of its host');
     
     
