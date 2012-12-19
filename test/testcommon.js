@@ -20,16 +20,36 @@ function ShadowDomNotSupportedError() {
     this.message = "Shadow DOM is not supported";
 }
 
-function ShadowDomNotSupported() {
-    throw new ShadowDomNotSupportedError();
+function ShadowRootImplementation (host) {
+	  if (host.createShadowRoot) {
+		  return host.createShadowRoot(); 
+	  } else if (host.webkitCreateShadowRoot) {
+		  return host.webkitCreateShadowRoot();
+	  } else {
+		throw new ShadowDomNotSupportedError();   
+	  }		
 }
 
-// Alias the constructor so vendor-prefixed implementations can run
-// most of the test suite.
-var SR = window.ShadowRoot ||
-    window.WebKitShadowRoot ||
-    // Add other vendor prefixes here.
-    ShadowDomNotSupported;
+var SR = ShadowRootImplementation;
+
+
+function addPrefixed(element) {
+	// To allow using of both prefixed and non-prefixed API we do
+	// the following hook
+	if (!element.pseudo) {
+		Object.defineProperty(element, 'pseudo', {
+			  get: function () { return element.webkitPseudo; },
+			  set: function (value) { return element.webkitPseudo = value; }
+		});
+	}
+
+	if (!element.createShadowRoot) {
+		element.createShadowRoot = function () {
+			return this.webkitCreateShadowRoot();
+		};
+	}
+}
+
 
 
 function PROPS(assertion, properties) {
@@ -56,11 +76,25 @@ function rethrowInternalErrors(e) {
 }
 
 function newDocument() {
-    return document.implementation.createDocument();
+    var d = document.implementation.createDocument();
+	d.oldCreate = d.createElement;
+	d.createElement = function(tagName) {
+		var el = d.oldCreate(tagName);
+		addPrefixed(el);
+		return el;
+	};
+    return d;        
 }
 
 function newHTMLDocument() {
-    return document.implementation.createHTMLDocument();
+	var d = document.implementation.createHTMLDocument('Test Document');
+	d.oldCreate = d.createElement;
+	d.createElement = function(tagName) {
+		var el = d.oldCreate(tagName);
+		addPrefixed(el);
+		return el;
+	};
+    return d;
 }
 
 function newIFrame(ctx, src) {
@@ -86,7 +120,14 @@ function newIFrame(ctx, src) {
 }
 function newRenderedHTMLDocument(ctx) {
     var frame = newIFrame(ctx);
-    return frame.contentWindow.document;
+    var d = frame.contentWindow.document;
+	d.oldCreate = d.createElement;
+	d.createElement = function(tagName) {
+		var el = d.oldCreate(tagName);
+		addPrefixed(el);
+		return el;
+	};
+    return d;    
 }
 
 function newContext() {

@@ -14,7 +14,8 @@ var A_10_02_02_01 = {
     	'createShadowRoot method creates new instance of Shadow root object',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-aware-methods',
     highlight: '[[createShadowRoot]]' +
-    	'[\\s\\S]*[[Create a new instance of the ShadowRoot object]]'
+    	'[\\s\\S]*[[Create a new instance of the ShadowRoot object]]',
+    bug:['https://bugs.webkit.org/show_bug.cgi?id=105397']
 };
 
 test(function () {
