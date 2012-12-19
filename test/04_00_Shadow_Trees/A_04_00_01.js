@@ -28,10 +28,10 @@ function A_04_00_01_test(elementName) {
     d.body.appendChild(n);
 
 // add first shadow tree
-    var shadowTree1 =  new SR(n);
+    var shadowTree1 =  n.createShadowRoot();
     assert_equals(shadowTree1.ownerDocument, d, 'Expected: Shadow tree 1 is part of the document, Actual: Shadow tree 1 is not part of the document');
  // add second shadow tree
-    var shadowTree2 =  new SR(n);
+    var shadowTree2 =  n.createShadowRoot();
     assert_equals(shadowTree2.ownerDocument, d, 'Expected: Shadow tree 2 is part of the document, Actual: Shadow tree 2 is not part of the document');
 }
 

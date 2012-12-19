@@ -19,7 +19,7 @@ var HTML5_FORM_ASSOCIATED_ELEMENTS = ['button', 'fieldset', 'input', 'keygen', '
 function ShadowDomNotSupportedError() {
     this.message = "Shadow DOM is not supported";
 }
-
+/*
 function ShadowRootImplementation (host) {
 	  if (host.createShadowRoot) {
 		  return host.createShadowRoot(); 
@@ -32,10 +32,11 @@ function ShadowRootImplementation (host) {
 
 var SR = ShadowRootImplementation;
 
+*/
 
+// To allow using of both prefixed and non-prefixed API we do
+// the following hook
 function addPrefixed(element) {
-	// To allow using of both prefixed and non-prefixed API we do
-	// the following hook
 	if (!element.pseudo) {
 		Object.defineProperty(element, 'pseudo', {
 			  get: function () { return element.webkitPseudo; },
@@ -44,9 +45,15 @@ function addPrefixed(element) {
 	}
 
 	if (!element.createShadowRoot) {
-		element.createShadowRoot = function () {
-			return this.webkitCreateShadowRoot();
-		};
+		if (element.webkitCreateShadowRoot) {
+			element.createShadowRoot = function () {
+				return this.webkitCreateShadowRoot();
+			};
+		} else {
+			element.createShadowRoot = function () {
+				throw new ShadowDomNotSupportedError();
+			};
+		}
 	}
 }
 
