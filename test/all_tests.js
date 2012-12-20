@@ -133,6 +133,8 @@ include("10_02_01_ShadowAware_Attributes/A_10_02_01_06.js");
 include("10_02_02_ShadowAware_Methods/A_10_02_02_01.js");
 include("10_02_02_ShadowAware_Methods/A_10_02_02_02.js");
 include("10_02_02_ShadowAware_Methods/A_10_02_02_03.js");
+include("10_03_01_CSSHostRule_Attributes/A_10_03_01_01.js");
+include("10_03_01_CSSHostRule_Attributes/A_10_03_01_02.js");
 include("10_04_The_content_HTML_element/A_10_04_01.js");
 include("10_04_The_content_HTML_element/A_10_04_02.js");
 include("10_04_The_content_HTML_element/A_10_04_03.js");

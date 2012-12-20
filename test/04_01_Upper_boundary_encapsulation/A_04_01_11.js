@@ -10,12 +10,12 @@ policies and contribution forms [3].
 
 var A_04_01_11 = {
     name:'A_04_01_11',
-    assert:'Upper-boundary encapsulation:The style sheets, represented by the nodes ' +
+    assert:'Upper-boundary encapsulation:The style sheets, represented by the shadow nodes ' +
         'are not accessible using shadow host document\'s CSSOM extensions',
     link:'http://www.w3.org/TR/shadow-dom/#upper-boundary-encapsulation',
     highlight:'The style sheets, represented by the nodes are not accessible using ' +
         'shadow host document\'s CSSOM extensions',
-    bug: ['https://bugs.webkit.org/show_bug.cgi?id=103393']
+    bug: ['https://bugs.webkit.org/show_bug.cgi?id=103393', 'https://bugs.webkit.org/show_bug.cgi?id=105274']
 };
 
 // check that <style> element added to head is not exposed
@@ -29,11 +29,12 @@ A_04_01_11_T1.step(function () {
     var iframe = newIFrame(ctx, 'resources/blank.html');
     iframe.onload = A_04_01_11_T1.step_func(step_unit(function () {
         var d = iframe.contentDocument;
+        var initialStyleSheetsCount = d.styleSheets.length;
         var s = new SR(d.head);
         var style = d.createElement('style');
         s.appendChild(style);
-        assert_equals(d.styleSheets.length, 0, 'style elements in shadow DOM must not be exposed via ' +
-            'the document.styleSheets collection');
+        assert_equals(d.styleSheets.length, initialStyleSheetsCount, 'style elements in shadow DOM must not be exposed via ' +
+            'the document.styleSheets collection ');
 
     }, ctx, A_04_01_11_T1));
 });
@@ -43,23 +44,28 @@ A_04_01_11_T1.step(function () {
 test(unit(function (ctx) {
 
 	var d = newRenderedHTMLDocument(ctx);
-	
+	var initialStyleSheetsCount = d.styleSheets.length;
+
 	var link = d.createElement('link');
 	link.setAttribute('href', 'testharness.css');
 	link.setAttribute('rel', 'stylesheet');
-	
+	d.body.appendChild(link);
+
 	//create Shadow root
 	var root = d.createElement('div');
-	d.body.appendChild(root);    
+	d.body.appendChild(root);
 	var s = new SR(root);
-	
+
 	s.appendChild(link);
-	
-	assert_equals(d.styleSheets.length, 0, 'stylesheet link elements in shadow DOM must not be ' +
-            'exposed via the document.styleSheets collection');       
+
+	assert_equals(d.styleSheets.length, initialStyleSheetsCount, 'stylesheet link elements in shadow DOM must not be ' +
+            'exposed via the document.styleSheets collection');
 
 
 }), 'A_04_01_11_T2', PROPS(A_04_01_11, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-	reviewer:''
+	reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
+
+// TODO check selectedStyleSheetSet 
+
