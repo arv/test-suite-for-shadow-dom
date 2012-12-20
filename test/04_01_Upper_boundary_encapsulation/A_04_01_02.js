@@ -23,7 +23,7 @@ test(function () {
     var d1 = newHTMLDocument();
     var d2 = newHTMLDocument();
 
-    var s = new SR(d1.documentElement);
+    var s = d1.documentElement.createShadowRoot();
 
     assert_not_equals(d2.body, null, 'initial DOM model state check failed!');
     var d2_body = d2.body; // remember the reference to d2.body
@@ -43,7 +43,7 @@ test(function () {
 test(function () {
     var d1 = newHTMLDocument();
     var d2 = newHTMLDocument();
-    var s = new SR(d1.documentElement);
+    var s = d1.documentElement.createShadowRoot();
 
     assert_not_equals(d2.head, null, 'initial DOM model state check failed!');
     var d2_head = d2.head;
@@ -66,7 +66,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     allLengthBefore = d.all.length;
     e = d.createElement('br');
@@ -87,7 +87,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     e = d.createElement('a');
     e.setAttribute('name', 'x');
@@ -109,7 +109,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     e = d.createElement('applet');
     d.body.appendChild(e);
@@ -130,7 +130,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     e = d.createElement('embed');
     d.body.appendChild(e);
@@ -149,7 +149,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     e = d.createElement('form');
     d.body.appendChild(e);
@@ -168,7 +168,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     var e = d.createElement('img');
     d.body.appendChild(e);
@@ -188,7 +188,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     e = d.createElement('a');
     e.setAttribute('href', 'http://www.w3.org/');
@@ -209,7 +209,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     e = d.createElement('area');
     e.setAttribute('href', 'http://www.w3.org/');
@@ -230,7 +230,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     e = d.createElement('script');
     d.head.appendChild(e);
@@ -251,7 +251,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     e = d.createElement('div');
     e.setAttribute('name', 'bob');
@@ -269,7 +269,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     e = d.createElement('div');
     e.setAttribute('name', 'bob');
@@ -291,7 +291,7 @@ test(function () {
 // when added to shadow tree
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.documentElement);
+    var s = d.documentElement.createShadowRoot();
 
     e = d.createElement('div');
     e.setAttribute('name', 'bob');
@@ -312,7 +312,7 @@ test(function () {
 //when added to shadow tree
 test(function () {
 	var d = newHTMLDocument();
-	var s = new SR(d.documentElement);
+	var s = d.documentElement.createShadowRoot();
 
 	e = d.createElementNS('http://www.w3c.org/namespace','div');
 	d.body.appendChild(e);

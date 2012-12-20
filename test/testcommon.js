@@ -19,32 +19,18 @@ var HTML5_FORM_ASSOCIATED_ELEMENTS = ['button', 'fieldset', 'input', 'keygen', '
 function ShadowDomNotSupportedError() {
     this.message = "Shadow DOM is not supported";
 }
-/*
-function ShadowRootImplementation (host) {
-	  if (host.createShadowRoot) {
-		  return host.createShadowRoot(); 
-	  } else if (host.webkitCreateShadowRoot) {
-		  return host.webkitCreateShadowRoot();
-	  } else {
-		throw new ShadowDomNotSupportedError();   
-	  }		
-}
-
-var SR = ShadowRootImplementation;
-
-*/
 
 // To allow using of both prefixed and non-prefixed API we do
 // the following hook
 function addPrefixed(element) {
-	if (!element.pseudo) {
+	if (element && !element.pseudo) {
 		Object.defineProperty(element, 'pseudo', {
 			  get: function () { return element.webkitPseudo; },
 			  set: function (value) { return element.webkitPseudo = value; }
 		});
 	}
 
-	if (!element.createShadowRoot) {
+	if (element && !element.createShadowRoot) {
 		if (element.webkitCreateShadowRoot) {
 			element.createShadowRoot = function () {
 				return this.webkitCreateShadowRoot();
@@ -84,6 +70,10 @@ function rethrowInternalErrors(e) {
 
 function newDocument() {
     var d = document.implementation.createDocument();
+    //FIXME remove all of this when non-prefixed API is used
+    addPrefixed(d.body);
+    addPrefixed(d.documentElement);
+    addPrefixed(d.head);
 	d.oldCreate = d.createElement;
 	d.createElement = function(tagName) {
 		var el = d.oldCreate(tagName);
@@ -95,6 +85,10 @@ function newDocument() {
 
 function newHTMLDocument() {
 	var d = document.implementation.createHTMLDocument('Test Document');
+    //FIXME remove all of this when non-prefixed API is used
+    addPrefixed(d.body);
+    addPrefixed(d.documentElement);
+    addPrefixed(d.head);
 	d.oldCreate = d.createElement;
 	d.createElement = function(tagName) {
 		var el = d.oldCreate(tagName);
@@ -128,6 +122,10 @@ function newIFrame(ctx, src) {
 function newRenderedHTMLDocument(ctx) {
     var frame = newIFrame(ctx);
     var d = frame.contentWindow.document;
+    //FIXME remove all of this when non-prefixed API is used
+    addPrefixed(d.body);
+    addPrefixed(d.documentElement);
+    addPrefixed(d.head);
 	d.oldCreate = d.createElement;
 	d.createElement = function(tagName) {
 		var el = d.oldCreate(tagName);

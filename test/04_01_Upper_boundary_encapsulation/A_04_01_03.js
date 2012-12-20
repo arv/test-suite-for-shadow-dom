@@ -21,12 +21,13 @@ var A_04_01_03 = {
 // 'frameset', 'iframe', 'img' and 'object' named elements do not
 // appear in window object named properties
 test(unit(function (ctx) {
-    var f = newIFrame(ctx);
-    var d = f.contentWindow.document;
+    //var f = newIFrame(ctx);
+    //var d = f.contentWindow.document;
+	var d = newHTMLDocument(ctx);
 
     var div = d.createElement('div');
     d.body.appendChild(div);
-    var s = new SR(div);
+    var s = div.createShadowRoot();
 
     //Window named properties
     var namedElements = ['a', 'applet', 'area', 'embed', 'form', 'frame',
@@ -52,12 +53,13 @@ test(unit(function (ctx) {
 
 // check that element with ID does not appear in window object named properties
 test(unit(function (ctx) {
-    var f = newIFrame(ctx);
-    var d = f.contentWindow.document;
+    //var f = newIFrame(ctx);
+    //var d = f.contentWindow.document;
+	var d = newHTMLDocument(ctx);
 
     var div1 = d.createElement('div');
     d.body.appendChild(div1);
-    var s = new SR(div1);
+    var s = div1.createShadowRoot();
 
     var div2 = d.createElement('div');
     div2.id = 'divWithId';
@@ -75,9 +77,10 @@ test(unit(function (ctx) {
 
 //check that any HTML5 element with ID does not appear in window object named properties
 test(unit(function (ctx) {
-    var f = newIFrame(ctx);
-    var d = f.contentWindow.document;
-    var s = new SR(d.documentElement);
+    //var f = newIFrame(ctx);
+    //var d = f.contentWindow.document;
+	var d = newHTMLDocument(ctx);
+    var s = d.documentElement.createShadowRoot();
 
     var i;
     for (i=0; i<HTML5_TAG.length; i++){
