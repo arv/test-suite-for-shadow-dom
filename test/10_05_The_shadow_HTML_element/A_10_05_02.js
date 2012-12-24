@@ -24,10 +24,10 @@ test(unit(function (ctx) {
 	d.body.appendChild(host);
 	
 	//old tree
-	var s1 = new SR(host);
+	var s1 = createSR(host);
 	s1.innerHTML = '<span id="sp1">This is an old tree</span>';
 	//young tree
-	var s2 = new SR(host);
+	var s2 = createSR(host);
 	
 	var div = d.createElement('div');	
 	div.innerHTML = '' +

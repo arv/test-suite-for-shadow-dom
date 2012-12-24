@@ -42,7 +42,7 @@ test(function () {
     var d = newDocument();
     var n = d.createCDATASection('some data');
     d.documentElement.appendChild(n);
-    assert_equals(n.createShadowRoot, undefined, 'CDATA section can\'t be used as shadow root');
+    assert_equals(createSR(n.createShadowRoot, undefined, 'CDATA section can\'t be used as shadow root');
 }, 'A_04_00_02_T03', PROPS(A_04_00_02, {
     author:'Mikhail Fursov <mfursov@unipro.ru>',
     reviewer:'Sergey G. Grekhov <sgrekhov@unipro.ru>'

@@ -31,7 +31,7 @@ test(unit(function (ctx) {
     	'<span id="shadow">This is a node that should be distributed</span>' +
     	'<span id="flbk">This is a fallback content</span>';
     
-    var s = new SR(el);
+    var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
     assert_true(d.querySelector('#shadow').offsetTop > 0, 'Iframe should allow at least one insertion point');
@@ -56,7 +56,7 @@ test(unit(function (ctx) {
     	'<span id="shadow">This is a node that should be distributed</span>' +
     	'<span id="flbk">This is a fallback content</span>';
     
-    var s = new SR(el);
+    var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
     assert_true(d.querySelector('#shadow').offsetTop > 0, 'object should allow at least one insertion point');
@@ -81,7 +81,7 @@ test(unit(function (ctx) {
     	'<span id="shadow">This is a node that should be distributed</span>' +
     	'<span id="flbk">This is a fallback content</span>';
     
-    var s = new SR(el);
+    var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
     assert_true(d.querySelector('#shadow').offsetTop > 0, 'video should allow at least one insertion point');
@@ -106,7 +106,7 @@ test(unit(function (ctx) {
     	'<span id="shadow">This is a node that should be distributed</span>' +
     	'<span id="flbk">This is a fallback content</span>';
     
-    var s = new SR(el);
+    var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
     assert_true(d.querySelector('#shadow').offsetTop > 0, 'audio should allow at least one insertion point');
@@ -131,7 +131,7 @@ test(unit(function (ctx) {
     	'<span id="shadow">This is a node that should be distributed</span>' +
     	'<span id="flbk">This is a fallback content</span>';
     
-    var s = new SR(el);
+    var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
     assert_true(d.querySelector('#shadow').offsetTop > 0, 'canvas should allow at least one insertion point');
@@ -165,7 +165,7 @@ test(unit(function (ctx) {
 		'<span id="flbk">This is a fallback content</span>';
     
     
-    var s = new SR(el);
+    var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
     assert_true(d.querySelector('#shadow').offsetTop > 0, 'map should allow at least one insertion point');
@@ -190,7 +190,7 @@ test(unit(function (ctx) {
     	'<span id="shadow">This is a node that should be distributed</span>' +
     	'<span id="flbk">This is a fallback content</span>';
     
-    var s = new SR(el);
+    var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
     assert_true(d.querySelector('#shadow').offsetTop > 0, 'textarea should allow at least one insertion point');
@@ -215,7 +215,7 @@ test(unit(function (ctx) {
     	'<span id="shadow">This is a node that should be distributed</span>' +
     	'<span id="flbk">This is a fallback content</span>';
     
-    var s = new SR(el);
+    var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
     assert_true(d.querySelector('#shadow').offsetTop > 0, 'progress should allow at least one insertion point');
@@ -240,7 +240,7 @@ test(unit(function (ctx) {
     	'<span id="shadow">This is a node that should be distributed</span>' +
     	'<span id="flbk">This is a fallback content</span>';
     
-    var s = new SR(el);
+    var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
     assert_true(d.querySelector('#shadow').offsetTop > 0, 'meter should allow at least one insertion point');

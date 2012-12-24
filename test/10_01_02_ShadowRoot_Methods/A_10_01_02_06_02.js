@@ -25,7 +25,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     var span = d.createElement('span');
     span.innerHTML = 'Some text';
@@ -47,7 +47,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     var span = d.createElement('span');
     span.innerHTML = 'Some text';

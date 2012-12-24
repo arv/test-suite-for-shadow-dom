@@ -27,7 +27,7 @@ test(unit(function (ctx) {
     var host = d.createElement('div');
     d.body.appendChild(host);
 
-	var s = new SR(host);
+	var s = createSR(host);
 	s.resetStyleInheritance = true;
 	
 	assert_equals(s.resetStyleInheritance, true, 'attribute must return the current value of the ' +
@@ -46,7 +46,7 @@ test(unit(function (ctx) {
     var host = d.createElement('div');
     d.body.appendChild(host);
 
-	var s = new SR(host);
+	var s = createSR(host);
 	s.resetStyleInheritance = false;
 	
 	assert_equals(s.resetStyleInheritance, false, 'attribute must return the current value of the ' +
@@ -64,7 +64,7 @@ test(unit(function (ctx) {
     var host = d.createElement('div');
     d.body.appendChild(host);
 
-	var s = new SR(host);
+	var s = createSR(host);
 	s.resetStyleInheritance = true;
 	
 	assert_equals(s.resetStyleInheritance, true, 'attribute must return the current value of the ' +

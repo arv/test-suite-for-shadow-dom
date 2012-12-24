@@ -20,7 +20,7 @@ var A_04_01_08 = {
 //check querySelector method
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
 
     var e = d.createElement('span');
     e.setAttribute('id', 'span_id');
@@ -46,7 +46,7 @@ test(function () {
 //check querySelectorAll method
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
 
     var e1 = d.createElement('span');
     e1.setAttribute('id', 'span_id');
@@ -79,7 +79,7 @@ test(function () {
     var divElement = d.createElement('div');
     d.body.appendChild(divElement);
 
-    var s = new SR(divElement);
+    var s = createSR(divElement);
 
     var e1 = d.createElement('span');
     e1.setAttribute('id', 'span1_id');
@@ -131,7 +131,7 @@ test(function () {
     var divElement = d.createElement('div');
     d.body.appendChild(divElement);
 
-    var s = new SR(divElement);
+    var s = createSR(divElement);
 
     var e1 = d.createElement('span');
     e1.setAttribute('id', 'span1_id');

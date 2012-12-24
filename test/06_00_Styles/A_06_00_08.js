@@ -41,7 +41,7 @@ test(unit(function (ctx) {
 
     var host = d.querySelector('.cls');
 	//Shadow root to play with
-	var s = new SR(host);
+	var s = createSR(host);
 	
 	var div = d.createElement('div');	
 	div.innerHTML ='<ul><content select=".shadow"></content></ul>'; 
@@ -77,7 +77,7 @@ test(unit(function (ctx) {
 
     var host = d.querySelector('.cls');
 	//Shadow root to play with
-	var s = new SR(host);
+	var s = createSR(host);
 	
 	var div = d.createElement('div');	
 	div.innerHTML ='<ul><content select=".shadow"></content></ul>'; 
@@ -112,13 +112,13 @@ test(unit(function (ctx) {
     d.body.appendChild(host);
 
 	//Older tree
-	var s1 = new SR(host);
+	var s1 = createSR(host);
 	var div1 = d.createElement('div');
 	div1.innerHTML = '<span id="shd1">This is an old shadow tree</span>'; 
 	s1.appendChild(div1);
 	
 	//Younger tree
-	var s2 = new SR(host);
+	var s2 = createSR(host);
 	var div1 = d.createElement('div');
 	div1.innerHTML = '<span id="shd2">This is a young shadow tree</span>' + 
 		'<shadow><span id="shd3">This is the shadow tree fallback content</span></shadow>'; 

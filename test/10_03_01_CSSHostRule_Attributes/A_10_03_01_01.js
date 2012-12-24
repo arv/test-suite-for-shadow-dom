@@ -27,7 +27,7 @@ test(unit(function (ctx) {
     var host = d.createElement('div');
     d.body.appendChild(host);
     
-	var s = new SR(host);
+	var s = createSR(host);
 	
 	var style = d.createElement('style');
     style.innerHTML = '' + 
@@ -52,7 +52,7 @@ test(unit(function (ctx) {
     var host = d.createElement('div');
     d.body.appendChild(host);
     
-	var s = new SR(host);
+	var s = createSR(host);
 	
 	var style = d.createElement('style');
     style.innerHTML = '' + 

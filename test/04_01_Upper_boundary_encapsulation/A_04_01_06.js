@@ -20,7 +20,7 @@ var A_04_01_06 = {
 // getElementsByTagName accessor
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
     var e = d.createElement('img');
     s.appendChild(e);
 
@@ -35,7 +35,7 @@ test(function () {
 // getElementsByTagNameNS accessor
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
     var e = d.createElement('img');
     s.appendChild(e);
 
@@ -51,7 +51,7 @@ test(function () {
 // getElementsByClassName accessor
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
     e = d.createElement('div');
     e.setAttribute('class', 'div_class');
     s.appendChild(e);
@@ -66,7 +66,7 @@ test(function () {
 // getElementById accessor
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
 
     e = d.createElement('span');
     e.setAttribute('id', 'span_id');
@@ -83,7 +83,7 @@ test(function () {
 // querySelector accessor
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
 
     var e1 = d.createElement('span');
     e1.setAttribute('id', 'span_id');
@@ -113,7 +113,7 @@ test(function () {
 // querySelectorAll accessor by element type
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
 
     var e1 = d.createElement('span');
     s.appendChild(e1);
@@ -141,7 +141,7 @@ test(function () {
 // querySelectorAll accessor with attribute value
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
 
     var e1 = d.createElement('span');
     e1.setAttribute('test', 'span_id');
@@ -170,7 +170,7 @@ test(function () {
 // querySelectorAll accessor for class
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
 
     var e1 = d.createElement('div');
     e1.setAttribute('class', 'div_class');
@@ -198,7 +198,7 @@ test(function () {
 //querySelector accessor by ID
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
 
     var e1 = d.createElement('span');
     e1.setAttribute('id', 'span_id');

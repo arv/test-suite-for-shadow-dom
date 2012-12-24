@@ -63,7 +63,7 @@ A_08_02_03_T01.step(function () {
     //create Shadow root
     var root = d.createElement('div');
     form.appendChild(root);    
-    var s = new SR(root);
+    var s = createSR(root);
         
 
     var input1 = d.createElement('input');

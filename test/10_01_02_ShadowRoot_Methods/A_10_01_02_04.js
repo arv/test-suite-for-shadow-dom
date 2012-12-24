@@ -22,7 +22,7 @@ test(unit(function (ctx) {
 	
 	var host = d.createElement('div');
 	d.body.appendChild(host);
-	var s = new SR(host);
+	var s = createSR(host);
     
 	var span = d.createElement('span');
 	span.innerHTML = 'Some text';

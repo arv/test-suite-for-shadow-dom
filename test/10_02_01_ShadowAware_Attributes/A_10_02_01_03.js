@@ -30,7 +30,7 @@ test(unit(function (ctx) {
     var widget = d.createElement('div');
     d.body.appendChild(widget);
     
-    var s = new SR(widget);
+    var s = createSR(widget);
     
     var thumb = d.createElement('span');
     thumb.innerHTML = 'This is a pseudo-element';

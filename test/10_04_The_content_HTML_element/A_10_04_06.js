@@ -34,7 +34,7 @@ test(unit(function (ctx) {
 	
 	var host = d.querySelector('.cls');
 	//Shadow root to play with
-	var s = new SR(host);
+	var s = createSR(host);
 	
 	var div = d.createElement('div');	
 	div.innerHTML = '' +
@@ -66,7 +66,7 @@ test(unit(function (ctx) {
 	
 	var host = d.querySelector('.cls');
 	//Shadow root to play with
-	var s = new SR(host);
+	var s = createSR(host);
 	
 	var div = d.createElement('div');	
 	div.innerHTML = '' +

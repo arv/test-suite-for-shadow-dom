@@ -20,7 +20,7 @@ var A_04_01_10 = {
 //check parentNode of usual shadow
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
 
     assert_equals(s.parentNode, null, 'the parentNode attribute of the shadow ' +
         'root object must always return null');
@@ -33,7 +33,7 @@ test(function () {
 //check parentElement of usual shadow
 test(function () {
     var d = newHTMLDocument();
-    var s = new SR(d.body);
+    var s = createSR(d.body);
 
     assert_equals(s.parentElement, null, 'the parentElement attribute of the shadow root object ' +
         'must always return null');
@@ -46,10 +46,10 @@ test(function () {
 //check parentNode for nested shadow
 test(function () {
     var d = newHTMLDocument();
-    var s1 = new SR(d.body);
+    var s1 = createSR(d.body);
     var e1 = d.createElement('div');
     s1.appendChild(e1);
-    var s2 = new SR(e1);
+    var s2 = createSR(e1);
 
     assert_equals(s2.parentNode, null, 'the parentNode attribute of the shadow ' +
         'root object must always return null');
@@ -62,10 +62,10 @@ test(function () {
 //check parentElement for nested shadow
 test(function () {
     var d = newHTMLDocument();
-    var s1 = new SR(d.body);
+    var s1 = createSR(d.body);
     var e1 = d.createElement('div');
     s1.appendChild(e1);
-    var s2 = new SR(e1);
+    var s2 = createSR(e1);
 
     assert_equals(s2.parentElement, null, 'the parentElement attribute of the shadow root object ' +
         'must always return null');

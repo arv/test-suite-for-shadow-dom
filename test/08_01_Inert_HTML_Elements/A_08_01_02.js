@@ -29,7 +29,7 @@ test(unit(function (ctx) {
 	//create Shadow root
 	var root = d.createElement('div');
 	d.body.appendChild(root);    
-	var s = new SR(root);
+	var s = createSR(root);
 	
 	s.appendChild(link);
 	

@@ -30,13 +30,13 @@ A_04_01_01.checkOwnerDocument = function (node, expectedOwnerDocument){
 test(function () {
     var d = newHTMLDocument();
 
-    var s1 = d.body.createShadowRoot();
+    var s1 = createSR(d.body);
     assert_equals(s1.ownerDocument, d, 'Check for d.body node');
 
-    var s2 = d.documentElement.createShadowRoot();
+    var s2 = createSR(d.documentElement);
     assert_equals(s2.ownerDocument, d, 'Check for d.documentElement node');
 
-    var s3 = d.head.createShadowRoot();
+    var s3 = createSR(d.head);
     assert_equals(s3.ownerDocument, d, 'Check for d.head node');
 
 }, 'A_04_01_01_T01', PROPS(A_04_01_01, {
@@ -50,18 +50,18 @@ test(function () {
 
     var e1 = d.createElement('div');
     d.body.appendChild(e1);
-    var s1 = e1.createShadowRoot();
+    var s1 = createSR(e1);
     assert_equals(s1.ownerDocument, d, 'Check for a simple element at depth 1 [div]');
 
 
     var e2 = d.createElement('h1');
     e1.appendChild(e2);
-    var s2 = e2.createShadowRoot();
+    var s2 = createSR(e2);
     assert_equals(s2.ownerDocument, d, 'Check for a simple element at depth 2: [div.h1]');
 
     var e3 = d.createElement('script');
     e2.appendChild(e3);
-    var s3 = e3.createShadowRoot();
+    var s3 = createSR(e3);
     assert_equals(s3.ownerDocument, d, 'Check for a simple element at depth 3: [div.h1.script]');
 
 }, 'A_04_01_01_T02', PROPS(A_04_01_01, {
@@ -74,7 +74,7 @@ test(function () {
 // valid owner document
 test(function () {
     var d = newHTMLDocument();
-    var s = d.body.createShadowRoot();
+    var s = createSR(d.body);
 
     var e = d.createElement('div');
     e = s.appendChild(e);
@@ -91,7 +91,7 @@ test(function () {
     var d1 = newHTMLDocument();
     var d2 = newHTMLDocument();
 
-    var s = d1.body.createShadowRoot();
+    var s = createSR(d1.body);
     var e = d2.createElement('div');
     e = s.appendChild(e);
 
@@ -108,7 +108,7 @@ test(function () {
 test(function () {
     var d1 = newHTMLDocument();
     var d2 = newHTMLDocument();
-    var s = d1.body.createShadowRoot();
+    var s = createSR(d1.body);
 
     var e1 = d2.createElement('div');
     var e2 = d2.createElement('div');
@@ -131,7 +131,7 @@ test(function () {
 test(function () {
     var d1 = newHTMLDocument();
     var d2 = newHTMLDocument();
-    var s = d1.body.createShadowRoot();
+    var s = createSR(d1.body);
 
     var e1 = d2.createElement('div');
     var e2 = d2.createElement('div');
@@ -156,7 +156,7 @@ test(function(){
 
 		var hostElement = d1.createElement(HTML5_TAG[i]);
 		try {
-			var shadowRoot = hostElement.createShadowRoot();
+			var shadowRoot = createSR(hostElement);
 		} catch (e) {
 			// if shadow tree can not be added, can not check the test case.
 			continue;			

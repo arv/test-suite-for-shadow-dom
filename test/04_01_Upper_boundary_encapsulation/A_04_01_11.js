@@ -30,7 +30,7 @@ A_04_01_11_T1.step(function () {
     iframe.onload = A_04_01_11_T1.step_func(step_unit(function () {
         var d = iframe.contentDocument;
         var initialStyleSheetsCount = d.styleSheets.length;
-        var s = new SR(d.head);
+        var s = createSR(d.head);
         var style = d.createElement('style');
         s.appendChild(style);
         assert_equals(d.styleSheets.length, initialStyleSheetsCount, 'style elements in shadow DOM must not be exposed via ' +
@@ -54,7 +54,7 @@ test(unit(function (ctx) {
 	//create Shadow root
 	var root = d.createElement('div');
 	d.body.appendChild(root);
-	var s = new SR(root);
+	var s = createSR(root);
 
 	s.appendChild(link);
 

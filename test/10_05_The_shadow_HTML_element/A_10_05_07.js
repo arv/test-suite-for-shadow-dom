@@ -26,10 +26,10 @@ test(unit(function (ctx) {
 	var host = d.createElement('div');
 	d.body.appendChild(host);
 	
-	var s1 = new SR(host);
+	var s1 = createSR(host);
 	s1.innerHTML = '<span id="sp1">Tree 1</span>';
 	
-	var s2 = new SR(host);
+	var s2 = createSR(host);
 	var div = d.createElement('div');	
 	div.innerHTML = '' +
 		'<span id="spandex">This is a shadow root content</span>' +

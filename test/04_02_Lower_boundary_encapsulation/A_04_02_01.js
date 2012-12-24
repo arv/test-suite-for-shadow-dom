@@ -27,7 +27,7 @@ A_04_02_01_T1.step(function () {
     iframe.onload = A_04_02_01_T1.step_func(step_unit(function () {
         var d = iframe.contentDocument;
         var ul = d.querySelector('ul.stories');
-        var s = new SR(ul);
+        var s = createSR(ul);
 
         //make shadow subtree
         var subdiv1 = document.createElement('div');

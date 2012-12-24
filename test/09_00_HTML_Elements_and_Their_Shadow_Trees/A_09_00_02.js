@@ -27,7 +27,7 @@ test(unit(function (ctx) {
     var el = d.createElement('img');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     s.innerHTML = '<content id="cont" select="#shadow"></content>';
 
@@ -49,7 +49,7 @@ test(unit(function (ctx) {
     var el = d.createElement('embed');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     s.innerHTML = '<content id="cont" select="#shadow"></content>';
 
@@ -71,7 +71,7 @@ test(unit(function (ctx) {
     var el = d.createElement('input');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     s.innerHTML = '<content id="cont" select="#shadow"></content>';
 

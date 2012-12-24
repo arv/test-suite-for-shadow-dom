@@ -27,7 +27,7 @@ test(unit(function (ctx) {
 	
 	var host = d.createElement('div');
 	d.body.appendChild(host);
-	var s = new SR(host);
+	var s = createSR(host);
 	
 	assert_true(s.styleSheets != null, 'ShadowRoot styleSheets attribute shouldn\'t be null');
     assert_equals(s.styleSheets.length, '0', 'attribute must return the shadow root style sheets only');
@@ -44,7 +44,7 @@ test(unit(function (ctx) {
 	
 	var host = d.createElement('div');
 	d.body.appendChild(host);
-	var s = new SR(host);
+	var s = createSR(host);
 	
 	var style = d.createElement('style');
 	s.appendChild(style);

@@ -65,7 +65,7 @@ test(unit(function (ctx) {
     
 	//Shadow root to play with
 	var host = d.querySelector('#shHost');
-    var s = new SR(host);    
+    var s = createSR(host);    
 
 	var div = d.createElement('div');	
 	div.innerHTML ='<ul><content select=".shadow"></content></ul>'; 
@@ -133,7 +133,7 @@ test(unit(function (ctx) {
     
 	//Shadow root to play with
 	var host = d.querySelector('#shHost');
-    var s = new SR(host);
+    var s = createSR(host);
     s.resetStyleInheritance = false;
 
 	var div = d.createElement('div');	

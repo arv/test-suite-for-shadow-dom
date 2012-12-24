@@ -25,7 +25,7 @@ test(unit(function (ctx) {
 	d.body.appendChild(host);
 	
 	//Shadow root to play with
-	var s = new SR(host);
+	var s = createSR(host);
 	
 	var div = d.createElement('div');	
 	div.innerHTML = '' +

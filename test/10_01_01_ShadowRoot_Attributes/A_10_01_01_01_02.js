@@ -32,7 +32,7 @@ test(unit(function (ctx) {
     d.body.appendChild(host);
 
 	//Shadow root to play with
-	var s = new SR(host);
+	var s = createSR(host);
 	s.applyAuthorStyles = true;
 	
 	var div1 = d.createElement('div');

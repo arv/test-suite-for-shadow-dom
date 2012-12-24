@@ -27,7 +27,7 @@ test(unit(function (ctx) {
     var host = d.createElement('div');
     d.body.appendChild(host);
 
-	var s = new SR(host);
+	var s = createSR(host);
 	s.applyAuthorStyles = true;
 	
 	assert_equals(s.applyAuthorStyles, true, 'attribute must return the current value of the ' +
@@ -46,7 +46,7 @@ test(unit(function (ctx) {
     var host = d.createElement('div');
     d.body.appendChild(host);
 
-	var s = new SR(host);
+	var s = createSR(host);
 	s.applyAuthorStyles = false;
 	
 	assert_equals(s.applyAuthorStyles, false, 'attribute must return the current value of the ' +
@@ -64,7 +64,7 @@ test(unit(function (ctx) {
     var host = d.createElement('div');
     d.body.appendChild(host);
 
-	var s = new SR(host);
+	var s = createSR(host);
 	s.applyAuthorStyles = true;
 	
 	assert_equals(s.applyAuthorStyles, true, 'attribute must return the current value of the ' +

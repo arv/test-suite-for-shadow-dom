@@ -20,6 +20,16 @@ function ShadowDomNotSupportedError() {
     this.message = "Shadow DOM is not supported";
 }
 
+function createSR(element) {
+	if (element.createShadowRoot) {
+		return element.createShadowRoot(); 
+	}
+	if (element.webkitCreateShadowRoot) {
+		return element.webkitCreateShadowRoot();
+	}
+	throw new ShadowDomNotSupportedError();
+}
+
 // To allow using of both prefixed and non-prefixed API we do
 // the following hook
 function addPrefixed(element) {
@@ -29,20 +39,27 @@ function addPrefixed(element) {
 			  set: function (value) { return element.webkitPseudo = value; }
 		});
 	}
-
-	if (element && !element.createShadowRoot) {
-		if (element.webkitCreateShadowRoot) {
-			element.createShadowRoot = function () {
-				return this.webkitCreateShadowRoot();
-			};
-		} else {
-			element.createShadowRoot = function () {
-				throw new ShadowDomNotSupportedError();
-			};
-		}
-	}
 }
 
+function addDocumentPrefixed(d) {
+	if (d) {
+		if (d.body) {
+		    addPrefixed(d.body);
+		}
+		if (d.head) {
+		    addPrefixed(d.head);			
+		}
+		if (d.documentElement) {
+			addPrefixed(d.documentElement);
+		}
+		d.oldCreate = d.createElement;
+		d.createElement = function(tagName) {
+			var el = d.oldCreate(tagName);
+			addPrefixed(el);
+			return el;
+		};		
+	}	
+}
 
 
 function PROPS(assertion, properties) {
@@ -70,31 +87,15 @@ function rethrowInternalErrors(e) {
 
 function newDocument() {
     var d = document.implementation.createDocument();
-    //FIXME remove all of this when non-prefixed API is used
-    addPrefixed(d.body);
-    addPrefixed(d.documentElement);
-    addPrefixed(d.head);
-	d.oldCreate = d.createElement;
-	d.createElement = function(tagName) {
-		var el = d.oldCreate(tagName);
-		addPrefixed(el);
-		return el;
-	};
+    //FIXME remove the call below when non-prefixed API is used
+    addDocumentPrefixed(d);
     return d;        
 }
 
 function newHTMLDocument() {
 	var d = document.implementation.createHTMLDocument('Test Document');
-    //FIXME remove all of this when non-prefixed API is used
-    addPrefixed(d.body);
-    addPrefixed(d.documentElement);
-    addPrefixed(d.head);
-	d.oldCreate = d.createElement;
-	d.createElement = function(tagName) {
-		var el = d.oldCreate(tagName);
-		addPrefixed(el);
-		return el;
-	};
+    //FIXME remove the call below when non-prefixed API is used
+    addDocumentPrefixed(d);
     return d;
 }
 
@@ -122,16 +123,8 @@ function newIFrame(ctx, src) {
 function newRenderedHTMLDocument(ctx) {
     var frame = newIFrame(ctx);
     var d = frame.contentWindow.document;
-    //FIXME remove all of this when non-prefixed API is used
-    addPrefixed(d.body);
-    addPrefixed(d.documentElement);
-    addPrefixed(d.head);
-	d.oldCreate = d.createElement;
-	d.createElement = function(tagName) {
-		var el = d.oldCreate(tagName);
-		addPrefixed(el);
-		return el;
-	};
+    //FIXME remove the call below when non-prefixed API is used
+    addDocumentPrefixed(d);
     return d;    
 }
 
@@ -213,7 +206,7 @@ function createTestMediaPlayer(d) {
 	    '</div>' +
 	'</div>';
 
-	var playerShadowRoot = new SR(d.querySelector('#player-shadow-root'));
+	var playerShadowRoot = createSR(d.querySelector('#player-shadow-root'));
 	playerShadowRoot.innerHTML = '' +
 		'<div id="controls">' +
 			'<button class="play-button">PLAY</button>' +
@@ -229,10 +222,10 @@ function createTestMediaPlayer(d) {
 		    '</div>' +
 		'</div>';
 
-	var timeLineShadowRoot = new SR(playerShadowRoot.querySelector('#timeline-shadow-root'));
+	var timeLineShadowRoot = createSR(playerShadowRoot.querySelector('#timeline-shadow-root'));
 	timeLineShadowRoot.innerHTML =  '<div class="slider-thumb" id="timeline-slider-thumb"></div>';
 
-	var volumeShadowRoot = new SR(playerShadowRoot.querySelector('#volume-shadow-root'));
+	var volumeShadowRoot = createSR(playerShadowRoot.querySelector('#volume-shadow-root'));
 	volumeShadowRoot.innerHTML = '<div class="slider-thumb" id="volume-slider-thumb"></div>';
 
 	return {

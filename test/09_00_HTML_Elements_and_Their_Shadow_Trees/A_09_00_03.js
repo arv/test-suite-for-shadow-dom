@@ -33,7 +33,7 @@ test(unit(function (ctx) {
     	'<span id="shadow">This is a node that should be distributed</span>' +
     	'<span id="flbk">This is a fallback content</span>';
     
-    var s = new SR(el);
+    var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
     assert_true(d.querySelector('#shadow').offsetTop > 0, 'fieldset should allow at least one insertion point');
@@ -61,7 +61,7 @@ test(unit(function (ctx) {
     	'</legend>' +
     	'<span id="flbk">Unlucky content</span>';
     
-    var s = new SR(el);
+    var s = createSR(el);
     s.innerHTML = '<content select="legend:first-of-type"></content>';
 
     assert_true(d.querySelector('#shadow').offsetTop > 0, 'fieldset should allow insertion point ' +

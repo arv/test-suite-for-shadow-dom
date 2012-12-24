@@ -24,7 +24,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     assert_equals(s.getElementsByTagNameNS('*', 'div').length, 0, 'ShadowRoot getElementsByTagNameNS() ' +
     		'method should return empty list if there\'s no matching child elements');
@@ -43,7 +43,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     var child = d.createElement('span');
     s.appendChild(child);
@@ -64,7 +64,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     var child = d.createElement('span');
     s.appendChild(child);
@@ -88,7 +88,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     assert_equals(s.getElementsByTagNameNS('http://www.w3c.org/namespace', 'div').length, 0, 
     		'ShadowRoot getElementsByTagNameNS() method should return empty list if there\'s no ' +
@@ -108,7 +108,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     var child = d.createElementNS('http://www.w3c.org/namespace','span');
     s.appendChild(child);
@@ -129,7 +129,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     var child = d.createElementNS('http://www.w3c.org/namespace','span');
     s.appendChild(child);
@@ -153,7 +153,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     var child = d.createElement('span');
     s.appendChild(child);

@@ -24,7 +24,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     assert_equals(s.getElementsByClassName('clazz').length, 0, 'ShadowRoot getElementsByClassName() ' +
     		'method should return empty list if there\'s no matching child elements');
@@ -43,7 +43,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     var child = d.createElement('span');
     child.setAttribute('class', 'clazz');
@@ -65,7 +65,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     var child = d.createElement('span');
     child.setAttribute('class', 'clazz');

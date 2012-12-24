@@ -26,7 +26,7 @@ test(unit(function (ctx) {
 	var host = d.createElement('div');
 	host.setAttribute('id', 'shRoot');
 	d.body.appendChild(host);
-	var s = new SR(host);
+	var s = createSR(host);
     	
     assert_equals(s.activeElement, null, 'activeElement attribute of the ShadowRoot ' +
     		'must return null if there\'s no focused element');
@@ -44,7 +44,7 @@ test(unit(function (ctx) {
 	var host = d.createElement('div');
 	host.setAttribute('id', 'shRoot');
 	d.body.appendChild(host);
-	var s = new SR(host);
+	var s = createSR(host);
 
 	var inp = d.createElement('input');
 	inp.setAttribute('type', 'text');
@@ -70,7 +70,7 @@ test(unit(function (ctx) {
 	var host = d.createElement('div');
 	host.setAttribute('id', 'shRoot');
 	d.body.appendChild(host);
-	var s = new SR(host);
+	var s = createSR(host);
 
 	var inp = d.createElement('input');
 	inp.setAttribute('type', 'text');

@@ -27,9 +27,9 @@ test(function () {
     d.body.appendChild(host);
     
     //old tree
-    var s1 = new SR(host);
+    var s1 = createSR(host);
     //young tree
-    var s2 = new SR(host)
+    var s2 = createSR(host)
     
     assert_equals(host.shadowRoot, s2, 'attribute shadowRoot must return the youngest tree that has ' +
         	'the context object as its shadow host');

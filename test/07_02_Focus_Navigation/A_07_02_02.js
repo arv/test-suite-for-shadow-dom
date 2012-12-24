@@ -65,7 +65,7 @@ A_07_02_02_T01.step(unit(function (ctx) {
 	invoked[2] = false;
 	host.appendChild(chb3);
 	
-	var s = new SR(host);
+	var s = createSR(host);
 	
 	var div = d.createElement('div');
 	div.innerHTML = '<content select=".shadow"></content>';

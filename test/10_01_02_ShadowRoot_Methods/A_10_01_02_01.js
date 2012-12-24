@@ -24,7 +24,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     var child = d.createElement('span');
     child.setAttribute('id', 'span_id');
@@ -49,7 +49,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     assert_true(s.getElementById('span_id') == null, ' ShadowRoot getElementById() ' +
     		'method should return null if matching element not found');

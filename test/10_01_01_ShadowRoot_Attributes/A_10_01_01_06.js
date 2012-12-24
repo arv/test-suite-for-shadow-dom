@@ -23,7 +23,7 @@ test(unit(function (ctx) {
 	
 	var host = d.createElement('div');
 	d.body.appendChild(host);
-	var s = new SR(host);
+	var s = createSR(host);
 	
     assert_equals(s.nodeType, 11, 'The nodeType attribute of a ShadowRoot ' +
     		'instance must return DOCUMENT_FRAGMENT_NODE');

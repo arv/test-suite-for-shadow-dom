@@ -45,10 +45,10 @@ A_04_01_09.setup = function () {
     ctx.d = newHTMLDocument();
     A_04_01_09.setupBlock(ctx, 'd', ctx.d.body);
 
-    ctx.s1 = new SR(ctx.d_p1);
+    ctx.s1 = createSR(ctx.d_p1);
     A_04_01_09.setupBlock(ctx, 's1', ctx.s1);
 
-    ctx.s2 = new SR(ctx.s1_p1);
+    ctx.s2 = createSR(ctx.s1_p1);
     A_04_01_09.setupBlock(ctx, 's2', ctx.s2);
 
     assert_true(ctx.d_div1 != null, 'setup:d_div1');

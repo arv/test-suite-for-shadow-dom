@@ -24,7 +24,7 @@ test(unit(function (ctx) {
 	
 	var host = d.createElement('div');
 	d.body.appendChild(host);
-	var s = new SR(host);
+	var s = createSR(host);
 	
     assert_equals(s.nodeName, '#document-fragment', 'The nodeName attribute of a ShadowRoot instance ' +
     		'must return "#document-fragment".');

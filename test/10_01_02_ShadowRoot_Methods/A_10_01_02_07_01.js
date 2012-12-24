@@ -28,7 +28,7 @@ test(function () {
     var el = d.createElement('div');
     d.body.appendChild(el);
     
-    var s = new SR(el);
+    var s = createSR(el);
     
     var link = d.createElement('link');
     var retVal = s.addStyleSheet(link);
