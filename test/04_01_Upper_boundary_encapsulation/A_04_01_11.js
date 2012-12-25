@@ -67,5 +67,5 @@ test(unit(function (ctx) {
 	reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
-// TODO check selectedStyleSheetSet 
+// TODO check selectedStyleSheetSet, lastStyleSheetSet, preferredStyleSheetSet, styleSheetSets
 

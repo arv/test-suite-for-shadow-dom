@@ -18,7 +18,7 @@ var A_04_02_01 = {
 
 var A_04_02_01_T1 = async_test('A_04_02_01_T01', PROPS(A_04_02_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 A_04_02_01_T1.step(function () {
@@ -57,5 +57,8 @@ A_04_02_01_T1.step(function () {
             'Point 1: Distribution shouldn\'t change shadow DOM subtree elements children');
         assert_equals(s.querySelector('div.other').children.length, 1,
             'Point 2:Distribution shouldn\'t change shadow DOM subtree elements children');
+
+        A_04_02_01_T1.done();
+
     }, ctx, A_04_02_01_T1));
 });
