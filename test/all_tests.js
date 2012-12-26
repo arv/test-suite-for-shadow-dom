@@ -124,6 +124,7 @@ include("10_01_02_ShadowRoot_Methods/A_10_01_02_06_01.js");
 include("10_01_02_ShadowRoot_Methods/A_10_01_02_06_02.js");
 include("10_01_02_ShadowRoot_Methods/A_10_01_02_07_01.js");
 include("10_01_02_ShadowRoot_Methods/A_10_01_02_08_01.js");
+include("10_01_02_ShadowRoot_Methods/A_10_01_02_09.js");
 include("10_02_01_ShadowAware_Attributes/A_10_02_01_01.js");
 include("10_02_01_ShadowAware_Attributes/A_10_02_01_02.js");
 include("10_02_01_ShadowAware_Attributes/A_10_02_01_03.js");
