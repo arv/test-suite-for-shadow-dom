@@ -19,7 +19,7 @@ var A_10_01_01_01_02 = {
 
 
 test(unit(function (ctx) {
-	
+
     var d = newRenderedHTMLDocument(ctx);
 
     d.head.innerHTML = '<style>' +
@@ -27,18 +27,18 @@ test(unit(function (ctx) {
 		'display:none;' +
 		'}' +
 		'</style>';
-    
+
     var host = d.createElement('div');
     d.body.appendChild(host);
 
 	//Shadow root to play with
 	var s = createSR(host);
 	s.applyAuthorStyles = true;
-	
+
 	var div1 = d.createElement('div');
-	div1.innerHTML ='<span id="shd" class="invis">This is the shadow tree</span>'; 
+	div1.innerHTML ='<span id="shd" class="invis">This is the shadow tree</span>';
 	s.appendChild(div1);
-	
+
 	//apply-author-styles flag is set to true. Invisible style should be applied
 	assert_equals(s.querySelector('#shd').offsetTop, 0,
     	'CSS styles declared in enclosing tree must  be applied in a shadow tree ' +
@@ -46,5 +46,5 @@ test(unit(function (ctx) {
 
 }), 'A_10_01_01_01_02_T01', PROPS(A_10_01_01_01_02, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));

@@ -21,62 +21,66 @@ var A_10_01_01_01_03 = {
 
 
 test(unit(function (ctx) {
-	
+
     var d = newRenderedHTMLDocument(ctx);
-    
+
     var host = d.createElement('div');
     d.body.appendChild(host);
 
 	var s = createSR(host);
 	s.applyAuthorStyles = true;
-	
+
 	assert_equals(s.applyAuthorStyles, true, 'attribute must return the current value of the ' +
 			'apply-author-styles flag');
 
 }), 'A_10_01_01_01_03_T01', PROPS(A_10_01_01_01_03, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 
 test(unit(function (ctx) {
-	
+
     var d = newRenderedHTMLDocument(ctx);
-    
+
     var host = d.createElement('div');
     d.body.appendChild(host);
 
 	var s = createSR(host);
 	s.applyAuthorStyles = false;
-	
+
 	assert_equals(s.applyAuthorStyles, false, 'attribute must return the current value of the ' +
 			'apply-author-styles flag');
 
 }), 'A_10_01_01_01_03_T02', PROPS(A_10_01_01_01_03, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 test(unit(function (ctx) {
-	
+
     var d = newRenderedHTMLDocument(ctx);
-    
+
     var host = d.createElement('div');
     d.body.appendChild(host);
 
 	var s = createSR(host);
+
+	assert_equals(s.applyAuthorStyles, false, 'attribute must the default value (false) of the ' +
+			'apply-author-styles flag');
+
 	s.applyAuthorStyles = true;
-	
+
 	assert_equals(s.applyAuthorStyles, true, 'attribute must return the current value of the ' +
 			'apply-author-styles flag');
 
 	s.applyAuthorStyles = false;
-	
+
 	assert_equals(s.applyAuthorStyles, false, 'attribute must change the value of the ' +
 			'apply-author-styles flag');
-	
+
 }), 'A_10_01_01_01_03_T03', PROPS(A_10_01_01_01_03, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 

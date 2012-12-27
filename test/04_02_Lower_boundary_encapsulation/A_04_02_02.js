@@ -26,7 +26,6 @@ var A_04_02_02_T1 = async_test('A_04_02_02_T01', PROPS(A_04_02_02, {
 
 A_04_02_02_T1.step(function () {
     var iframe = document.createElement('iframe');
-    iframe.src = 'resources/bobs_page.html';
     document.body.appendChild(iframe);
 
     iframe.onload = A_04_02_02_T1.step_func(function () {
@@ -84,6 +83,8 @@ A_04_02_02_T1.step(function () {
         } finally {
             iframe.parentNode.removeChild(iframe);
         }
+
         A_04_02_02_T1.done();
     });
+    iframe.src = 'resources/bobs_page.html';
 });
