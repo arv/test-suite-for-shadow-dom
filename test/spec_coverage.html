@@ -190,6 +190,7 @@ How to use:
                 return a1.name.localeCompare(a2.name);
             });
         });
+        init();
     }
     add_completion_callback(tests_completion_callback);
 </script>
@@ -235,7 +236,13 @@ function showTotals() {
         testsPassed += c.testsPassed;
         testsWithoutReview += c.testsWithoutReview;
     });
-    var totalsElement = document.createElement("div");
+
+    var totalsElement = assertsAreaBody.querySelector('#totalTable');
+    if (!totalsElement) {
+    		totalsElement = document.createElement("div");
+    		totalsElement.setAttribute('id','totalTable');
+    		assertsAreaBody.appendChild(totalsElement);
+    }
     totalsElement.innerHTML = "<br><table id='total' style='font-weight: bold; width:300; border: 0; margin: 0;'>" +
             "<tr style='color: black;'><td>Assertions</td><td>" + assertionsCount + "</td></tr>" +
             "<tr style='color:" + testPassedColor + ";'><td>Tests passed</td><td>" + testsPassed + "</td></tr>" +
@@ -243,7 +250,7 @@ function showTotals() {
             "<tr style='color:" + testsWithoutReviewTotalColor + ";'><td>Tests without review</td><td>" + testsWithoutReview + "</td></tr>" +
             "<tr style='color:" + testTotalColor + ";'><td>Tests total</td><td>" + testsTotal + "</td></tr>" +
             "</table><br><hr><br>";
-    assertsAreaBody.appendChild(totalsElement);
+
 }
 
 
@@ -377,13 +384,13 @@ function highlightSpecs(a) {
 }
 
 // Check for browser support of event handling capability
-if (window.addEventListener) {
+/* if (window.addEventListener) {
     window.addEventListener("load", init, false);
 } else if (window.attachEvent) {
     window.attachEvent("onload", init);
 } else {
     window.onload = init;
-}
+} */
 
 var selectedAssertions = [];
 
