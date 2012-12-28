@@ -23,7 +23,7 @@ test(unit(function (ctx) {
 	
 	var host = d.createElement('div');
 	d.body.appendChild(host);
-	var s = host.createShadowRoot();
+	var s = createSR(host);
 	
 	try {
 		s.cloneNode();
