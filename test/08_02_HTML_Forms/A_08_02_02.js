@@ -27,7 +27,7 @@ test(function () {
 
     var div = d.createElement('div');
     d.body.appendChild(div);
-    s = createSR(div);
+    var s = createSR(div);
 
 
     HTML5_FORM_ASSOCIATED_ELEMENTS.forEach(function (tagName) {
@@ -37,6 +37,8 @@ test(function () {
         el.setAttribute('id', tagName + '_id');
         s.appendChild(el);
 
+        assert_true(s.querySelector('#' + tagName + '_id') != null, 'Form-associated element ' + tagName + 
+        		' in shadow tree must be accessible shadow tree accessors');
         assert_equals(s.querySelector('#' + tagName + '_id').getAttribute('id'), tagName + '_id',
         	'Form-associated element ' + tagName + ' in shadow tree must be accessible shadow tree accessors');
     });
@@ -55,18 +57,48 @@ test(function () {
 
     var div = d.createElement('div');
     form.appendChild(div);
-    s = createSR(div);
+    var s = createSR(div);
 
     HTML5_FORM_ASSOCIATED_ELEMENTS.forEach(function (tagName) {
 
         var el = d.createElement(tagName);
         el.setAttribute('id', tagName + '_id');
         s.appendChild(el);
-
+        
+        assert_true(s.querySelector('#' + tagName + '_id') != null, 'Form-associated element ' + tagName + 
+		' in shadow tree must be accessible shadow tree accessors');
         assert_equals(s.querySelector('#' + tagName + '_id').getAttribute('id'), tagName + '_id',
         	'Form element ' + tagName +	' in shadow tree must be accessible shadow tree accessors');
     });
 }, 'A_08_02_02_T02', PROPS(A_08_02_02, {
+	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+	reviewer:''
+}));
+
+
+//test distributed form elements
+test(function () {
+	var d = newHTMLDocument();
+
+    HTML5_FORM_ASSOCIATED_ELEMENTS.forEach(function (tagName) {
+    	
+        var form = d.createElement('form');
+        d.body.appendChild(form);
+
+        var div = d.createElement('div');
+        form.appendChild(div);
+        
+        var el = d.createElement(tagName);
+        el.setAttribute('id', tagName + '_id');
+        div.appendChild(el);
+        
+        var s = createSR(div);
+    	s.innerHTML = '<content select="' + tagName + '"></content>';
+    	
+        assert_true(s.querySelector('#' + tagName + '_id') == null, 'Distributed form-associated element ' + tagName + 
+		' in shadow tree must not be accessible shadow tree accessors');
+    });
+}, 'A_08_02_02_T03', PROPS(A_08_02_02, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));
