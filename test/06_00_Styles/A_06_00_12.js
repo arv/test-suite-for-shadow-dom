@@ -18,7 +18,8 @@ var A_06_00_12 = {
 	link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#styles',
 	highlight:'If the reset-style-inheritance flag is set for a shadow tree, all inheritable CSS ' +
 		'properties must behave as if they were explicitly set to the initial value at the upper ' +
-		'boundary of the tree.'
+		'boundary of the tree.',
+	bug: ['https://bugs.webkit.org/show_bug.cgi?id=103709']
 };
 
 // test Shadow root
