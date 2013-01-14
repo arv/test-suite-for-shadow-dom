@@ -19,31 +19,25 @@ var A_04_01_11 = {
 };
 
 // check that <style> element added to head is not exposed
-var A_04_01_11_T1 = async_test('A_04_01_11_T01', PROPS(A_04_01_11, {
-    author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:'Mikhail Fursov <mfursov@unipro.ru>'
+test_in_iframe('resources/blank.html', function(ctx){
+  var d = ctx.iframes[0].contentWindow.document;
+  var initialStyleSheetsCount = d.styleSheets.length;
+  var s = createSR(d.head);
+  var style = d.createElement('style');
+  s.appendChild(style);
+  assert_equals(d.styleSheets.length, initialStyleSheetsCount, 'style elements in shadow DOM must not be exposed via ' +
+      'the document.styleSheets collection ');
+},
+  'A_04_01_11_T01', PROPS(A_04_01_11, {
+  author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+  reviewer:'Mikhail Fursov <mfursov@unipro.ru>'
 }));
 
-A_04_01_11_T1.step(function () {
-    var ctx = newContext();
-    var iframe = newIFrame(ctx, 'resources/blank.html');
-    iframe.onload = A_04_01_11_T1.step_func(step_unit(function () {
-        var d = iframe.contentDocument;
-        var initialStyleSheetsCount = d.styleSheets.length;
-        var s = createSR(d.head);
-        var style = d.createElement('style');
-        s.appendChild(style);
-        assert_equals(d.styleSheets.length, initialStyleSheetsCount, 'style elements in shadow DOM must not be exposed via ' +
-            'the document.styleSheets collection ');
-
-    }, ctx, A_04_01_11_T1));
-});
 
 
 // check that <link> element added to head is not exposed
-test(unit(function (ctx) {
-
-	var d = newRenderedHTMLDocument(ctx);
+test_in_iframe(null, function(ctx){
+	var d = ctx.iframes[0].contentWindow.document;
 	var initialStyleSheetsCount = d.styleSheets.length;
 
 	var link = d.createElement('link');
@@ -60,12 +54,12 @@ test(unit(function (ctx) {
 
 	assert_equals(d.styleSheets.length, initialStyleSheetsCount, 'stylesheet link elements in shadow DOM must not be ' +
             'exposed via the document.styleSheets collection');
-
-
-}), 'A_04_01_11_T2', PROPS(A_04_01_11, {
+},
+	'A_04_01_11_T2', PROPS(A_04_01_11, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
+
 
 // TODO check selectedStyleSheetSet, lastStyleSheetSet, preferredStyleSheetSet, styleSheetSets
 

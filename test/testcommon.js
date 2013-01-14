@@ -22,7 +22,7 @@ function ShadowDomNotSupportedError() {
 
 function createSR(element) {
 	if (element.createShadowRoot) {
-		return element.createShadowRoot(); 
+		return element.createShadowRoot();
 	}
 	if (element.webkitCreateShadowRoot) {
 		return element.webkitCreateShadowRoot();
@@ -47,7 +47,7 @@ function addDocumentPrefixed(d) {
 		    addPrefixed(d.body);
 		}
 		if (d.head) {
-		    addPrefixed(d.head);			
+		    addPrefixed(d.head);
 		}
 		if (d.documentElement) {
 			addPrefixed(d.documentElement);
@@ -57,8 +57,8 @@ function addDocumentPrefixed(d) {
 			var el = d.oldCreate(tagName);
 			addPrefixed(el);
 			return el;
-		};		
-	}	
+		};
+	}
 }
 
 
@@ -89,7 +89,7 @@ function newDocument() {
     var d = document.implementation.createDocument();
     //FIXME remove the call below when non-prefixed API is used
     addDocumentPrefixed(d);
-    return d;        
+    return d;
 }
 
 function newHTMLDocument() {
@@ -125,7 +125,7 @@ function newRenderedHTMLDocument(ctx) {
     var d = frame.contentWindow.document;
     //FIXME remove the call below when non-prefixed API is used
     addDocumentPrefixed(d);
-    return d;    
+    return d;
 }
 
 function newContext() {
@@ -148,7 +148,7 @@ function unit(f) {
         } finally {
             cleanContext(ctx);
         }
-    }
+    };
 }
 
 function step_unit(f, ctx, t) {
@@ -163,8 +163,36 @@ function step_unit(f, ctx, t) {
             }
             cleanContext(ctx);
         }
-    }
+    };
 }
+
+// new context and iframe are created and url (if supplied) is asigned to iframe.src
+// function f is bound to the iframe onload event or executed directly after iframe creation
+// the context is passed to function as argument
+function test_in_iframe(url, f, testName, testProps){
+	if (url){
+		var t = async_test(testName, testProps);
+		t.step(function(){
+			var ctx = newContext();
+			var iframe = newIFrame(ctx, url);
+			addDocumentPrefixed(iframe.contentWindow.document);
+			iframe.onload = t.step_func(function (){
+				try {
+					f(ctx);
+					t.done();
+				} finally {
+					cleanContext(ctx);
+				}
+			});
+		});
+	} else {
+		test(unit(function(ctx){
+			newRenderedHTMLDocument(ctx);
+			f(ctx);
+		}), testName, testProps);
+	}
+}
+
 
 
 // helper method for debugging
