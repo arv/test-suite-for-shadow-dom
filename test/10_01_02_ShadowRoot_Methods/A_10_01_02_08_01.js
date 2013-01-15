@@ -20,26 +20,25 @@ var A_10_01_02_08_01 = {
 };
 
 test(function () {
-	
+
 	var d = newHTMLDocument();
-	
+
     var el = d.createElement('div');
     d.body.appendChild(el);
-    
+
     var s = createSR(el);
-    
+
     var link = d.createElement('link');
-    
+
     try {
     	s.removeStyleSheet(link);
     	assert_true(false, 'NoModificationAllowedError should be thrown');
     } catch(e) {
-    	//FIXME Check the expected error type
-    	assert_true(e instanceof SyntaxError, 'Wrong error type');
+    	assert_equals({}.toString.call(e), '[object NoModificationAllowedError]', 'Wrong error type \''+e+'\'');
     }
 
 }, 'A_10_01_02_08_01_T01', PROPS(A_10_01_02_08_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-	reviewer:''
+	reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 

@@ -14,20 +14,21 @@ var A_10_02_01_06 = {
     	'shadowRoot of type ShadowRoot',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#shadow-aware-attributes',
     highlight: '[[shadowRoot of type ShadowRoot]]' +
-    	'[\\s\\S]*[[null if no such shadow tree is accesible.]]'
+    	'[\\s\\S]*[[null if no such shadow tree is accesible.]]',
+    bug: ['https://bugs.webkit.org/show_bug.cgi?id=106857']
 };
 
 test(function () {
-	
+
 	var d = newHTMLDocument();
-	    
+
     var host = d.createElement('div');
     d.body.appendChild(host);
-    
+
     assert_equals(host.shadowRoot, null, 'attribute shadowRoot must return null if no shadow tree is accesible');
-    
-    
+
+
 }, 'A_10_02_01_06_T01', PROPS(A_10_02_01_06, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-	reviewer:''
+	reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));

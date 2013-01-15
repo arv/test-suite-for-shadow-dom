@@ -16,26 +16,27 @@ var A_10_02_01_05 = {
     highlight: '[[shadowRoot of type ShadowRoot]]' +
     	'[\\s\\S]*[[Represents the top shadow tree in the "as rendered" structure.]]' +
     	'[\\s\\S]*[[On getting, the attribute must return the youngest tree that has ' +
-    	'the context object as its shadow host]]'
+    	'the context object as its shadow host]]',
+    bug: ['https://bugs.webkit.org/show_bug.cgi?id=106857']
 };
 
 test(function () {
-	
+
 	var d = newHTMLDocument();
-	    
+
     var host = d.createElement('div');
     d.body.appendChild(host);
-    
+
     //old tree
     var s1 = createSR(host);
     //young tree
     var s2 = createSR(host)
-    
+
     assert_equals(host.shadowRoot, s2, 'attribute shadowRoot must return the youngest tree that has ' +
         	'the context object as its shadow host');
-    
-    
+
+
 }, 'A_10_02_01_05_T01', PROPS(A_10_02_01_05, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-	reviewer:''
+	reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
