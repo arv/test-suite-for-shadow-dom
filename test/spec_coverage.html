@@ -1,40 +1,41 @@
+<!DOCTYPE html>
 <!--
 
 How to use:
 1) Start any web server with document root in this folder (like php -S localhost:7070)
-2) Access to the page: http://localhost:7070/spec_cove.html
+2) Access to the page: http://localhost:7070/spec_coverage.html
 
 -->
 <head>
     <style>
         * {
             margin: 0;
-            padding: 0
+            padding: 0;
         }
 
         html, body {
             height: 100%;
             width: 100%;
-            overflow: hidden
+            overflow: hidden;
         }
 
         table {
             height: 100%;
             width: 100%;
-            border-collapse: collapse
+            border-collapse: collapse;
         }
 
         iframe {
             height: 100%;
-            width: 100%
+            width: 100%;
         }
 
         .header {
-            border-bottom: 1px solid #000
+            border-bottom: 1px solid #000;
         }
 
         .content {
-            height: 100%
+            height: 100%;
         }
     </style>
 </head>
@@ -67,7 +68,6 @@ How to use:
     var allIncludes = [];
     function include(script_filename) {
         document.write('<' + 'script');
-        document.write(' language="javascript"');
         document.write(' type="text/javascript"');
         document.write(' src="' + script_filename + '">');
         document.write('</' + 'script' + '>');
@@ -76,7 +76,7 @@ How to use:
     }
     function load(url) {
         xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", url, false);
+        xmlhttp.open('GET', url, false);
         xmlhttp.send(null);
         return xmlhttp.responseText;
     }
@@ -100,7 +100,6 @@ How to use:
     function Chapter(name) {
         this.name = name;
         this.chapterTitle = "";
-        this.e = null;
         this.testsTotal = 0;
         this.testsPassed = 0;
         this.testsWithoutReview = 0;
@@ -134,11 +133,11 @@ How to use:
     var chapters = [];
     var assertionsMap = {};
 
-    function findChapter(aName) {
-        var bName = getChapterNameByAssertion(aName);
-        var res = chaptersMap[bName];
-        if (typeof (res) == "undefined") {
-            res = chaptersMap[bName] = new Chapter(bName);
+    function findChapter(assertionName) {
+        var chapterName = getChapterNameByAssertion(assertionName);
+        var res = chaptersMap[chapterName];
+        if (!res) {
+            res = chaptersMap[chapterName] = new Chapter(chapterName);
             chapters.push(res);
         }
         return res;
@@ -153,7 +152,7 @@ How to use:
         return res;
     }
 
-    function tests_completion_callback(tests, status) {
+    function testsCompletionCallback(tests, status) {
         this.tests = tests;
         tests.forEach(function (t) {
             var a = findAssertion(t.properties);
@@ -167,7 +166,7 @@ How to use:
                 a.testsPassed++;
                 c.testsPassed++;
             }
-            t.reviewed = typeof(t.properties.reviewer) != "undefined" && t.properties.reviewer.length > 0;
+            t.reviewed = t.properties.reviewer && t.properties.reviewer.length > 0;
             if (!t.reviewed) {
                 a.testsWithoutReview++;
                 c.testsWithoutReview++;
@@ -183,7 +182,36 @@ How to use:
         });
 
         chapters.sort(function (c1, c2) {
-            return c1.name.localeCompare(c2.name);
+        	var n11,n12,n21,n22;
+        	var i1 = c1.name.indexOf('.');
+        	if (i1>=0) {
+        		n11 = +c1.name.substring(0,i1);
+        		n12 = +c1.name.substring(i1+1);
+        	} else {
+        		n11 = +c1.name;
+        		n12 = 0;
+        	}
+        	var i2 = c2.name.indexOf('.');
+        	if (i2>=0) {
+        		n21 = +c2.name.substring(0,i2);
+        		n22 = +c2.name.substring(i2+1);
+        	} else {
+        		n21 = +c2.name;
+        		n22 = 0;
+        	}
+			if (n11<n21){
+				return -1;
+			} else if (n11>n21) {
+			    return 1;
+			} else {
+				if (n12<n22){
+					return -1;
+				} else if (n12>n22) {
+					return 1;
+				} else {
+					return 0;
+				}
+			}
         });
         chapters.forEach(function (c) {
             c.assertions.sort(function (a1, a2) {
@@ -192,7 +220,7 @@ How to use:
         });
         init();
     }
-    add_completion_callback(tests_completion_callback);
+    add_completion_callback(testsCompletionCallback);
 </script>
 
 
@@ -250,7 +278,6 @@ function showTotals() {
             "<tr style='color:" + testsWithoutReviewTotalColor + ";'><td>Tests without review</td><td>" + testsWithoutReview + "</td></tr>" +
             "<tr style='color:" + testTotalColor + ";'><td>Tests total</td><td>" + testsTotal + "</td></tr>" +
             "</table><br><hr><br>";
-
 }
 
 
@@ -260,13 +287,7 @@ function updateChapterTitle(c) {
     for (var i = 0; i < sections.length; i++) {
         var s = sections.item(i);
         if (s.firstChild.textContent == c.name) {
-            var spanWithChapterName = s.nextElementSibling;
-            while (spanWithChapterName.textContent == null) {
-                spanWithChapterName = s.nextElementSibling;
-            }
-            res = spanWithChapterName.textContent;
-            var anchor = s.parentNode.getAttribute("href");
-            c.sectionElement = specsFrame.contentWindow.document.querySelector(anchor);
+			res = s.parentNode.textContent.trim().substring(c.name.length).trim();
             break;
         }
     }
@@ -332,6 +353,7 @@ function showAssertion(c, a) {
 
     highlightSpecs(a);
 }
+
 var entityMap = {
     "&":"&amp;",
     "<":"&lt;",
@@ -348,7 +370,7 @@ function escapeHTML(string) {
 }
 
 function highlightSpecs(a) {
-    if (typeof(a.highlight) == "undefined" || a.highlight == null || a.highlight.length == 0) {
+    if (!a.highlight || a.highlight.length == 0) {
         var titleNode = assertsAreaBody.ownerDocument.getElementById(a.name);
         titleNode.style.backgroundColor = emptyAssertBgColor;
         titleNode.style.color = emptyAssertFgColor;
@@ -475,7 +497,7 @@ function activateTest(aName, tName) {
     var fileContent = load(file);
     var head = "<head>" +
             "<link type='text/css' rel='stylesheet' href='rainbow.css'/></head>";
-    var body = "<body><pre><code data-language='javascript'>" + fileContent + "</code></pre></body>";
+    var body = "<body><pre><code data-language='javascript'>" + escapeHTML(fileContent) + "</code></pre></body>";
     testFrame.contentWindow.document.open();
     testFrame.contentWindow.document.write("<html>" + head + body + "</html>");
     testFrame.contentWindow.document.close();
