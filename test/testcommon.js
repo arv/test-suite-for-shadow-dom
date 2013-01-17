@@ -33,11 +33,21 @@ function createSR(element) {
 // To allow using of both prefixed and non-prefixed API we do
 // the following hook
 function addPrefixed(element) {
-	if (element && !element.pseudo) {
-		Object.defineProperty(element, 'pseudo', {
-			  get: function () { return element.webkitPseudo; },
-			  set: function (value) { return element.webkitPseudo = value; }
-		});
+	if (element) {
+
+		if (!element.pseudo) {
+			Object.defineProperty(element, 'pseudo', {
+				  get: function () { return element.webkitPseudo; },
+				  set: function (value) { return element.webkitPseudo = value; }
+			});
+		}
+		if (!element.shadowRoot) {
+			Object.defineProperty(element, 'shadowRoot', {
+				  get: function () { return element.webkitShadowRoot; },
+				  set: function (value) { return element.webkitShadowRoot = value; }
+			});
+		}
+
 	}
 }
 

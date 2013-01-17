@@ -20,26 +20,26 @@ var A_10_05_07 = {
 
 
 test(unit(function (ctx) {
-	
+
 	var d = newRenderedHTMLDocument(ctx);
-	
+
 	var host = d.createElement('div');
 	d.body.appendChild(host);
-	
+
 	var s1 = createSR(host);
 	s1.innerHTML = '<span id="sp1">Tree 1</span>';
-	
+
 	var s2 = createSR(host);
-	var div = d.createElement('div');	
+	var div = d.createElement('div');
 	div.innerHTML = '' +
 		'<span id="spandex">This is a shadow root content</span>' +
-		'<shadow><span id="shadow1">This is a shadow fallback content 1</span></shadow>';
+		'<shadow id="shadow1"><span>This is a shadow fallback content 1</span></shadow>';
 	s2.appendChild(div);
-	
+
 	assert_equals(s2.querySelector('#shadow1').olderShadowRoot, s1, 'Point 1: Wrong olderShadowRoot value');
-    
+
 }), 'A_10_05_07_T01', PROPS(A_10_05_07, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-	reviewer:''
+	reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 

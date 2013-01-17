@@ -20,26 +20,26 @@ var A_10_05_08 = {
 
 
 test(unit(function (ctx) {
-	
+
 	var d = newRenderedHTMLDocument(ctx);
-	
+
 	var host = d.createElement('div');
 	d.body.appendChild(host);
-	
+
 	//Shadow root to play with
 	var s = createSR(host);
-	
-	var div = d.createElement('div');	
+
+	var div = d.createElement('div');
 	div.innerHTML = '' +
 		'<span id="spandex">This is a shadow root content</span>' +
-		'<shadow><span id="shadowId">This is a shadow fallback content</span></shadow>';
+		'<shadow id="shadowId"><span>This is a shadow fallback content</span></shadow>';
 	s.appendChild(div);
-	
+
 	assert_equals(s.querySelector('#shadowId').olderShadowRoot, null, 'or null if no such ' +
 			'shadow tree is accessible.');
-    
+
 }), 'A_10_05_08_T01', PROPS(A_10_05_08, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-	reviewer:''
+	reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
