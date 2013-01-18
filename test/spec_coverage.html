@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <!--
+Distributed under both the W3C Test Suite License [1] and the W3C
+3-clause BSD License [2]. To contribute to a W3C Test Suite, see the
+policies and contribution forms [3].
+
+[1] http://www.w3.org/Consortium/Legal/2008/04-testsuite-license
+[2] http://www.w3.org/Consortium/Legal/2008/03-bsd-license
+[3] http://www.w3.org/2004/10/27-testcases
+
 
 How to use:
 1) Start any web server with document root in this folder (like php -S localhost:7070)
@@ -234,7 +242,7 @@ var assertsAreaFrame = document.getElementById("assertFrame");
 var assertsAreaBody = assertsAreaFrame.contentWindow.document.body;
 var testFrameRow = document.getElementById("testFrameRow");
 var testFrame = document.getElementById("testFrame");
-var tnt = null;
+var textNodeTokenizer = null;
 var defaultHighlightColor = "Khaki";
 var activeHighlightColor = "LightSalmon";
 var mappingErrorAssertBgColor = "Red";
@@ -250,7 +258,7 @@ var chapterBlocks = {};
 function init() {
     done(); // wait for harness to complete
     showTotals();
-    tnt = new TextNodeTokenizer(specsFrame.contentWindow.document.documentElement);
+    textNodeTokenizer = new TextNodeTokenizer(specsFrame.contentWindow.document.documentElement);
     chapters.forEach(function (c) {
         showChapter(c);
     });
@@ -282,7 +290,7 @@ function showTotals() {
 
 
 function updateChapterTitle(c) {
-    var sections = tnt.root.querySelectorAll('.section');
+    var sections = textNodeTokenizer.root.querySelectorAll('.section');
     var res = "???";
     for (var i = 0; i < sections.length; i++) {
         var s = sections.item(i);
@@ -378,7 +386,7 @@ function highlightSpecs(a) {
         return;
     }
     var doc = specsFrame.contentWindow.document;
-    var res = tnt.addBlockToMapping(prepareTokensBlock(a.name, a.highlight, "[[", "]]"));
+    var res = textNodeTokenizer.addBlockToMapping(prepareTokensBlock(a.name, a.highlight, "[[", "]]"));
     if (res != null) {
         var titleNode = assertsAreaBody.ownerDocument.getElementById(a.name);
         titleNode.style.backgroundColor = mappingErrorAssertBgColor;
@@ -387,13 +395,13 @@ function highlightSpecs(a) {
             alert(res);
         }
     } else {
-        var nodes = tnt.getNodesByBlock(a.name);
+        var nodes = textNodeTokenizer.getNodesByBlock(a.name);
         nodes.forEach(function (node) {
             node.parentNode.style.backgroundColor = defaultHighlightColor;
             node.parentNode.style.cursor = "pointer";
             node.parentNode.onclick = function (e) {
                 var node = e.target.childNodes[0];
-                var blockNames = tnt.getBlocksByNode(node);
+                var blockNames = textNodeTokenizer.getBlocksByNode(node);
                 updateAssertionsSelection(blockNames, false);
                 if (blockNames.length > 0) {
                     var titleNode = assertsAreaBody.ownerDocument.getElementById(blockNames[0]);
@@ -429,7 +437,7 @@ function updateAssertionsSelection(aNames, scrollTo) {
         newSelection = [newSelection];
     }
     newSelection.forEach(function (aName) {
-        var nodes = tnt.getNodesByBlock(aName);
+        var nodes = textNodeTokenizer.getNodesByBlock(aName);
         if (nodes.length > 0) {
             var node = nodes[0];
             var offsetTop = node.parentNode.offsetTop;
@@ -442,7 +450,7 @@ function updateAssertionsSelection(aNames, scrollTo) {
     });
 }
 function setSelectedAssertion(aName, flag) {
-    var specNodes = tnt.getNodesByBlock(aName);
+    var specNodes = textNodeTokenizer.getNodesByBlock(aName);
     specNodes.forEach(function (node) {
         node.parentNode.style.backgroundColor = flag ? activeHighlightColor : defaultHighlightColor;
     });

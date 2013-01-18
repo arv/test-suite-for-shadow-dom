@@ -1,13 +1,18 @@
+/*
+Distributed under both the W3C Test Suite License [1] and the W3C
+3-clause BSD License [2]. To contribute to a W3C Test Suite, see the
+policies and contribution forms [3].
+
+[1] http://www.w3.org/Consortium/Legal/2008/04-testsuite-license
+[2] http://www.w3.org/Consortium/Legal/2008/03-bsd-license
+[3] http://www.w3.org/2004/10/27-testcases
+*/
+
 /**
- * Created with JetBrains PhpStorm.
- * User: mfursov
- * Date: 31.10.12
- * Time: 14:17
- * To change this template use File | Settings | File Templates.
+ * The file contains utility functions for indexing text found in the input DOM.
  */
 
 /**
- *
  * @param {String} name
  * @param {String} context
  * @param {Array} tokens
@@ -25,7 +30,7 @@ function MappingElement(node, startPos) {
     this.blocks = [];
     this.endPos = function () {
         return this.startPos + this.node.textContent.length;
-    }
+    };
 }
 
 function MappingElementBlockInfo(name, token) {
@@ -41,7 +46,6 @@ function Token2NodeMapping() {
 }
 
 /**
- *
  * @param {HTMLElement} rootElement
  * @constructor
  */
@@ -53,9 +57,10 @@ function TextNodeTokenizer(rootElement) {
 
     this.mapText(this.root);
     this.wrapTextNodes();
-//    this.dump();
 }
-
+/**
+ * this method is created for debugging purposes
+ */
 TextNodeTokenizer.prototype.dump = function () {
     var t = "";
     for (var i = 0; i < this.nodeMapping.length; i++) {
@@ -117,8 +122,6 @@ TextNodeTokenizer.prototype.addBlockToMapping = function (block) {
             if (match && match[0]) {
                 startPos = this.text.search(re);
                 endPos = startPos + match[0].length;
-                //console.log("FOUND:" + startPos + "-" + endPos + "\nre:'" + context + "'\ntext: '" + this.text.substr(startPos, endPos - startPos + 1) + "'");
-                //
                 regexp = true;
             }
         } catch (e) {
@@ -148,8 +151,6 @@ TextNodeTokenizer.prototype.addBlockToMapping = function (block) {
             } else {
                 var tokenStartPos = startPos + partStartPos + idx;
                 var tokenEndPos = tokenStartPos + token.length;
-//                console.log("o:'" + token + "'");
-//                console.log("a:'" + this.text.substr(tokenStartPos, tokenEndPos - tokenStartPos + 1) + "'");
                 this.registerToken(tokenStartPos, tokenEndPos, name);
             }
         }
@@ -180,11 +181,6 @@ TextNodeTokenizer.prototype.registerToken = function (startPos, endPos, block) {
     return null;
 };
 
-/**
- *
- * @param nodeGlobalIdx
- * @param textSplitPos
- */
 TextNodeTokenizer.prototype.splitNode = function (nodeGlobalIdx, textSplitPos) {
     /** @type {MappingElement}*/
     var oldME = this.nodeMapping[nodeGlobalIdx];
@@ -206,13 +202,6 @@ TextNodeTokenizer.prototype.splitNode = function (nodeGlobalIdx, textSplitPos) {
     return newME;
 };
 
-
-/**
- * @param startPos
- * @param endPos
- * @param token
- * @return {Token2NodeMapping}
- */
 TextNodeTokenizer.prototype.prepareToken2NodeMapping = function (startPos, endPos) {
     var res = new Token2NodeMapping();
     var resMeEx = this.findMappingElements(startPos, endPos);
@@ -234,7 +223,6 @@ TextNodeTokenizer.prototype.findMappingElements = function (textStartPos, textEn
             if (e.startPos < textEndPos) {
                 resME.push(e);
                 resIdx.push(i);
-//                console.log("ME:['" + e.node.textContent + "']");
             } else {
                 break;
             }
@@ -255,7 +243,6 @@ TextNodeTokenizer.prototype.getNodesByBlock = function (block) {
     for (var i = 0; i < elements.length; i++) {
         var me = elements[i];
         res.push(me.node);
-//        console.log("[" + me.node.textContent + "]");
     }
     return res;
 };
@@ -280,13 +267,6 @@ TextNodeTokenizer.prototype.getBlocksByNode = function (node) {
     return res;
 };
 
-/**
- * @param name
- * @param text
- * @param startMarker
- * @param endMarker
- * @return {TokensBlock}
- */
 function prepareTokensBlock(name, text, startMarker, endMarker) {
     if (startMarker.length == 0 || text.indexOf(startMarker) == -1) {
         return new TokensBlock(name, text, [text]);

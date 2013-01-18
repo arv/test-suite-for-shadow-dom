@@ -1,4 +1,12 @@
-// Copyright 2012 Google Inc. All Rights Reserved.
+/*
+Distributed under both the W3C Test Suite License [1] and the W3C
+3-clause BSD License [2]. To contribute to a W3C Test Suite, see the
+policies and contribution forms [3].
+
+[1] http://www.w3.org/Consortium/Legal/2008/04-testsuite-license
+[2] http://www.w3.org/Consortium/Legal/2008/03-bsd-license
+[3] http://www.w3.org/2004/10/27-testcases
+*/
 
 "use strict";
 
@@ -104,9 +112,9 @@ function newDocument() {
 
 function newHTMLDocument() {
 	var d = document.implementation.createHTMLDocument('Test Document');
-    //FIXME remove the call below when non-prefixed API is used
-    addDocumentPrefixed(d);
-    return d;
+	//FIXME remove the call below when non-prefixed API is used
+	addDocumentPrefixed(d);
+	return d;
 }
 
 function newIFrame(ctx, src) {
@@ -130,12 +138,13 @@ function newIFrame(ctx, src) {
     );
     return iframe;
 }
+
 function newRenderedHTMLDocument(ctx) {
-    var frame = newIFrame(ctx);
-    var d = frame.contentWindow.document;
-    //FIXME remove the call below when non-prefixed API is used
-    addDocumentPrefixed(d);
-    return d;
+	var frame = newIFrame(ctx);
+	var d = frame.contentWindow.document;
+	//FIXME remove the call below when non-prefixed API is used
+	addDocumentPrefixed(d);
+	return d;
 }
 
 function newContext() {
