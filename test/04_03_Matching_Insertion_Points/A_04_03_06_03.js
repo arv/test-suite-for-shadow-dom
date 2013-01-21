@@ -18,7 +18,7 @@ var A_04_03_06_03 = {
 
 var A_04_03_06_03_T01 = async_test('A_04_03_06_03_T01', PROPS(A_04_03_06_03, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru'
 }));
 
 
@@ -28,26 +28,27 @@ A_04_03_06_03_T01.step(function () {
     document.body.appendChild(iframe);
 
     iframe.onload = A_04_03_06_03_T01.step_func(function () {
-        try {
-
             var d = iframe.contentDocument;
             var div = d.querySelector('#links-wrapper');
             var s = createSR(div);
-            
+
             //make shadow subtree
             var subdiv1 = document.createElement('div');
             subdiv1.innerHTML = '<content select=":target"></content>';
             s.appendChild(subdiv1);
 
-            //link10 should be visible, link11 not
-            assert_true(d.querySelector('#link10').offsetTop > 0,
-                'Element should match :target pseudo-class selector');
-            assert_equals(d.querySelector('#link11').offsetTop, 0,
-                'Element shouldn\'t match :target pseudo-class selector');
-
-        } finally {
-            iframe.parentNode.removeChild(iframe);
-        }
-        A_04_03_06_03_T01.done();
+            // have to wait while the document is actually rendered
+            setTimeout(A_04_03_06_03_T01.step_func(function(){
+            	try {
+	            	//link10 should be visible, link11 not
+		            assert_true(d.querySelector('#link10').offsetTop > 0,
+		                'Element should match :target pseudo-class selector');
+		            assert_equals(d.querySelector('#link11').offsetTop, 0,
+		                'Element shouldn\'t match :target pseudo-class selector');
+            	} finally {
+            		iframe.parentNode.removeChild(iframe);
+            	}
+            	A_04_03_06_03_T01.done();
+            }),1000);
     });
 });
