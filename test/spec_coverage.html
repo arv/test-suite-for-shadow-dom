@@ -114,6 +114,7 @@ How to use:
         this.assertions = [];
         this.assertionsPassed = 0;
         this.sectionElement = null;
+        this.failuresWithoutBug = 0;
     }
     Chapter.prototype.isFailed = function () {
         return this.assertionsPassed < this.assertions.length;
@@ -127,6 +128,7 @@ How to use:
         this.tests = [];
         this.testsPassed = 0;
         this.testsWithoutReview = 0;
+        this.failuresWithoutBug = 0;
     }
     Assertion.prototype.isFailed = function () {
         return this.testsPassed < this.tests.length;
@@ -173,6 +175,11 @@ How to use:
             if (t.status == 0) {
                 a.testsPassed++;
                 c.testsPassed++;
+            } else {
+				if (!t.properties.bug) {
+					a.failuresWithoutBug++;
+					c.failuresWithoutBug++;
+				}
             }
             t.reviewed = t.properties.reviewer && t.properties.reviewer.length > 0;
             if (!t.reviewed) {
@@ -253,6 +260,7 @@ var testPassedColor = "green";
 var testFailedColor = "red";
 var testTotalColor = "blue";
 var testsWithoutReviewTotalColor = "gray";
+var testWithoutBug = "yellow";
 var chapterBlocks = {};
 
 function init() {
@@ -308,6 +316,7 @@ function showChapter(c) {
     headElement.style.cursor = "pointer";
     headElement.innerHTML = "<span style='text-decoration:underline; font-family: monospace;' id='" + c.name + "_tree" + "' "
             + " onclick='parent.toggleTreeDetails(\"" + c.name + "\")'>[-]</span>";
+
     var color = c.isFailed() ? testFailedColor : c.testsWithoutReview > 0 ? testsWithoutReviewTotalColor : "";
     headElement.innerHTML += "<span id='" + c.name + "' " +
             "onclick='parent.scrollToSection(\"" + c.name + "\")/*;parent.toggleTreeDetails(\"" + c.name + "\")*/' "
@@ -330,8 +339,12 @@ function showAssertion(c, a) {
     var assertElement = document.createElement("div");
     assertElement.innerHTML = "<span style='text-decoration:underline; cursor: pointer; font-family: monospace;' id='" + a.name + "_tree" + "' "
             + " onclick='parent.toggleTreeDetails(\"" + a.name + "\")'>[+]</span>";
+   	var color = testFailedColor;
+	if (a.isFailed() && a.failuresWithoutBug > 0 ) {
+		color = testFailedColor +'; background-color: '+testWithoutBug;
+	}
     assertElement.innerHTML += "<span id='" + a.name + "' onclick=\"parent.updateAssertionsSelection(\'" + a.name + "', true);\" style='cursor:pointer; margin-left:5px'>"
-            + a.name + "<span " + (a.isFailed() ? " style='color:" + testFailedColor + ";'" : "")
+            + a.name + "<span " + (a.isFailed() ? " style='color:" + color + ";'" : "")
             + ";'> [" + a.testsPassed + "/" + a.tests.length + "]</span>";
 
     if (a.testsWithoutReview > 0) {
