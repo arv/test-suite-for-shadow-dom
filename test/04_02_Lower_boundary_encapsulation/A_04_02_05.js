@@ -14,7 +14,7 @@ var A_04_02_05 = {
         'An insertion point may be active or inactive. An active insertion point ' +
         'participates in the distribution process, whereas the inactive insertion does not',
     link:'http://www.w3.org/TR/shadow-dom/#lower-boundary-encapsulation',
-    highlight: 'An insertion point may be active or inactive. An active insertion point ' + 
+    highlight: 'An insertion point may be active or inactive. An active insertion point ' +
     	'participates in the distribution process, whereas the inactive insertion does not.'
 };
 
@@ -44,17 +44,17 @@ A_04_02_05_T1.step(function () {
 
             // All li1-li6 should be invisible, shadowspan visible
             assert_equals(d.querySelector('#li1').offsetTop, 0,
-                'Point 1: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 1: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li2').offsetTop, 0,
-                'Point 2: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 2: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li3').offsetTop, 0,
-                'Point 3: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 3: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li4').offsetTop, 0,
-                'Point 4: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 4: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li5').offsetTop, 0,
-                'Point 5: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 5: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li6').offsetTop, 0,
-                'Point 6: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 6: Elements that don\'t match insertion point criteria participate in distribution');
         } finally {
             iframe.parentNode.removeChild(iframe);
         }

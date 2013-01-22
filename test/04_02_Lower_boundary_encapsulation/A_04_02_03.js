@@ -40,26 +40,26 @@ A_04_02_03_T1.step(function () {
             //The order of <li> elements at this point should be the following:
             //li3, li6, li11, li12, 1i13, li14, li15. Other elements (li1, li2, li4, li5) invisible
             assert_true(d.querySelector('#li3').offsetTop < d.querySelector('#li6').offsetTop,
-                'Point 1: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 1: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li6').offsetTop < d.querySelector('#li11').offsetTop,
-                'Point 2: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 2: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li11').offsetTop < d.querySelector('#li12').offsetTop,
-                'Point 3: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 3: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li12').offsetTop < d.querySelector('#li13').offsetTop,
-                'Point 4: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 4: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li13').offsetTop < d.querySelector('#li14').offsetTop,
-                'Point 5: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 5: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li14').offsetTop < d.querySelector('#li15').offsetTop,
-                'Point 6: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 6: Elements that match insertion point criteria don\'t participate in distribution');
 
             assert_equals(d.querySelector('#li1').offsetTop, 0,
-                'Point 7: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 7: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li2').offsetTop, 0,
-                'Point 8: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 8: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li4').offsetTop, 0,
-                'Point 9: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 9: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li5').offsetTop, 0,
-                'Point 10: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 10: Elements that don\'t match insertion point criteria participate in distribution');
 
             var subdiv2 = document.createElement('div');
             subdiv2.innerHTML = '<ul><content select=".shadow2"></content></ul>';
@@ -69,26 +69,26 @@ A_04_02_03_T1.step(function () {
             //The order of <li> elements should now be the following:
             //li3, li6, li4, li11, li12, 1i13, li14, li15. Invisible: li1, li2, li5
             assert_true(d.querySelector('#li3').offsetTop < d.querySelector('#li6').offsetTop,
-                'Point 11: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 11: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li6').offsetTop < d.querySelector('#li4').offsetTop,
-                'Point 12: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 12: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li4').offsetTop < d.querySelector('#li11').offsetTop,
-                'Point 13: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 13: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li11').offsetTop < d.querySelector('#li12').offsetTop,
-                'Point 14: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 14: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li12').offsetTop < d.querySelector('#li13').offsetTop,
-                'Point 15: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 15: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li13').offsetTop < d.querySelector('#li14').offsetTop,
-                'Point 16: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 16: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li14').offsetTop < d.querySelector('#li15').offsetTop,
-                'Point 17: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 17: Elements that match insertion point criteria don\'t participate in distribution');
 
             assert_equals(d.querySelector('#li1').offsetTop, 0,
-                'Point 18: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 18: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li2').offsetTop, 0,
-                'Point 19: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 19: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li5').offsetTop, 0,
-                'Point 20: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 20: Elements that don\'t match insertion point criteria participate in distribution');
 
             var subdiv3 = document.createElement('div');
             subdiv3.innerHTML = '<ul><content select=".shadow"></content></ul>';
@@ -97,26 +97,26 @@ A_04_02_03_T1.step(function () {
             //There should be no change. Order:
             //li3, li6, li4, li11, li12, 1i13, li14, li15. Invisible: li1, li2, li5
             assert_true(d.querySelector('#li3').offsetTop < d.querySelector('#li6').offsetTop,
-                'Point 21: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 21: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li6').offsetTop < d.querySelector('#li4').offsetTop,
-                'Point 22: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 22: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li4').offsetTop < d.querySelector('#li11').offsetTop,
-                'Point 23: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 23: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li11').offsetTop < d.querySelector('#li12').offsetTop,
-                'Point 24: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 24: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li12').offsetTop < d.querySelector('#li13').offsetTop,
-                'Point 25: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 25: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li13').offsetTop < d.querySelector('#li14').offsetTop,
-                'Point 26: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 26: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li14').offsetTop < d.querySelector('#li15').offsetTop,
-                'Point 27: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 27: Elements that match insertion point criteria don\'t participate in distribution');
 
             assert_equals(d.querySelector('#li1').offsetTop, 0,
-                'Point 28: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 28: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li2').offsetTop, 0,
-                'Point 29: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 29: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li5').offsetTop, 0,
-                'Point 30: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 30: Elements that don\'t match insertion point criteria participate in distribution');
         } finally {
             iframe.parentNode.removeChild(iframe);
         }
