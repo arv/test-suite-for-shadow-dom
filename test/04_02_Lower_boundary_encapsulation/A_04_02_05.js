@@ -15,12 +15,13 @@ var A_04_02_05 = {
         'participates in the distribution process, whereas the inactive insertion does not',
     link:'http://www.w3.org/TR/shadow-dom/#lower-boundary-encapsulation',
     highlight: 'An insertion point may be active or inactive. An active insertion point ' +
-    	'participates in the distribution process, whereas the inactive insertion does not.'
+    	'participates in the distribution process, whereas the inactive insertion does not.',
+    bug: ['https://www.w3.org/Bugs/Public/show_bug.cgi?id=20729']
 };
 
 var A_04_02_05_T1 = async_test('A_04_02_05_T01', PROPS(A_04_02_05, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 A_04_02_05_T1.step(function () {
@@ -61,3 +62,73 @@ A_04_02_05_T1.step(function () {
         A_04_02_05_T1.done();
     });
 });
+
+
+// nested <content> inside <content> in shadow tree
+var A_04_02_05_T2 = async_test('A_04_02_05_T02', PROPS(A_04_02_05, {
+    author:'Aleksei Yu. Semenov <a.semenov@unipro.ru>',
+    reviewer:''
+}));
+
+A_04_02_05_T2.step(function () {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'resources/bobs_page.html';
+    document.body.appendChild(iframe);
+
+    iframe.onload = A_04_02_05_T2.step_func(function () {
+        try {
+            var d = iframe.contentDocument;
+
+            var standaloneContent = d.createElement('content');
+            standaloneContent.setAttribute('select', 'a');
+            d.body.appendChild(standaloneContent);
+
+            var linksWrapper = d.querySelector('#links-wrapper');
+            var s = createSR(linksWrapper);
+
+            assert_equals(d.querySelector('#link10').offsetTop, 0, 'Children of shadow host should be hidden');
+            assert_equals(d.querySelector('#link11').offsetTop, 0, 'Children of shadow host should be hidden');
+
+            assert_equals(standaloneContent.childNodes.length, 0, '<content> outside shadow tree should not partisipate in distribution');
+
+        } finally {
+            iframe.parentNode.removeChild(iframe);
+        }
+        A_04_02_05_T2.done();
+    });
+});
+
+//<content> outside shadow tree
+var A_04_02_05_T3 = async_test('A_04_02_05_T03', PROPS(A_04_02_05, {
+    author:'Aleksei Yu. Semenov <a.semenov@unipro.ru>',
+    reviewer:''
+}));
+
+A_04_02_05_T3.step(function () {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'resources/bobs_page.html';
+    document.body.appendChild(iframe);
+
+    iframe.onload = A_04_02_05_T3.step_func(function () {
+        try {
+            var d = iframe.contentDocument;
+            var linksWrapper = d.querySelector('#links-wrapper');
+            var s = createSR(linksWrapper);
+            var content1 = d.createElement('content');
+            content1.setAttribute('select', '#link10');
+            var content2 = d.createElement('content');
+            content2.setAttribute('select', '#link11');
+            content1.appendChild(content2);
+            s.appendChild(content1);
+
+
+            assert_true(d.querySelector('#link10').offsetTop>0, 'First <content> should participate in distribution');
+            assert_equals(d.querySelector('#link11').offsetTop, 0, 'Nested <content> should not participate in distribution');
+
+        } finally {
+            iframe.parentNode.removeChild(iframe);
+        }
+        A_04_02_05_T3.done();
+    });
+});
+
