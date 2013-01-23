@@ -13,12 +13,13 @@ var A_04_04_01 = {
     assert:'Matching Children, Distributed To Insertion Points',
     link:'http://www.w3.org/TR/shadow-dom/#selecting-nodes-distributed-to-insertion-points',
     highlight: 'Reference combinators match the children of a shadow host, distributed to the ' +
-    	'insertion points within a shadow tree.'
+    	'insertion points within a shadow tree.',
+    bug: ['https://bugs.webkit.org/show_bug.cgi?id=107654']
 };
 
 var A_04_04_01_T1 = async_test('A_04_04_01_T01', PROPS(A_04_04_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 
@@ -35,28 +36,29 @@ A_04_04_01_T1.step(function () {
             var d = iframe.contentDocument;
             var ul = d.querySelector('ul.stories');
             var s = createSR(ul);
-            
-            //make shadow subtree
-            var subdiv1 = d.createElement('div');
-            subdiv1.innerHTML = '<ul><content select="li"></content></ul>';
-            s.appendChild(subdiv1);
-            
+
             var style = d.createElement('style');
-            style.innerHTML = 'ul.stories/select/li.shadow {display:none}';
+            style.innerHTML = 'content /select/ li.shadow {display:none}';
             d.head.appendChild(style);
-            
+
+
+
+            var content =  d.createElement('content');
+            content.setAttribute('select', 'li.shadow');
+            s.appendChild(content);
+
             //TODO (sgrekhov). Should we add the test for
             //d.querySelector('ul.stories /select/ .shadow')?
-            
-            
+
+
             //The order of DOM elements should be the following:
             //li3, li6 - invisible. Other elements visible
             assert_equals(d.querySelector('#li3').offsetTop, 0,
 	            'Point 1: Elements that don\'t mach insertion point criteria participate in distribution');
 	        assert_equals(d.querySelector('#li6').offsetTop, 0,
 	            'Point 2: Elements that don\'t mach insertion point criteria participate in distribution');
-            
-            
+
+
             assert_true(d.querySelector('#li1').offsetTop > 0,
             	'Point 3: Reference combinators should be a valid insertion point matching criteria, element should be visible');
             assert_true(d.querySelector('#li1').offsetTop < d.querySelector('#li2').offsetTop,
