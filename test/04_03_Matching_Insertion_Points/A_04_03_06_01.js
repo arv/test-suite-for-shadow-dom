@@ -18,7 +18,7 @@ var A_04_03_06_01 = {
 
 var A_04_03_06_01_T01 = async_test('A_04_03_06_01_T01', PROPS(A_04_03_06_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''    
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 
@@ -32,6 +32,8 @@ A_04_03_06_01_T01.step(function () {
 
             var d = iframe.contentDocument;
             var div = d.querySelector('#links-wrapper');
+            var span = d.createElement('span');
+            div.appendChild(span);
             var s = createSR(div);
 
             //make shadow subtree
@@ -44,6 +46,8 @@ A_04_03_06_01_T01.step(function () {
                 'Point 1: <a> tag should match :link pseudo-class selector');
             assert_true(d.querySelector('#link11').offsetTop > 0,
                 'Point 2: <a> tag should match :link pseudo-class selector');
+            assert_equals(span.offsetTop, 0, '<span> tag should not match :link selector')
+
         } finally {
             iframe.parentNode.removeChild(iframe);
         }

@@ -18,7 +18,7 @@ var A_04_03_06_09 = {
 
 var A_04_03_06_09_T01 = async_test('A_04_03_06_09_T01', PROPS(A_04_03_06_09, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 
@@ -33,7 +33,7 @@ A_04_03_06_09_T01.step(function () {
             var d = iframe.contentDocument;
             var ul = d.querySelector('ul.stories');
             var s = createSR(ul);
-            
+
             //make shadow subtree
             var subdiv1 = document.createElement('div');
             subdiv1.innerHTML = '<ul><content select=":nth-last-child(2)"></content></ul>';

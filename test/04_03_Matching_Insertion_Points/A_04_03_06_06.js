@@ -18,7 +18,7 @@ var A_04_03_06_06 = {
 
 var A_04_03_06_06_T01 = async_test('A_04_03_06_06_T01', PROPS(A_04_03_06_06, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 
@@ -33,7 +33,7 @@ A_04_03_06_06_T01.step(function () {
             var d = iframe.contentDocument;
             var div = d.querySelector('#inputs-wrapper');
             var s = createSR(div);
-            
+
             //make shadow subtree
             var subdiv1 = document.createElement('div');
             subdiv1.innerHTML = '<content select=":checked"></content>';

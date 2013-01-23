@@ -18,7 +18,7 @@ var A_04_03_02 = {
 
 var A_04_03_02_T1 = async_test('A_04_03_02_T01', PROPS(A_04_03_02, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 
