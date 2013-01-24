@@ -66,22 +66,22 @@ A_04_08_01_T1.step(function () {
             	'Nested shadow subtree should take part in the distribution');
 
             assert_equals(d.querySelector('#li1').offsetTop, 0,
-                'Point 3: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 3: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li2').offsetTop, 0,
-                'Point 4: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 4: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li4').offsetTop, 0,
-                'Point 5: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 5: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li5').offsetTop, 0,
-            	'Point 6: Elements that don\'t mach insertion point criteria participate in distribution');
+            	'Point 6: Elements that don\'t match insertion point criteria participate in distribution');
             
             assert_equals(s1.querySelector('#sh_li1').offsetTop, 0,
-            	'Point 7: Elements of the nested shadow subtree that don\'t mach insertion point criteria participate in distribution');
+            	'Point 7: Elements of the nested shadow subtree that don\'t match insertion point criteria participate in distribution');
             assert_equals(s1.querySelector('#sh_li2').offsetTop, 0,
-            	'Point 8: Elements of the nested shadow subtree that don\'t mach insertion point criteria participate in distribution');
+            	'Point 8: Elements of the nested shadow subtree that don\'t match insertion point criteria participate in distribution');
             assert_equals(s1.querySelector('#sh_li4').offsetTop, 0,
-        		'Point 9: Elements of the nested shadow subtree that don\'t mach insertion point criteria participate in distribution');
+        		'Point 9: Elements of the nested shadow subtree that don\'t match insertion point criteria participate in distribution');
             assert_equals(s1.querySelector('#sh_li5').offsetTop, 0,
-        		'Point 10: Elements of the nested shadow subtree that don\'t mach insertion point criteria participate in distribution');
+        		'Point 10: Elements of the nested shadow subtree that don\'t match insertion point criteria participate in distribution');
             
             assert_true(s1.querySelector('#sh_span').offsetTop > 0,
             	'Shadow subtree elements that are not shadow host should take part in the distribution');

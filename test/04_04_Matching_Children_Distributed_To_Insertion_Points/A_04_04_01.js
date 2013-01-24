@@ -54,9 +54,9 @@ A_04_04_01_T1.step(function () {
             //The order of DOM elements should be the following:
             //li3, li6 - invisible. Other elements visible
             assert_equals(d.querySelector('#li3').offsetTop, 0,
-	            'Point 1: Elements that don\'t mach insertion point criteria participate in distribution');
+	            'Point 1: Elements that don\'t match insertion point criteria participate in distribution');
 	        assert_equals(d.querySelector('#li6').offsetTop, 0,
-	            'Point 2: Elements that don\'t mach insertion point criteria participate in distribution');
+	            'Point 2: Elements that don\'t match insertion point criteria participate in distribution');
 
 
             assert_true(d.querySelector('#li1').offsetTop > 0,

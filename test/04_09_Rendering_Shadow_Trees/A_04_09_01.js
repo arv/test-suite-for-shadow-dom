@@ -94,11 +94,11 @@ test(unit(function (ctx) {
 		'point criteria should be rendered');
 	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 22: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 23: Node that doen\'t match ' +
+	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 23: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li4').offsetTop, 0, 'Point 24: Node that doen\'t match ' +
+	assert_equals(d.querySelector('#li4').offsetTop, 0, 'Point 24: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li5').offsetTop, 0, 'Point 25: Node that doen\'t match ' +
+	assert_equals(d.querySelector('#li5').offsetTop, 0, 'Point 25: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes
@@ -124,11 +124,11 @@ test(unit(function (ctx) {
 		'point criteria should be rendered');
 	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 32: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li1').offsetTop, 0, 'Point 33: Node that doen\'t match ' +
+	assert_equals(d.querySelector('#li1').offsetTop, 0, 'Point 33: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 34: Node that doen\'t match ' +
+	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 34: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li3').offsetTop, 0, 'Point 35: Node that doen\'t match ' +
+	assert_equals(d.querySelector('#li3').offsetTop, 0, 'Point 35: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes (all invisible)
@@ -149,11 +149,11 @@ test(unit(function (ctx) {
 		'point criteria should be rendered');
 	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 42: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 43: Node that doen\'t match ' +
+	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 43: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 44: Node that doen\'t match ' +
+	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 44: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 45: Node that doen\'t match ' +
+	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 45: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes (a11, a13, a14 visible, a12 not)
@@ -175,11 +175,11 @@ test(unit(function (ctx) {
 		'point criteria should be rendered');
 	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 52: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 53: Node that doen\'t match ' +
+	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 53: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 54: Node that doen\'t match ' +
+	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 54: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 55: Node that doen\'t match ' +
+	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 55: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes (a11 and a13 visible, a12 not)
@@ -203,11 +203,11 @@ test(unit(function (ctx) {
 		'point criteria should be rendered');
 	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 62: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 63: Node that doen\'t match ' +
+	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 63: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 64: Node that doen\'t match ' +
+	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 64: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 65: Node that doen\'t match ' +
+	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 65: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes (a12 visible, others not)
@@ -231,11 +231,11 @@ test(unit(function (ctx) {
 		'point criteria should be rendered');
 	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 62: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 63: Node that doen\'t match ' +
+	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 63: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 64: Node that doen\'t match ' +
+	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 64: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 65: Node that doen\'t match ' +
+	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 65: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes (a12 visible, others not)

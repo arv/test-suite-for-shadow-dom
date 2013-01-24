@@ -46,13 +46,13 @@ A_04_03_03_T01.step(function () {
                 'Class name should be a valid insertion point matching criteria, element should be visible');
 
             assert_equals(d.querySelector('#li1').offsetTop, 0,
-                'Point 1: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 1: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li2').offsetTop, 0,
-                'Point 2: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 2: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li4').offsetTop, 0,
-                'Point 3: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 3: Elements that don\'t match insertion point criteria participate in distribution');
             assert_equals(d.querySelector('#li5').offsetTop, 0,
-                'Point 4: Elements that don\'t mach insertion point criteria participate in distribution');
+                'Point 4: Elements that don\'t match insertion point criteria participate in distribution');
         } finally {
             iframe.parentNode.removeChild(iframe);
         }

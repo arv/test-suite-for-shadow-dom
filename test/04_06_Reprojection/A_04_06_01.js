@@ -77,11 +77,11 @@ A_04_06_01_T01.step(function () {
             	'point criteria should be rendered');
             assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 2: Node that match insertion ' +
             	'point criteria should be rendered');
-            assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 3: Node that doen\'t match ' +
+            assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 3: Node that does not match ' +
             	'insertion point criteria shouldn\'t be rendered');
-            assert_equals(d.querySelector('#li4').offsetTop, 0, 'Point 4: Node that doen\'t match ' +
+            assert_equals(d.querySelector('#li4').offsetTop, 0, 'Point 4: Node that does not match ' +
             	'insertion point criteria shouldn\'t be rendered');
-            assert_equals(d.querySelector('#li5').offsetTop, 0, 'Point 5: Node that doen\'t match ' +
+            assert_equals(d.querySelector('#li5').offsetTop, 0, 'Point 5: Node that does not match ' +
             	'insertion point criteria shouldn\'t be rendered');
 
             //check the nested tree
@@ -152,15 +152,15 @@ A_04_06_01_T02.step(function () {
             s2.appendChild(div2);
 
             // The second distribution shouldn't render anything
-            assert_equals(d.querySelector('#li1').offsetTop, 0, 'Point 1: Node that doen\'t match ' +
+            assert_equals(d.querySelector('#li1').offsetTop, 0, 'Point 1: Node that does not match ' +
                 'insertion point criteria shouldn\'t be rendered');
-            assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 2: Node that doen\'t match ' +
+            assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 2: Node that does not match ' +
                 'insertion point criteria shouldn\'t be rendered');
-            assert_equals(d.querySelector('#li3').offsetTop, 0, 'Point 3: Node that doen\'t match ' +
+            assert_equals(d.querySelector('#li3').offsetTop, 0, 'Point 3: Node that does not match ' +
             	'insertion point criteria shouldn\'t be rendered');
-            assert_equals(d.querySelector('#li4').offsetTop, 0, 'Point 4: Node that doen\'t match ' +
+            assert_equals(d.querySelector('#li4').offsetTop, 0, 'Point 4: Node that does not match ' +
             	'insertion point criteria shouldn\'t be rendered');
-            assert_equals(d.querySelector('#li5').offsetTop, 0, 'Point 5: Node that doen\'t match ' +
+            assert_equals(d.querySelector('#li5').offsetTop, 0, 'Point 5: Node that does not match ' +
             	'insertion point criteria shouldn\'t be rendered');
 
             //check the nested tree

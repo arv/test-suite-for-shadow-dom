@@ -43,15 +43,15 @@ A_04_03_02_T1.step(function () {
             //The order of DOM elements should be the following:
             // li1-li6 should be visible and located on-order
             assert_true(d.querySelector('#li1').offsetTop < d.querySelector('#li2').offsetTop,
-                'Point 1: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 1: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li2').offsetTop < d.querySelector('#li3').offsetTop,
-                'Point 2: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 2: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li3').offsetTop < d.querySelector('#li4').offsetTop,
-                'Point 3: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 3: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li4').offsetTop < d.querySelector('#li5').offsetTop,
-                'Point 4: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 4: Elements that match insertion point criteria don\'t participate in distribution');
             assert_true(d.querySelector('#li5').offsetTop < d.querySelector('#li6').offsetTop,
-                'Point 5: Elements that mach insertion point criteria don\'t participate in distribution');
+                'Point 5: Elements that match insertion point criteria don\'t participate in distribution');
         } finally {
             iframe.parentNode.removeChild(iframe);
         }
