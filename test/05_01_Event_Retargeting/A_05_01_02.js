@@ -20,39 +20,42 @@ var A_05_01_02 = {
 
 var A_05_01_02_T1 = async_test('A_05_01_02_T1', PROPS(A_05_01_02, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 A_05_01_02_T1.step(function () {
     var iframe = document.createElement('iframe');
     iframe.src = 'resources/bobs_page.html';
     document.body.appendChild(iframe);
-    
+
     iframe.onload = A_05_01_02_T1.step_func(function () {
-    
-    try {    	
-    	var d = iframe.contentDocument;
-    	
-        var ul = d.querySelector('ul.stories');
-        var s = createSR(ul);
-	  
-        //make shadow subtree
-        var div = document.createElement('div');
-        div.innerHTML = '<ul id="ip_wrapper"><content select=".shadow"></content></ul>';
-        s.appendChild(div);
-    	  
-    	d.body.addEventListener('click', A_05_01_02_T1.step_func(function (event) {
-            assert_equals(event.target.tagName, 'UL', 'Information about event target crossing ' +
-            		'the shadow boundaries should be adjusted for document nodes distributed' +
-            		'among insertion points');
-        }), false);
-    	
-        var event = d.createEvent('HTMLEvents');
-        event.initEvent ("click", true, false);
-        d.querySelector('#li3').dispatchEvent(event);		  
-    } finally {
-        iframe.parentNode.removeChild(iframe);
-    }
-    A_05_01_02_T1.done();
+
+	    try {
+	    	var d = iframe.contentDocument;
+
+	        var ul = d.querySelector('ul.stories');
+	        var s = createSR(ul);
+
+	        //make shadow subtree
+	        var div = document.createElement('div');
+	        div.innerHTML = '<ul id="ip_wrapper"><content select=".shadow"></content></ul>';
+	        s.appendChild(div);
+
+	    	d.body.addEventListener(
+	    			'click',
+	    			A_05_01_02_T1.step_func(function (event) {
+	    					assert_equals(event.target.id, 'li3', 'Information about event target crossing ' +
+	    							'the shadow boundaries should be adjusted for document nodes distributed' +
+	    							'among insertion points');
+	    			}),
+	    			false);
+
+	        var event = d.createEvent('HTMLEvents');
+	        event.initEvent ("click", true, false);
+	        d.querySelector('#li3').dispatchEvent(event);
+	    } finally {
+	        iframe.parentNode.removeChild(iframe);
+	    }
+	    A_05_01_02_T1.done();
     });
 });

@@ -21,43 +21,43 @@ var A_05_01_01 = {
 
 var A_05_01_01_T1 = async_test('A_05_01_01_T1', PROPS(A_05_01_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 A_05_01_01_T1.step(function () {
     var iframe = document.createElement('iframe');
     iframe.src = 'resources/blank.html';
     document.body.appendChild(iframe);
-    
+
     iframe.onload = A_05_01_01_T1.step_func(function () {
-    
-    try {
-    	var d = iframe.contentDocument;
-    	var div = d.createElement('div');
-    	d.body.appendChild(div);
-    	
-    	var s = createSR(div);
-	  
-    	var div2 = d.createElement('div');
-    	s.appendChild(div2);
-    	
-    	var inp = d.createElement('input');
-    	inp.setAttribute('type', 'text');
-    	inp.setAttribute('id', 'inpid');	  
-    	div2.appendChild(inp);	  	  
-	  
-    	div2.addEventListener('click', A_05_01_01_T1.step_func(function (event) {
-            assert_equals(event.target.tagName, 'INPUT', 'Information about target of the event that ' +
-            		'doesn\'t cross the shadow boundaries should not be adjusted');      		
-        }), false);
-    	
-        var event = d.createEvent('HTMLEvents');
-        event.initEvent ("click", true, false);
-        inp.dispatchEvent(event);		  
-    } finally {
-        iframe.parentNode.removeChild(iframe);
-    }
-    A_05_01_01_T1.done();
+
+	    try {
+	    	var d = iframe.contentDocument;
+	    	var div = d.createElement('div');
+	    	d.body.appendChild(div);
+
+	    	var s = createSR(div);
+
+	    	var div2 = d.createElement('div');
+	    	s.appendChild(div2);
+
+	    	var inp = d.createElement('input');
+	    	inp.setAttribute('type', 'text');
+	    	inp.setAttribute('id', 'inpid');
+	    	div2.appendChild(inp);
+
+	    	div2.addEventListener('click', A_05_01_01_T1.step_func(function (event) {
+	            assert_equals(event.target.tagName, 'INPUT', 'Information about target of the event that ' +
+	            		'doesn\'t cross the shadow boundaries should not be adjusted');
+	        }), false);
+
+	        var event = d.createEvent('HTMLEvents');
+	        event.initEvent ("click", true, false);
+	        inp.dispatchEvent(event);
+	    } finally {
+	        iframe.parentNode.removeChild(iframe);
+	    }
+	    A_05_01_01_T1.done();
     });
 });
 
@@ -65,44 +65,49 @@ A_05_01_01_T1.step(function () {
 
 var A_05_01_01_T2 = async_test('A_05_01_01_T2', PROPS(A_05_01_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
-    reviewer:''
+    reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
 }));
 
 A_05_01_01_T2.step(function () {
     var iframe = document.createElement('iframe');
     iframe.src = 'resources/blank.html';
     document.body.appendChild(iframe);
-    
+
     iframe.onload = A_05_01_01_T2.step_func(function () {
-    
-    try {
-    	var d = iframe.contentDocument;
-    	
-    	var div = d.createElement('div');
-    	d.body.appendChild(div);
-    	
-    	var s = createSR(div);
-	  
-    	var div2 = d.createElement('div');
-    	s.appendChild(div2);
-    	
-    	var inp = d.createElement('input');
-    	inp.setAttribute('type', 'text');
-    	inp.setAttribute('id', 'inpid');	  
-    	div2.appendChild(inp);	  	  
-	  
-    	div.addEventListener('click', A_05_01_01_T2.step_func(function (event) {
-            assert_equals(event.target.tagName, 'DIV', 'Information about event target crossing ' +
-            		'the shadow boundaries should be adjusted');      		
-        }), false);
-    	
-        var event = d.createEvent('HTMLEvents');
-        event.initEvent ("click", true, false);
-        inp.dispatchEvent(event);		  
-    } finally {
-        iframe.parentNode.removeChild(iframe);
-    }
-    A_05_01_01_T2.done();
+
+	    try {
+	    	var d = iframe.contentDocument;
+
+	    	var div = d.createElement('div');
+	    	div.setAttribute('id', 'shadowHost');
+	    	d.body.appendChild(div);
+
+	    	var s = createSR(div);
+	    	var div2 = d.createElement('div');
+	    	div2.setAttribute('id', 'shadowNode');
+
+	    	s.appendChild(div2);
+
+	    	var inp = d.createElement('input');
+	    	inp.setAttribute('type', 'text');
+	    	inp.setAttribute('id', 'inpid');
+	    	div2.appendChild(inp);
+
+	    	div.addEventListener(
+	    		'click',
+	    		A_05_01_01_T2.step_func(function (event) {
+	    			assert_equals(event.target.id, 'shadowHost', 'Information about event target crossing ' +
+	            		'the shadow boundaries should be adjusted');
+	    		}),
+	    		false);
+
+	        var event = d.createEvent('HTMLEvents');
+	        event.initEvent ("click", true, false);
+	        inp.dispatchEvent(event);
+	    } finally {
+	        iframe.parentNode.removeChild(iframe);
+	    }
+	    A_05_01_01_T2.done();
     });
 });
 
