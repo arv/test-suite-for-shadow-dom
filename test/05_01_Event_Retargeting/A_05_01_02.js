@@ -45,7 +45,7 @@ A_05_01_02_T1.step(function () {
 	    			'click',
 	    			A_05_01_02_T1.step_func(function (event) {
 	    					assert_equals(event.target.id, 'li3', 'Information about event target crossing ' +
-	    							'the shadow boundaries should be adjusted for document nodes distributed' +
+	    							'the shadow boundaries should not be adjusted for document nodes distributed' +
 	    							'among insertion points');
 	    			}),
 	    			false);

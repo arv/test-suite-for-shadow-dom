@@ -25,7 +25,7 @@ test(unit(function (ctx) {
 	d.body.appendChild(host);
 	var s = createSR(host);
 	
-    assert_equals(s.nodeType, 11, 'The nodeType attribute of a ShadowRoot ' +
+    assert_equals(s.nodeType, Node.DOCUMENT_FRAGMENT_NODE, 'The nodeType attribute of a ShadowRoot ' +
     		'instance must return DOCUMENT_FRAGMENT_NODE');
 
 }), 'A_10_01_01_06_T01', PROPS(A_10_01_01_06, {
