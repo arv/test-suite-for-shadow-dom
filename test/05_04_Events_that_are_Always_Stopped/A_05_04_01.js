@@ -54,11 +54,9 @@ A_05_04_01_T01.step(unit(function (ctx) {
 }));
 
 
-//Check event fired from DOM node distributed into insertion point
-//TODO (sgrekhov) see https://bugs.webkit.org/show_bug.cgi?id=103479
-//if this test is correct then add such test for other events.
-//Otherwise change expected result according result of the bug above and add for other
-//events anyway
+// For nodes distributed among insertion points event should be dispatched 
+// in the outer tree as normal.
+// See https://bugs.webkit.org/show_bug.cgi?id=103479
 var A_05_04_01_T02 = async_test('A_05_04_01_T02', PROPS(A_05_04_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
@@ -102,13 +100,17 @@ A_05_04_01_T02.step(unit(function (ctx) {
     	assert_equals(event.target.getAttribute('id'), 'inp1', 'Inside shadow tree: Wrong target');  	
     }), false);
     
+    
+    var invoked = false;     
     d.body.addEventListener('abort', A_05_04_01_T02.step_func(function(event) {
-    	assert_true(false, 'Abort event should always be stopped at Shadow boundary');  	
+    	invoked = true;
     }), false);
     
     var event = d.createEvent('UIEvent');
     event.initUIEvent ('abort', true, false);
-    inp1.dispatchEvent(event);		  
+    inp1.dispatchEvent(event);
+    
+    assert_true(invoked, 'Abort event should not be stopped at Shadow boundary for distributed nodes');
 	
 	A_05_04_01_T02.done();
 }));
