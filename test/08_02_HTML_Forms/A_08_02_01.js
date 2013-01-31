@@ -46,6 +46,35 @@ test(function () {
 	reviewer:''
 }));
 
+//same as the above but using document.forms['..'].elements['..'] accessor
+test(function () {
+	var d = newHTMLDocument();
+
+    var form = d.createElement('form');
+    form.setAttribute('id', 'form_id');
+    form.setAttribute('name', 'theForm');
+    d.body.appendChild(form);
+
+    var div = d.createElement('div');
+    d.body.appendChild(div);
+    var s = createSR(div);
+
+
+    HTML5_FORM_ASSOCIATED_ELEMENTS.forEach(function (tagName) {
+
+        var el = d.createElement(tagName);
+        el.setAttribute('form', 'form_id');
+        el.setAttribute('id', tagName + '_id');
+        s.appendChild(el);
+
+        assert_equals(d.forms['theForm'].elements[tagName + '_id'], undefined, 
+        		'Form-associated element ' + tagName + 	' in shadow tree must not be accessible ' +
+        		'using owner\'s document tree accessors');
+    });
+}, 'A_08_02_01_T02', PROPS(A_08_02_01, {
+	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+	reviewer:''
+}));
 
 //test form elements
 test(function () {
@@ -67,7 +96,33 @@ test(function () {
         assert_equals(d.querySelector('#' + tagName + '_id'), null, 'Form element ' + tagName +
         	' in shadow tree must not be accessible using owner\'s document tree accessors');
     });
-}, 'A_08_02_01_T02', PROPS(A_08_02_01, {
+}, 'A_08_02_01_T03', PROPS(A_08_02_01, {
+	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+	reviewer:''
+}));
+
+//same as the above but using document.forms['..'].elements['..'] accessor
+test(function () {
+	var d = newHTMLDocument();
+
+    var form = d.createElement('form');
+    form.setAttribute('name', 'theForm');
+    d.body.appendChild(form);
+
+    var div = d.createElement('div');
+    form.appendChild(div);
+    s = createSR(div);
+
+    HTML5_FORM_ASSOCIATED_ELEMENTS.forEach(function (tagName) {
+
+        var el = d.createElement(tagName);
+        el.setAttribute('id', tagName + '_id');
+        s.appendChild(el);
+
+        assert_equals(d.forms['theForm'].elements[tagName + '_id'], undefined, 'Form element ' + tagName +
+        	' in shadow tree must not be accessible using owner\'s document tree accessors');
+    });
+}, 'A_08_02_01_T04', PROPS(A_08_02_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
 	reviewer:''
 }));
