@@ -35,7 +35,7 @@ test(unit(function (ctx) {
 		'<shadow id="shadowId"><span>This is a shadow fallback content</span></shadow>';
 	s.appendChild(div);
 
-	assert_equals(s.querySelector('#shadowId').olderShadowRoot, null, 'or null if no such ' +
+	assert_equals(s.querySelector('#shadowId').olderShadowRoot, null, 'olderShadowRoot shoul be null if no ' +
 			'shadow tree is accessible.');
 
 }), 'A_10_05_08_T01', PROPS(A_10_05_08, {

@@ -33,7 +33,8 @@ test(function () {
     var link = d.createElement('link');
     var retVal = s.addStyleSheet(link);
     
-    assert_true(retVal != null, 'addStyleSheet() method must return newly created style sheet object');
+    assert_true(retVal != null && retVal.constructor == window.CSSStyleSheet, 
+    		'addStyleSheet() method must return newly created style sheet object');
         
 }, 'A_10_01_02_07_01_T01', PROPS(A_10_01_02_07_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
