@@ -9,9 +9,6 @@ policies and contribution forms [3].
 */
 
 
-// The some of the tests below fails. 
-// See https://bugs.webkit.org/show_bug.cgi?id=103608
-
 var A_06_03_01 = {
     name:'A_06_03_01',
     assert:'@host @-rule: ' +
@@ -22,14 +19,16 @@ var A_06_03_01 = {
     	'the shadow host of the shadow tree in which the style is specified'
 };
 
-//TODO (sgrekhov) Check the expected result at https://www.w3.org/Bugs/Public/show_bug.cgi?id=20150
+// declare @host rule in document header. It shouldn't be applied
 test(unit(function (ctx) {
 	var d = newRenderedHTMLDocument(ctx);
-    
-    d.head.innerHTML = '' + 
+	
+	var style = d.createElement('style');
+    style.innerHTML = '' + 
 			'@host {' +
-				'div {display:none;}' +
+				'ul{display:none;}' +
 			'}';
+	d.head.appendChild(style);	
 
     d.body.innerHTML = 
     	'<ul class="cls">' +
@@ -67,7 +66,7 @@ test(unit(function (ctx) {
 }));
 
 
-//Test fails. See https://bugs.webkit.org/show_bug.cgi?id=103608
+//declare @host rule in shadow tree. It should be applied
 test(unit(function (ctx) {
 	var d = newRenderedHTMLDocument(ctx);
 	
@@ -94,7 +93,7 @@ test(unit(function (ctx) {
 	var style = d.createElement('style');
     style.innerHTML = '' + 
 			'@host {' +
-				'div{display:none;}' +
+				'ul{display:none;}' +
 			'}';
 	s.appendChild(style);
 	
@@ -114,8 +113,9 @@ test(unit(function (ctx) {
 }));
 
 
-//Test fails. See https://bugs.webkit.org/show_bug.cgi?id=103608
+//declare @host rule in nesting shadow tree
 test(unit(function (ctx) {
+	
 	var d = newRenderedHTMLDocument(ctx);
 
     var host = d.createElement('div');
@@ -129,10 +129,10 @@ test(unit(function (ctx) {
 	
 	//Younger tree
 	var s2 = createSR(host);
-	var div1 = d.createElement('div');
-	div1.innerHTML = '<div><span id="shd2">This is a young shadow tree</span></div>' + 
+	var div2 = d.createElement('div');
+	div2.innerHTML = '<div><span id="shd2">This is a young shadow tree</span></div>' + 
 		'<shadow><span id="shd3">This is the shadow tree fallback content</span></shadow>'; 
-	s2.appendChild(div1);
+	s2.appendChild(div2);
 	
 	var style = d.createElement('style');
     style.innerHTML = '' + 
@@ -143,10 +143,53 @@ test(unit(function (ctx) {
 	
 	assert_equals(s2.querySelector('#shd2').offsetTop, 0,
 		'Element should not be rendered');
-	assert_true(s1.querySelector('#shd1').offsetTop > 0,
+	assert_equals(s1.querySelector('#shd1').offsetTop, 0,
+		'Element should not be rendered');
+	assert_equals(s2.querySelector('#shd3').offsetTop, 0,
 		'Element should not be rendered');
 	
 }), 'A_06_03_01_T03', PROPS(A_06_03_01, {
+    author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+    reviewer:''
+}));
+
+
+//declare @host rule in nested tree. Should be applied
+test(unit(function (ctx) {
+
+	var d = newRenderedHTMLDocument(ctx);
+
+    var host = d.createElement('div');
+    d.body.appendChild(host);
+
+	//Older tree
+	var s1 = createSR(host);
+	var div1 = d.createElement('div');
+	div1.innerHTML = '<span id="shd1">This is an old shadow tree</span>'; 
+	s1.appendChild(div1);
+	
+	//Younger tree
+	var s2 = createSR(host);
+	var div2 = d.createElement('div');
+	div2.innerHTML = '<div><span id="shd2">This is a young shadow tree</span></div>' + 
+		'<shadow><span id="shd3">This is the shadow tree fallback content</span></shadow>'; 
+	s2.appendChild(div2);
+	
+	var style = d.createElement('style');
+    style.innerHTML = '' + 
+			'@host {' +
+				'div{display:none;}' +
+			'}';
+	s1.appendChild(style);
+	
+	assert_equals(s2.querySelector('#shd2').offsetTop, 0,
+		'Element should not be rendered');
+	assert_equals(s1.querySelector('#shd1').offsetTop, 0,
+		'Element should not be rendered');
+	assert_equals(s2.querySelector('#shd3').offsetTop, 0,
+		'Element should not be rendered');
+	
+}), 'A_06_03_01_T04', PROPS(A_06_03_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));
