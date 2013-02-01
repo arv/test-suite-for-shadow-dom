@@ -43,3 +43,27 @@ test(unit(function (ctx) {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:''
 }));
+
+// test that activeElement is null when the focused element is out of the scope
+test(unit(function (ctx) {
+	var d = newRenderedHTMLDocument(ctx);
+	
+	var host = d.createElement('div');
+	d.body.appendChild(host);
+	var s = createSR(host);
+    
+	var inp = d.createElement('input');
+	inp.setAttribute('type', 'text');
+	inp.setAttribute('id', 'inpId');
+	inp.setAttribute('value', 'Some text');
+	s.appendChild(inp);
+	
+	d.body.focus();
+	
+    assert_equals(s.activeElement, null, 'activeElement property of shadow root ' +
+    		'must return null when the focused element is out of the scope');
+	
+}), 'A_07_03_01_T02', PROPS(A_07_03_01, {
+    author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
+    reviewer:''
+}));
