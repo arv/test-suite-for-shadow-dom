@@ -46,7 +46,11 @@ A_04_03_06_01_T01.step(function () {
                 'Point 1: <a> tag should match :link pseudo-class selector');
             assert_true(d.querySelector('#link11').offsetTop > 0,
                 'Point 2: <a> tag should match :link pseudo-class selector');
-            assert_equals(span.offsetTop, 0, '<span> tag should not match :link selector')
+            assert_equals(span.offsetTop, 0, '<span> tag should not match :link selector');
+            
+            //All other elements should be invisible
+            assert_equals(d.querySelector('#nonlink').offsetTop, 0, 
+            		'Point 3: element shouldn\'t match :link pseudo-class selector');
 
         } finally {
             iframe.parentNode.removeChild(iframe);
