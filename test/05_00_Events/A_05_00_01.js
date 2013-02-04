@@ -17,7 +17,7 @@ var A_05_00_01 = {
 };
 
 
-
+// DOMAttrModified
 var A_05_00_01_T1 = async_test('A_05_00_01_T1', PROPS(A_05_00_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
     reviewer:'Aleksei Yu. Semenov <a.semenov@unipro.ru>'
@@ -48,7 +48,7 @@ A_05_00_01_T1.step(function () {
     	div2.addEventListener(
     			'DOMAttrModified',
     			A_05_00_01_T1.step_func(function (event) {
-    					assert_true(false, 'The mutation event types must never be dispatched in a shadow DOM subtree');
+    					assert_true(false, 'The mutation event DOMAttrModified must never be dispatched in a shadow DOM subtree');
     			}),
     			false);
     	/*
@@ -67,11 +67,169 @@ A_05_00_01_T1.step(function () {
     			iframe.parentNode.removeChild(iframe);
     			A_05_00_01_T1.done();
     		}),
-    		1000); // wait one second for invalid DOMAttrModified event to happen
+    		1000); // wait one second for invalid  event to happen
     });
 });
 
+// DOMNodeInserted event
+var A_05_00_01_T2 = async_test('A_05_00_01_T2', PROPS(A_05_00_01, {
+    author:'Aleksei Yu. Semenov <a.semenov@unipro.ru>',
+    reviewer:''
+}));
+
+A_05_00_01_T2.step(function () {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'resources/blank.html';
+    document.body.appendChild(iframe);
+
+    iframe.onload = A_05_00_01_T2.step_func(function () {
+
+    	var d = iframe.contentDocument;
+
+    	var div = d.createElement('div');
+    	d.body.appendChild(div);
+
+    	var s = createSR(div);
+
+    	var div2 = d.createElement('div');
+    	s.appendChild(div2);
+
+    	var inp = d.createElement('input');
+    	inp.setAttribute('type', 'text');
+    	inp.setAttribute('id', 'inpid');
+
+    	inp.addEventListener(
+    			'DOMNodeInserted',
+    			A_05_00_01_T2.step_func(function (event) {
+    					assert_true(false, 'The mutation event DOMNodeInserted must never be dispatched in a shadow DOM subtree');
+    			}),
+    			false);
+
+    	div2.addEventListener(
+    			'DOMNodeInserted',
+    			A_05_00_01_T2.step_func(function (event) {
+    					assert_true(false, 'The mutation event DOMNodeInserted must never be dispatched in a shadow DOM subtree');
+    			}),
+    			false);
 
 
+    	div2.appendChild(inp);
+
+    	setTimeout(
+    		A_05_00_01_T2.step_func(function (){
+    			iframe.parentNode.removeChild(iframe);
+    			A_05_00_01_T2.done();
+    		}),
+    		1000); // wait one second for invalid event to happen
+    });
+});
+
+//DOMNodeRemoved event
+var A_05_00_01_T3 = async_test('A_05_00_01_T3', PROPS(A_05_00_01, {
+    author:'Aleksei Yu. Semenov <a.semenov@unipro.ru>',
+    reviewer:''
+}));
+
+A_05_00_01_T3.step(function () {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'resources/blank.html';
+    document.body.appendChild(iframe);
+
+    iframe.onload = A_05_00_01_T3.step_func(function () {
+
+    	var d = iframe.contentDocument;
+
+    	var div = d.createElement('div');
+    	d.body.appendChild(div);
+
+    	var s = createSR(div);
+
+    	var div2 = d.createElement('div');
+    	s.appendChild(div2);
+
+    	var inp = d.createElement('input');
+    	inp.setAttribute('type', 'text');
+    	inp.setAttribute('id', 'inpid');
+    	div2.appendChild(inp);
+
+
+    	inp.addEventListener(
+    			'DOMNodeRemoved',
+    			A_05_00_01_T3.step_func(function (event) {
+    					assert_true(false, 'The mutation event DOMNodeRemoved must never be dispatched in a shadow DOM subtree');
+    			}),
+    			false);
+
+
+    	div2.addEventListener(
+    			'DOMNodeRemoved',
+    			A_05_00_01_T3.step_func(function (event) {
+    					assert_true(false, 'The mutation event DOMNodeRemoved must never be dispatched in a shadow DOM subtree');
+    			}),
+    			false);
+
+    	div2.removeChild(inp);
+
+
+    	setTimeout(
+    		A_05_00_01_T3.step_func(function (){
+    			iframe.parentNode.removeChild(iframe);
+    			A_05_00_01_T3.done();
+    		}),
+    		1000); // wait one second for invalid event to happen
+    });
+});
+
+//DOMCharacterDataModified event
+var A_05_00_01_T4 = async_test('A_05_00_01_T4', PROPS(A_05_00_01, {
+    author:'Aleksei Yu. Semenov <a.semenov@unipro.ru>',
+    reviewer:''
+}));
+
+A_05_00_01_T4.step(function () {
+    var iframe = document.createElement('iframe');
+    iframe.src = 'resources/blank.html';
+    document.body.appendChild(iframe);
+
+    iframe.onload = A_05_00_01_T4.step_func(function () {
+
+    	var d = iframe.contentDocument;
+
+    	var div = d.createElement('div');
+    	d.body.appendChild(div);
+
+    	var s = createSR(div);
+
+    	var div2 = d.createElement('div');
+    	s.appendChild(div2);
+
+    	var text = d.createTextNode('text');
+    	div2.appendChild(text);
+
+    	text.addEventListener(
+    			'DOMCharacterDataModified',
+    			A_05_00_01_T4.step_func(function (event) {
+    					assert_true(false, 'The mutation event DOMCharacterDataModified must never be dispatched in a shadow DOM subtree');
+    			}),
+    			false);
+
+    	div2.addEventListener(
+    			'DOMCharacterDataModified',
+    			A_05_00_01_T4.step_func(function (event) {
+    					assert_true(false, 'The mutation event DOMCharacterDataModified must never be dispatched in a shadow DOM subtree');
+    			}),
+    			false);
+
+    	text.appendData('text');
+
+
+    	setTimeout(
+    		A_05_00_01_T4.step_func(function (){
+    			iframe.parentNode.removeChild(iframe);
+    			A_05_00_01_T4.done();
+    		}),
+    		1000); // wait one second for invalid event to happen
+    });
+});
 
 
