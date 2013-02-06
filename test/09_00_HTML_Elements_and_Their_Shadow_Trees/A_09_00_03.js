@@ -36,8 +36,8 @@ test(unit(function (ctx) {
     var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'fieldset should allow at least one insertion point');
-    assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
+    assert_true(isVisible(d.querySelector('#shadow')), 'fieldset should allow at least one insertion point');
+    assert_false(isVisible(d.querySelector('#flbk')), 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_03_T01', PROPS(A_09_00_03, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -64,9 +64,9 @@ test(unit(function (ctx) {
     var s = createSR(el);
     s.innerHTML = '<content select="legend:first-of-type"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'fieldset should allow insertion point ' +
+    assert_true(isVisible(d.querySelector('#shadow')), 'fieldset should allow insertion point ' +
     		'with legend:first-of-type matching criteria');
-    assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
+    assert_false(isVisible(d.querySelector('#flbk')), 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_03_T02', PROPS(A_09_00_03, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',

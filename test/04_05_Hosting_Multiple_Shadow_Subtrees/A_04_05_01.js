@@ -51,18 +51,18 @@ A_04_05_01_T1.step(function () {
             
             //The order of DOM elements should be the following:
             //li4 visible. Other elements invisible
-            assert_true(d.querySelector('#li4').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li4')),
                 'Only the younger tree should take part in the distribution');
 
-            assert_equals(d.querySelector('#li1').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li1')),
                 'Point 1: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li2').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li2')),
                 'Point 2: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li3').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li3')),
                 'Point 3: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li5').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li5')),
                 'Point 4: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li6').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li6')),
             	'Point 5: Elements that don\'t match insertion point criteria participate in distribution');
                 
         } finally {
@@ -108,18 +108,18 @@ A_04_05_01_T2.step(function () {
             
             //The order of DOM elements should be the following:
             //li4, li3, li6 visible. Other elements invisible
-            assert_true(d.querySelector('#li4').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li4')),
                 'Younger tree should take part in the distribution');
             assert_true(d.querySelector('#li3').offsetTop > d.querySelector('#li4').offsetTop,
             	'Point 1: Older tree should take part in the distribution');
             assert_true(d.querySelector('#li6').offsetTop > d.querySelector('#li3').offsetTop,
             	'Point 2: Older tree should take part in the distribution');
 
-            assert_equals(d.querySelector('#li1').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li1')),
                 'Point 3: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li2').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li2')),
                 'Point 4: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li5').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li5')),
                 'Point 5: Elements that don\'t match insertion point criteria participate in distribution');
         } finally {
         	iframe.parentNode.removeChild(iframe);

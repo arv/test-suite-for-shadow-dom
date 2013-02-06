@@ -34,9 +34,9 @@ test(unit(function (ctx) {
 	div.innerHTML ='<span id="spn2">This is a shadow root child</span>'; 
 	s.appendChild(div);
 	
-	assert_equals(d.querySelector('#spn1').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#spn1')),
 		'Element should not be rendered');
-	assert_true(s.querySelector('#spn2').offsetTop > 0,
+	assert_true(isVisible(s.querySelector('#spn2')),
 		'Element should be rendered');
 	
 	var oldHeight = s.querySelector('#spn2').offsetHeight;

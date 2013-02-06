@@ -42,14 +42,14 @@ A_04_03_06_01_T01.step(function () {
             s.appendChild(subdiv1);
 
             //All links elements should be visible
-            assert_true(d.querySelector('#link10').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#link10')),
                 'Point 1: <a> tag should match :link pseudo-class selector');
-            assert_true(d.querySelector('#link11').offsetTop > 0,
-                'Point 2: <a> tag should match :link pseudo-class selector');
-            assert_equals(span.offsetTop, 0, '<span> tag should not match :link selector');
+            assert_true(isVisible(d.querySelector('#link11')),
+                'Point 2: <a> tag should match :link pseudo-class selector');            
             
             //All other elements should be invisible
-            assert_equals(d.querySelector('#nonlink').offsetTop, 0, 
+            assert_false(isVisible(span), '<span> tag should not match :link selector');
+            assert_false(isVisible(d.querySelector('#nonlink')), 
             		'Point 3: element shouldn\'t match :link pseudo-class selector');
 
         } finally {

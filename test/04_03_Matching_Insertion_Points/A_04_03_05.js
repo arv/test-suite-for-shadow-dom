@@ -39,18 +39,18 @@ A_04_03_05_T01.step(function () {
 
             //The order of DOM elements should be the following:
             //li2. Other elements invisible
-            assert_true(d.querySelector('#li2').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li2')),
                 'Attribute should be a valid insertion point matching criteria, element should be visible');
 
-            assert_equals(d.querySelector('#li1').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li1')),
                 'Point 1: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li3').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li3')),
                 'Point 2: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li4').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li4')),
                 'Point 3: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li5').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li5')),
                 'Point 4: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li6').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li6')),
                 'Point 5: Elements that don\'t match insertion point criteria participate in distribution');
         } finally {
             iframe.parentNode.removeChild(iframe);

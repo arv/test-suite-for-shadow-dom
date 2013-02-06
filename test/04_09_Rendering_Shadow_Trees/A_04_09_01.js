@@ -55,13 +55,13 @@ test(unit(function (ctx) {
     s.appendChild(shadowLI1);
 
 	//check the tree. a11 and a13 should be visible
-	assert_true(d.querySelector('#a11').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a11')),
 	    'Point 1: Node that matches insertion point criteria should be rendered');
-	assert_true(d.querySelector('#a13').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a13')),
 		'Point 2: Node that matches insertion point criteria should be rendered');
-	assert_equals(d.querySelector('#a12').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a12')),
 		'Point 3: Node that doesn\'t match insertion point criteria shouldn\'t be rendered');
-	assert_equals(d.querySelector('#a14').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a14')),
 		'Point 4: Node that doesn\'t match insertion point criteria shouldn\'t be rendered');
     
     
@@ -70,13 +70,13 @@ test(unit(function (ctx) {
     s.appendChild(shadowLI2);
     
 	//At this point a11, a13 and a14 should be visible
-	assert_true(d.querySelector('#a11').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a11')),
 	    'Point 11: Node that matches insertion point criteria should be rendered');
-	assert_true(d.querySelector('#a13').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a13')),
 		'Point 12: Node that matches insertion point criteria should be rendered');
 	assert_true(d.querySelector('#a14').offsetTop > d.querySelector('#a13').offsetTop,
 		'Point 13: Node that matches insertion point criteria should be rendered');
-	assert_equals(d.querySelector('#a12').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a12')),
 		'Point 14: Node that doesn\'t match insertion point criteria shouldn\'t be rendered');
 	
     
@@ -90,25 +90,25 @@ test(unit(function (ctx) {
     s2.appendChild(div2);
     
     // At this point visible: li1 and li3
-    assert_true(d.querySelector('#li1').offsetTop > 0, 'Point 21: Node that match insertion ' +
+    assert_true(isVisible(d.querySelector('#li1')), 'Point 21: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 22: Node that match insertion ' +
+	assert_true(isVisible(d.querySelector('#li3')), 'Point 22: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 23: Node that does not match ' +
+	assert_false(isVisible(d.querySelector('#li2')), 'Point 23: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li4').offsetTop, 0, 'Point 24: Node that does not match ' +
+	assert_false(isVisible(d.querySelector('#li4')), 'Point 24: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li5').offsetTop, 0, 'Point 25: Node that does not match ' +
+	assert_false(isVisible(d.querySelector('#li5')), 'Point 25: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes
-	assert_true(d.querySelector('#a11').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a11')),
 	    'Point 26: Node that matches insertion point criteria should be rendered');
-	assert_true(d.querySelector('#a13').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a13')),
 		'Point 27: Node that matches insertion point criteria should be rendered');
 	assert_true(d.querySelector('#a14').offsetTop > d.querySelector('#a13').offsetTop,
 		'Point 28: Node that matches insertion point criteria should be rendered');
-	assert_equals(d.querySelector('#a12').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a12')),
 		'Point 29: Node that doesn\'t match insertion point criteria shouldn\'t be rendered');
     
     
@@ -120,50 +120,50 @@ test(unit(function (ctx) {
     s3.appendChild(div3);
 
     //At this point: li4 and li5 visible, others not    
-    assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 31: Node that match insertion ' +
+    assert_true(isVisible(d.querySelector('#li4')), 'Point 31: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 32: Node that match insertion ' +
+	assert_true(isVisible(d.querySelector('#li5')), 'Point 32: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li1').offsetTop, 0, 'Point 33: Node that does not match ' +
+	assert_false(isVisible(d.querySelector('#li1')), 'Point 33: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 34: Node that does not match ' +
+	assert_false(isVisible(d.querySelector('#li2')), 'Point 34: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li3').offsetTop, 0, 'Point 35: Node that does not match ' +
+	assert_false(isVisible(d.querySelector('#li3')), 'Point 35: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes (all invisible)
-	assert_equals(d.querySelector('#a11').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a11')),
 	    'Point 36: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_equals(d.querySelector('#a12').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a12')),
 		'Point 37: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_equals(d.querySelector('#a13').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a13')),
 		'Point 38: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_equals(d.querySelector('#a14').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a14')),
 		'Point 39: Aleady distributed nodes should behave like a shadow host child nodes');
 	
 	var shadow = d.createElement('shadow');
 	s3.appendChild(shadow);
 
     //At this point: li1, li3, li4 and li5 visible li2 not    
-    assert_true(d.querySelector('#li1').offsetTop > 0, 'Point 41: Node that match insertion ' +
+    assert_true(isVisible(d.querySelector('#li1')), 'Point 41: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 42: Node that match insertion ' +
+	assert_true(isVisible(d.querySelector('#li3')), 'Point 42: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 43: Node that does not match ' +
+	assert_false(isVisible(d.querySelector('#li2')), 'Point 43: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 44: Node that does not match ' +
+	assert_true(isVisible(d.querySelector('#li4')), 'Point 44: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 45: Node that does not match ' +
+	assert_true(isVisible(d.querySelector('#li5')), 'Point 45: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes (a11, a13, a14 visible, a12 not)
-	assert_true(d.querySelector('#a11').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a11')),
 	    'Point 46: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_equals(d.querySelector('#a12').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a12')),
 		'Point 47: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_true(d.querySelector('#a13').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a13')),
 		'Point 48: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_true(d.querySelector('#a14').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a14')),
 		'Point 49: Aleady distributed nodes should behave like a shadow host child nodes');
 	
 	var shadow2 = d.createElement('shadow');
@@ -171,25 +171,25 @@ test(unit(function (ctx) {
 	
 	// Nothing should be changed
     //At this point: li1, li3, li4 and li5 visible li2 not    
-    assert_true(d.querySelector('#li1').offsetTop > 0, 'Point 51: Node that match insertion ' +
+    assert_true(isVisible(d.querySelector('#li1')), 'Point 51: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 52: Node that match insertion ' +
+	assert_true(isVisible(d.querySelector('#li3')), 'Point 52: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 53: Node that does not match ' +
+	assert_false(isVisible(d.querySelector('#li2')), 'Point 53: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 54: Node that does not match ' +
+	assert_true(isVisible(d.querySelector('#li4')), 'Point 54: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 55: Node that does not match ' +
+	assert_true(isVisible(d.querySelector('#li5')), 'Point 55: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes (a11 and a13 visible, a12 not)
-	assert_true(d.querySelector('#a11').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a11')),
 	    'Point 56: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_equals(d.querySelector('#a12').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a12')),
 		'Point 57: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_true(d.querySelector('#a13').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a13')),
 		'Point 58: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_true(d.querySelector('#a14').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a14')),
 		'Point 59: Aleady distributed nodes should behave like a shadow host child nodes');
 	
 	//replace the nested tree by younger one
@@ -199,25 +199,25 @@ test(unit(function (ctx) {
     s4.appendChild(shadowLI4);
 
     //At this point: li1, li3, li4 and li5 visible li2 not    
-    assert_true(d.querySelector('#li1').offsetTop > 0, 'Point 61: Node that match insertion ' +
+    assert_true(isVisible(d.querySelector('#li1')), 'Point 61: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 62: Node that match insertion ' +
+	assert_true(isVisible(d.querySelector('#li3')), 'Point 62: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 63: Node that does not match ' +
+	assert_false(isVisible(d.querySelector('#li2')), 'Point 63: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 64: Node that does not match ' +
+	assert_true(isVisible(d.querySelector('#li4')), 'Point 64: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 65: Node that does not match ' +
+	assert_true(isVisible(d.querySelector('#li5')), 'Point 65: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes (a12 visible, others not)
-	assert_equals(d.querySelector('#a11').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a11')),
 	    'Point 66: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_true(d.querySelector('#a12').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a12')),
 		'Point 67: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_equals(d.querySelector('#a13').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a13')),
 		'Point 68: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_equals(d.querySelector('#a14').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a14')),
 		'Point 69: Aleady distributed nodes should behave like a shadow host child nodes');
 	
 	
@@ -227,25 +227,25 @@ test(unit(function (ctx) {
 	s3.appendChild(shadow3);
 	
     //At this point: li1, li3, li4 and li5 visible li2 not    
-    assert_true(d.querySelector('#li1').offsetTop > 0, 'Point 61: Node that match insertion ' +
+    assert_true(isVisible(d.querySelector('#li1')), 'Point 61: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 62: Node that match insertion ' +
+	assert_true(isVisible(d.querySelector('#li3')), 'Point 62: Node that match insertion ' +
 		'point criteria should be rendered');
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 63: Node that does not match ' +
+	assert_false(isVisible(d.querySelector('#li2')), 'Point 63: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 64: Node that does not match ' +
+	assert_true(isVisible(d.querySelector('#li4')), 'Point 64: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 65: Node that does not match ' +
+	assert_true(isVisible(d.querySelector('#li5')), 'Point 65: Node that does not match ' +
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes (a12 visible, others not)
-	assert_equals(d.querySelector('#a11').offsetTop, 0,
+	assert_equals(isVisible(d.querySelector('#a11')),
 	    'Point 66: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_true(d.querySelector('#a12').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#a12')),
 		'Point 67: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_equals(d.querySelector('#a13').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a13')),
 		'Point 68: Aleady distributed nodes should behave like a shadow host child nodes');
-	assert_equals(d.querySelector('#a14').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#a14')),
 		'Point 69: Aleady distributed nodes should behave like a shadow host child nodes');	
 }), 'A_04_09_01_T01', PROPS(A_04_09_01, {
     author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',

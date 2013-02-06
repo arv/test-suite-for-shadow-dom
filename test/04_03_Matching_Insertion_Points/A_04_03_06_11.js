@@ -40,17 +40,17 @@ A_04_03_06_11_T01.step(function () {
             s.appendChild(subdiv1);
 
             //li6 should be invisible, all others visible
-            assert_true(d.querySelector('#li1').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li1')),
                 'Point 1: element should match :nth-last-of-type(2) pseudo-class selector');
-            assert_true(d.querySelector('#li2').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li2')),
             	'Point 2: element should match :nth-last-of-type(2) pseudo-class selector');
-            assert_true(d.querySelector('#li3').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li3')),
             	'Point 3: element should match :nth-last-of-type(2) pseudo-class selector');
-            assert_true(d.querySelector('#li4').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li4')),
             	'Point 4: element should match :nth-last-of-type(2) pseudo-class selector');
-            assert_true(d.querySelector('#li5').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li5')),
             	'Point 5: element should match :nth-last-of-type(2) pseudo-class selector');
-            assert_equals(d.querySelector('#li6').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li6')),
         		'Element shouldn\'t match :nth-last-of-type(2) pseudo-class selector');
 
         } finally {

@@ -43,7 +43,7 @@ test(unit(function (ctx) {
 	s.appendChild(div1);
 	
 	//apply-author-styles flag is set to true. Invisible style should be applied
-	assert_equals(s.querySelector('#shd').offsetTop, 0,
+	assert_false(isVisible(s.querySelector('#shd')),
     	'CSS styles declared in enclosing tree must  be applied in a shadow tree ' +
     	'if the apply-author-styles flag is set to true');
 
@@ -87,13 +87,13 @@ test(unit(function (ctx) {
 	
 	//apply-author-styles flag is set to true. Invisible style should be applied
 	//shd1 and shd2 should be invisible. sh3 invisible too because the tree should be active
-	assert_equals(s1.querySelector('#shd1').offsetTop,  0,
+	assert_false(isVisible(s1.querySelector('#shd1')),
     	'Point 1: CSS styles declared in enclosing tree must  be applied in a shadow tree ' +
     	'if the apply-author-styles flag is set to true');
-	assert_equals(s2.querySelector('#shd2').offsetTop, 0,
+	assert_false(isVisible(s2.querySelector('#shd2')),
 	    'Point 2: CSS styles declared in enclosing tree must be applied in a shadow tree ' +
 	    'if the apply-author-styles flag is set to true');
-	assert_equals(s2.querySelector('#shd3').offsetTop, 0,
+	assert_false(isVisible(s2.querySelector('#shd3')),
 	    'Fallback content shouldn\'t be rendered for active tree');
 
 
@@ -137,13 +137,13 @@ test(unit(function (ctx) {
 	
 	//apply-author-styles flag is set to true. Invisible style should be applied
 	//shd1 and shd2 should be invisible. sh3 invisible too because the tree should be active
-	assert_equals(s1.querySelector('#shd1').offsetTop,  0,
+	assert_false(isVisible(s1.querySelector('#shd1')),
     	'Point 1: CSS styles declared in enclosing tree must  be applied in a shadow tree ' +
     	'if the apply-author-styles flag is set to true');
-	assert_true(s2.querySelector('#shd2').offsetTop > 0,
+	assert_true(isVisible(s2.querySelector('#shd2')),
 	    'Point 2: CSS styles declared in enclosing tree must be applied in a shadow tree ' +
 	    'if the apply-author-styles flag is set to true');
-	assert_equals(s2.querySelector('#shd3').offsetTop, 0,
+	assert_false(isVisible(s2.querySelector('#shd3')),
 	    'Fallback content shouldn\'t be rendered for active tree');
 
 

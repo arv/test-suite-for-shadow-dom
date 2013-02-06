@@ -40,7 +40,7 @@ test(unit(function (ctx) {
 		'<ul><content select=".clazz"><span id="spandex">This is fallback content</span></content></ul>'; 
 	s.appendChild(div);
 	
-	assert_true(s.querySelector('#spandex').offsetTop > 0, 'Fallback content should be rendered');
+	assert_true(isVisible(s.querySelector('#spandex')), 'Fallback content should be rendered');
     
 }), 'A_10_04_01_T01', PROPS(A_10_04_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -72,7 +72,7 @@ test(unit(function (ctx) {
 		'<ul><content select=".shadow"><span id="spandex">This is fallback content</span></content></ul>'; 
 	s.appendChild(div);
 	
-	assert_equals(s.querySelector('#spandex').offsetTop, 0, 'Fallback content should not be rendered');
+	assert_false(isVisible(s.querySelector('#spandex')), 'Fallback content should not be rendered');
     
 }), 'A_10_04_01_T02', PROPS(A_10_04_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',

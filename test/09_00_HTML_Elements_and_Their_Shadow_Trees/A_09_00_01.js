@@ -34,8 +34,8 @@ test(unit(function (ctx) {
     var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'Iframe should allow at least one insertion point');
-    assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
+    assert_true(isVisible(d.querySelector('#shadow')), 'Iframe should allow at least one insertion point');
+    assert_false(isVisible(d.querySelector('#flbk')), 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_01_T01', PROPS(A_09_00_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -59,8 +59,8 @@ test(unit(function (ctx) {
     var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'object should allow at least one insertion point');
-    assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
+    assert_true(isVisible(d.querySelector('#shadow')), 'object should allow at least one insertion point');
+    assert_false(isVisible(d.querySelector('#flbk')), 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_01_T02', PROPS(A_09_00_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -84,8 +84,8 @@ test(unit(function (ctx) {
     var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'video should allow at least one insertion point');
-    assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
+    assert_true(isVisible(d.querySelector('#shadow')), 'video should allow at least one insertion point');
+    assert_false(isVisible(d.querySelector('#flbk')), 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_01_T03', PROPS(A_09_00_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -109,8 +109,8 @@ test(unit(function (ctx) {
     var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'audio should allow at least one insertion point');
-    assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
+    assert_true(isVisible(d.querySelector('#shadow')), 'audio should allow at least one insertion point');
+    assert_false(isVisible(d.querySelector('#flbk')), 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_01_T04', PROPS(A_09_00_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -134,8 +134,8 @@ test(unit(function (ctx) {
     var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'canvas should allow at least one insertion point');
-    assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
+    assert_true(isVisible(d.querySelector('#shadow')), 'canvas should allow at least one insertion point');
+    assert_false(isVisible(d.querySelector('#flbk')), 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_01_T05', PROPS(A_09_00_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -168,8 +168,8 @@ test(unit(function (ctx) {
     var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'map should allow at least one insertion point');
-    assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
+    assert_true(isVisible(d.querySelector('#shadow')), 'map should allow at least one insertion point');
+    assert_false(isVisible(d.querySelector('#flbk')), 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_01_T06', PROPS(A_09_00_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -193,8 +193,8 @@ test(unit(function (ctx) {
     var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'textarea should allow at least one insertion point');
-    assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
+    assert_true(isVisible(d.querySelector('#shadow')), 'textarea should allow at least one insertion point');
+    assert_false(isVisible(d.querySelector('#flbk')), 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_01_T07', PROPS(A_09_00_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -218,8 +218,8 @@ test(unit(function (ctx) {
     var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'progress should allow at least one insertion point');
-    assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
+    assert_true(isVisible(d.querySelector('#shadow')), 'progress should allow at least one insertion point');
+    assert_false(isVisible(d.querySelector('#flbk')), 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_01_T08', PROPS(A_09_00_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -243,8 +243,8 @@ test(unit(function (ctx) {
     var s = createSR(el);
     s.innerHTML = '<content select="#shadow"></content>';
 
-    assert_true(d.querySelector('#shadow').offsetTop > 0, 'meter should allow at least one insertion point');
-    assert_equals(d.querySelector('#flbk').offsetTop, 0, 'Fallback content shouldn\'t be rendered');
+    assert_true(isVisible(d.querySelector('#shadow')), 'meter should allow at least one insertion point');
+    assert_false(isVisible(d.querySelector('#flbk')), 'Fallback content shouldn\'t be rendered');
         
 }), 'A_09_00_01_T09', PROPS(A_09_00_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',

@@ -58,24 +58,24 @@ A_04_05_03_T1.step(function () {
 
             //The order of DOM elements should be the following:
             //li4, li3, li6 visible. Other elements invisible
-            assert_true(d.querySelector('#li4').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li4')),
                 'Only the younger tree should take part in the distribution');
             assert_true(d.querySelector('#li3').offsetTop > d.querySelector('#li4').offsetTop,
         		'Point 1: Older tree should take part in the distribution');
             assert_true(d.querySelector('#li6').offsetTop > d.querySelector('#li3').offsetTop,
         		'Point 2: Older tree should take part in the distribution');
 
-            assert_equals(d.querySelector('#li1').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li1')),
                 'The oldest tree shouldn\'t take part in the distribution');
-            assert_equals(d.querySelector('#li2').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li2')),
                 'Point 3: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li5').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li5')),
                 'Point 4: Elements that don\'t match insertion point criteria participate in distribution');
 
             //spn_first should be invisible, spn_second visible
-            assert_equals(s3.querySelector('#spn_first').offsetTop, 0,
+            assert_false(isVisible(s3.querySelector('#spn_first')),
             	'Shadow insertion point should be active');
-            assert_true(s3.querySelector('#spn_second').offsetTop > 0,
+            assert_true(isVisible(s3.querySelector('#spn_second')),
             	'Shadow insertion point should be inactive');
 
         } finally {

@@ -35,9 +35,9 @@ test(unit(function (ctx) {
 		'<shadow><span id="shadowId">This is a shadow fallback content</span></shadow>';
 	s2.appendChild(div);
 	
-	assert_equals(s2.querySelector('#shadowId').offsetTop, 0, 'Fallback content should not be rendered');
-	assert_true(s1.querySelector('#sp1').offsetTop > 0, 'Old tree should be rendered');
-	assert_true(s2.querySelector('#spandex').offsetTop > 0, 'Element should be rendered');
+	assert_false(isVisible(s2.querySelector('#shadowId')), 'Fallback content should not be rendered');
+	assert_true(isVisible(s1.querySelector('#sp1')), 'Old tree should be rendered');
+	assert_true(isVisible(s2.querySelector('#spandex')), 'Element should be rendered');
     
 }), 'A_10_05_02_T01', PROPS(A_10_05_02, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',

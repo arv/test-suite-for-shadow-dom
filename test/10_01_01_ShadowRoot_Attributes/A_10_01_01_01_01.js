@@ -34,7 +34,8 @@ test(unit(function (ctx) {
 	//Shadow root to play with
 	var s = createSR(host);
 
-	assert_false(s.applyAuthorStyles, 'Default value for ShadowRoot Object attribute applyAuthorStyles is expected to be false');
+	assert_false(s.applyAuthorStyles, 
+			'Default value for ShadowRoot Object attribute applyAuthorStyles is expected to be false');
 
 
 	var div1 = d.createElement('div');
@@ -42,7 +43,7 @@ test(unit(function (ctx) {
 	s.appendChild(div1);
 
 	//apply-author-styles flag is false by default. Invisible style shouldn't be applied
-	assert_true(s.querySelector('#shd').offsetTop > 0,
+	assert_true(isVisible(s.querySelector('#shd')),
     	'CSS styles declared in enclosing tree must not be applied in a shadow tree ' +
     	'if the apply-author-styles flag is set to false');
 
@@ -75,7 +76,7 @@ test(unit(function (ctx) {
 	s.appendChild(div1);
 
 	//apply-author-styles flag is set to false. Invisible style shouldn't be applied
-	assert_true(s.querySelector('#shd').offsetTop > 0,
+	assert_true(isVisible(s.querySelector('#shd')),
     	'CSS styles declared in enclosing tree must not be applied in a shadow tree ' +
     	'if the apply-author-styles flag is set to false');
 

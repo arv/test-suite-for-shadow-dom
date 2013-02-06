@@ -42,9 +42,9 @@ A_04_03_06_07_T01.step(function () {
             s.appendChild(subdiv1);
 
             //chb1 should be visible, chb2 not
-            assert_true(d.querySelector('#chb1').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#chb1')),
                 'Element should match :indeterminate pseudo-class selector');
-            assert_equals(d.querySelector('#chb2').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#chb2')),
                 'Element shouldn\'t match :indeterminate pseudo-class selector');
 
         } finally {

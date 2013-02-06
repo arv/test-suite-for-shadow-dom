@@ -41,9 +41,9 @@ A_04_03_06_03_T01.step(function () {
             setTimeout(A_04_03_06_03_T01.step_func(function(){
             	try {
 	            	//link10 should be visible, link11 not
-		            assert_true(d.querySelector('#link10').offsetTop > 0,
+		            assert_true(isVisible(d.querySelector('#link10')),
 		                'Element should match :target pseudo-class selector');
-		            assert_equals(d.querySelector('#link11').offsetTop, 0,
+		            assert_false(isVisible(d.querySelector('#link11')),
 		                'Element shouldn\'t match :target pseudo-class selector');
             	} finally {
             		iframe.parentNode.removeChild(iframe);

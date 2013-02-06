@@ -41,15 +41,15 @@ test(unit(function (ctx) {
 		'<ul><content select=".shadow"><span id="spandex">This is fallback content</span></content></ul>'; 
 	s.appendChild(div);
 	
-	assert_equals(s.querySelector('#spandex').offsetTop, 0, 'Fallback content should not be rendered');
+	assert_false(isVisible(s.querySelector('#spandex')), 'Fallback content should not be rendered');
 	
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 1: Element should not be rendered');
-	assert_equals(d.querySelector('#li4').offsetTop, 0, 'Point 2: Element should not be rendered');
-	assert_equals(d.querySelector('#li6').offsetTop, 0, 'Point 3: Element should not be rendered');
+	assert_false(isVisible(d.querySelector('#li2')), 'Point 1: Element should not be rendered');
+	assert_false(isVisible(d.querySelector('#li4')), 'Point 2: Element should not be rendered');
+	assert_false(isVisible(d.querySelector('#li6')), 'Point 3: Element should not be rendered');
     
-	assert_true(d.querySelector('#li1').offsetTop > 0, 'Point 11: Element should be rendered');
-	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 12: Element should be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 13: Element should be rendered');
+	assert_true(isVisible(d.querySelector('#li1')), 'Point 11: Element should be rendered');
+	assert_true(isVisible(d.querySelector('#li3')), 'Point 12: Element should be rendered');
+	assert_true(isVisible(d.querySelector('#li5')), 'Point 13: Element should be rendered');
 	
 }), 'A_10_04_02_T01', PROPS(A_10_04_02, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
@@ -81,15 +81,15 @@ test(unit(function (ctx) {
 		'<ul><content select=".shadow, #li4"><span id="spandex">This is fallback content</span></content></ul>'; 
 	s.appendChild(div);
 	
-	assert_equals(s.querySelector('#spandex').offsetTop, 0, 'Fallback content should not be rendered');
+	assert_false(isVisible(s.querySelector('#spandex')), 'Fallback content should not be rendered');
 	
-	assert_equals(d.querySelector('#li2').offsetTop, 0, 'Point 1: Element should not be rendered');	
-	assert_equals(d.querySelector('#li6').offsetTop, 0, 'Point 2: Element should not be rendered');
+	assert_false(isVisible(d.querySelector('#li2')), 'Point 1: Element should not be rendered');	
+	assert_false(isVisible(d.querySelector('#li6')), 'Point 2: Element should not be rendered');
     
-	assert_true(d.querySelector('#li1').offsetTop > 0, 'Point 11: Element should be rendered');
-	assert_true(d.querySelector('#li3').offsetTop > 0, 'Point 12: Element should be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0, 'Point 13: Element should be rendered');
-	assert_true(d.querySelector('#li4').offsetTop > 0, 'Point 14: Element should be rendered');
+	assert_true(isVisible(d.querySelector('#li1')), 'Point 11: Element should be rendered');
+	assert_true(isVisible(d.querySelector('#li3')), 'Point 12: Element should be rendered');
+	assert_true(isVisible(d.querySelector('#li5')), 'Point 13: Element should be rendered');
+	assert_true(isVisible(d.querySelector('#li4')), 'Point 14: Element should be rendered');
 	
 }), 'A_10_04_02_T01', PROPS(A_10_04_02, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',

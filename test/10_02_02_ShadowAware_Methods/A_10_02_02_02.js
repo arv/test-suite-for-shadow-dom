@@ -31,7 +31,7 @@ test(unit(function (ctx) {
     var s = host.createShadowRoot();
     
     // span should become invisible as shadow root content
-    assert_equals(span.offsetTop, 0, 'createShadowRoot() method should establish ' +
+    assert_false(isVisible(span), 'createShadowRoot() method should establish ' +
     		'the context object as the shadow host of the ShadowRoot object');
     
 }), 'A_10_02_02_02_T01', PROPS(A_10_02_02_02, {

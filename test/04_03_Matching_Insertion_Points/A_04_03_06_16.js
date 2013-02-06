@@ -40,17 +40,17 @@ A_04_03_06_16_T01.step(function () {
             s.appendChild(subdiv1);
 
             //All li1-li6 elements should be invisible
-            assert_equals(d.querySelector('#li1').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li1')),
                 'Point 1: element shouldn\'t match :only-of-type pseudo-class selector');
-            assert_equals(d.querySelector('#li2').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li2')),
             	'Point 2: element shouldn\'t match :only-of-type pseudo-class selector');
-            assert_equals(d.querySelector('#li3').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li3')),
             	'Point 3: element shouldn\'t match :only-of-type pseudo-class selector');
-            assert_equals(d.querySelector('#li4').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li4')),
             	'Point 4: element shouldn\'t match :only-of-type pseudo-class selector');
-            assert_equals(d.querySelector('#li5').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li5')),
         		'Point 5: element shouldn\'t match :only-of-type pseudo-class selector');
-            assert_equals(d.querySelector('#li6').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li6')),
     			'Point 6: element shouldn\'t match :only-of-type pseudo-class selector');
 
             var s2 = createSR(d.querySelector('#divid'));
@@ -61,9 +61,9 @@ A_04_03_06_16_T01.step(function () {
             s2.appendChild(subdiv2);
 
             //Span and ul both should be visible
-            assert_true(d.querySelector('#spandex').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#spandex')),
                 'Point 7: Element should match :only-of-type pseudo-class selector');
-            assert_true(d.querySelector('#ul2').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#ul2')),
             	'Point 8: Element should match :only-of-type pseudo-class selector');
         } finally {
             iframe.parentNode.removeChild(iframe);

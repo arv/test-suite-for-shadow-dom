@@ -21,11 +21,11 @@ test(unit(function (ctx) {
     var d = newRenderedHTMLDocument(ctx);
     var div = d.createElement('div');
     d.body.appendChild(div);
-    assert_true(div.offsetTop > 0, 'Expected: the host element is rendered before the check. Actual: the host element is not rendered');
+    assert_true(isVisible(div), 'Expected: the host element is rendered before the check. Actual: the host element is not rendered');
 
     var s = createSR(div);
     var hr = d.createElement('hr');
-    assert_true(hr.offsetTop == 0, 'Expected: The element to be added to shadow is not rendered before the check');
+    assert_false(isVisible(hr), 'Expected: The element to be added to shadow is not rendered before the check');
 
     s.appendChild(hr);
     assert_true(hr.offsetTop >= div.offsetTop, 'Expected: The element is rendered after adding to shadow tree');
@@ -44,16 +44,16 @@ test(unit(function (ctx) {
     div.innerHTML = '<span id="spandex">Shadow Root content to be replaced</span>';
     d.body.appendChild(div);
 
-    assert_true(d.querySelector('#spandex').offsetTop > 0, 'Expected: The host element content is ' +
+    assert_true(isVisible(d.querySelector('#spandex')), 'Expected: The host element content is ' +
         'rendered before the check');
 
     var s = createSR(div);
     var hr = d.createElement('hr');
-    assert_true(hr.offsetTop == 0, "Expected: The element to be added to shadow is not rendered before the check");
+    assert_false(isVisible(hr), "Expected: The element to be added to shadow is not rendered before the check");
 
     s.appendChild(hr);
     assert_true(hr.offsetTop >= div.offsetTop, "Expected: The element is rendered after adding to shadow tree");
-    assert_equals(d.querySelector('#spandex').offsetTop, 0, 'The shadow host element content should ' +
+    assert_false(isVisible(d.querySelector('#spandex')), 'The shadow host element content should ' +
         'be replaced by the shadow tree');
 
 }), 'A_04_00_03_T02', PROPS(A_04_00_03, {

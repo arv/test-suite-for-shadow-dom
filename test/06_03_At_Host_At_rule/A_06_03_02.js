@@ -48,11 +48,11 @@ test(unit(function (ctx) {
 			'}';
 	s1.appendChild(style);
 	
-	assert_equals(s2.querySelector('#shd2').offsetTop, 0,
+	assert_false(isVisible(s2.querySelector('#shd2')),
 		'Element should not be rendered');
-	assert_equals(s1.querySelector('#shd1').offsetTop, 0,
+	assert_false(isVisible(s1.querySelector('#shd1')),
 		'Element should not be rendered');
-	assert_equals(s2.querySelector('#shd3').offsetTop, 0,
+	assert_false(isVisible(s2.querySelector('#shd3')),
 		'Element should not be rendered');
 	
 }), 'A_06_03_02_T01', PROPS(A_06_03_02, {
@@ -88,9 +88,9 @@ test(unit(function (ctx) {
 			'}';
 	s1.appendChild(style);
 	
-	assert_true(s2.querySelector('#shd2').offsetTop > 0,
+	assert_true(isVisible(s2.querySelector('#shd2')),
 		'Element should not be rendered');
-	assert_equals(s1.querySelector('#shd1').offsetTop, 0,
+	assert_false(isVisible(s1.querySelector('#shd1')),
 		'Element should not be rendered');
 	
 }), 'A_06_03_02_T02', PROPS(A_06_03_02, {

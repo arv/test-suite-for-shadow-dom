@@ -33,7 +33,7 @@ test(unit(function (ctx) {
 		'<shadow><span id="shadowId">This is a shadow fallback content</span></shadow>';
 	s.appendChild(div);
 	
-	assert_true(s.querySelector('#shadowId').offsetTop > 0, 'Fallback content should be rendered');
+	assert_true(isVisible(s.querySelector('#shadowId')), 'Fallback content should be rendered');
     
 }), 'A_10_05_01_T01', PROPS(A_10_05_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',

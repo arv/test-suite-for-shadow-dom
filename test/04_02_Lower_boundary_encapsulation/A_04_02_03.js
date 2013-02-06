@@ -52,13 +52,13 @@ A_04_02_03_T1.step(function () {
             assert_true(d.querySelector('#li14').offsetTop < d.querySelector('#li15').offsetTop,
                 'Point 6: Elements that match insertion point criteria don\'t participate in distribution');
 
-            assert_equals(d.querySelector('#li1').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li1')),
                 'Point 7: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li2').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li2')),
                 'Point 8: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li4').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li4')),
                 'Point 9: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li5').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li5')),
                 'Point 10: Elements that don\'t match insertion point criteria participate in distribution');
 
             var subdiv2 = document.createElement('div');
@@ -83,11 +83,11 @@ A_04_02_03_T1.step(function () {
             assert_true(d.querySelector('#li14').offsetTop < d.querySelector('#li15').offsetTop,
                 'Point 17: Elements that match insertion point criteria don\'t participate in distribution');
 
-            assert_equals(d.querySelector('#li1').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li1')),
                 'Point 18: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li2').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li2')),
                 'Point 19: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li5').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li5')),
                 'Point 20: Elements that don\'t match insertion point criteria participate in distribution');
 
             var subdiv3 = document.createElement('div');
@@ -111,11 +111,11 @@ A_04_02_03_T1.step(function () {
             assert_true(d.querySelector('#li14').offsetTop < d.querySelector('#li15').offsetTop,
                 'Point 27: Elements that match insertion point criteria don\'t participate in distribution');
 
-            assert_equals(d.querySelector('#li1').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li1')),
                 'Point 28: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li2').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li2')),
                 'Point 29: Elements that don\'t match insertion point criteria participate in distribution');
-            assert_equals(d.querySelector('#li5').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li5')),
                 'Point 30: Elements that don\'t match insertion point criteria participate in distribution');
         } finally {
             iframe.parentNode.removeChild(iframe);

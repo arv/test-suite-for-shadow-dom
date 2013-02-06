@@ -44,7 +44,7 @@ A_04_03_01_T1.step(function () {
             assert_true(d.querySelector('ul.stories').offsetTop < d.querySelector('#spandex').offsetTop,
                 'A valid selector fragment may contain \'span\' type selector');
 
-            assert_equals(d.querySelector('#ul2').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#ul2')),
                 '<ul> element shouldn\'t match "span" type selector');
         } finally {
             iframe.parentNode.removeChild(iframe);

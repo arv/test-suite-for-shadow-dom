@@ -48,13 +48,13 @@ test(unit(function (ctx) {
 	s.appendChild(span);
 	
 	//li1, li3 and li5 should be invisible
-	assert_equals(d.querySelector('#li1').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#li1')),
 		'Point 1: Rules that contain select reference combinators should match elements ' +
 		'in the enclosing trees');
-	assert_equals(d.querySelector('#li3').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#li3')),
 		'Point 2: Rules that contain select reference combinators should match elements ' +
 		'in the enclosing trees');
-	assert_equals(d.querySelector('#li5').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#li5')),
 		'Point 3: Rules that contain select reference combinators should match elements ' +
 		'in the enclosing trees');
 	

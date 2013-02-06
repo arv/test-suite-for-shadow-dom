@@ -285,6 +285,10 @@ function createTestMediaPlayer(d) {
 		};
 }
 
+function isVisible(el) {
+	return el.offsetTop != 0;
+}
+
 //FIXME This call of initKeyboardEvent works for WebKit-only.
 //See https://bugs.webkit.org/show_bug.cgi?id=16735
 // and https://bugs.webkit.org/show_bug.cgi?id=13368. Add check for browser here

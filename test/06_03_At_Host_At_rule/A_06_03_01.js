@@ -50,13 +50,13 @@ test(unit(function (ctx) {
 		'<ul><content select=".shadow"></content></ul>'; 
 	s.appendChild(div);
 	
-	assert_true(s.querySelector('#shDiv').offsetTop > 0,
+	assert_true(isVisible(s.querySelector('#shDiv')),
 		'Point 1: element should be rendered');	
-	assert_true(d.querySelector('#li1').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#li1')),
 		'Point 2: element should be rendered');
-	assert_true(d.querySelector('#li3').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#li3')),
 		'Point 3: element should be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#li5')),
 		'Point 4: element should be rendered');
 
 	
@@ -97,13 +97,13 @@ test(unit(function (ctx) {
 			'}';
 	s.appendChild(style);
 	
-	assert_equals(s.querySelector('#shDiv').offsetTop, 0,
+	assert_false(isVisible(s.querySelector('#shDiv')),
 		'Point 1: element should not be rendered');	
-	assert_equals(d.querySelector('#li1').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#li1')),
 		'Point 2: element should not be rendered');
-	assert_equals(d.querySelector('#li3').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#li3')),
 		'Point 3: element should not be rendered');
-	assert_equals(d.querySelector('#li5').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#li5')),
 		'Point 4: element should not be rendered');
 
 
@@ -141,11 +141,11 @@ test(unit(function (ctx) {
 			'}';
 	s2.appendChild(style);
 	
-	assert_equals(s2.querySelector('#shd2').offsetTop, 0,
+	assert_false(isVisible(s2.querySelector('#shd2')),
 		'Element should not be rendered');
-	assert_equals(s1.querySelector('#shd1').offsetTop, 0,
+	assert_false(isVisible(s1.querySelector('#shd1')),
 		'Element should not be rendered');
-	assert_equals(s2.querySelector('#shd3').offsetTop, 0,
+	assert_false(isVisible(s2.querySelector('#shd3')),
 		'Element should not be rendered');
 	
 }), 'A_06_03_01_T03', PROPS(A_06_03_01, {
@@ -182,11 +182,11 @@ test(unit(function (ctx) {
 			'}';
 	s1.appendChild(style);
 	
-	assert_equals(s2.querySelector('#shd2').offsetTop, 0,
+	assert_false(isVisible(s2.querySelector('#shd2')),
 		'Element should not be rendered');
-	assert_equals(s1.querySelector('#shd1').offsetTop, 0,
+	assert_false(isVisible(s1.querySelector('#shd1')),
 		'Element should not be rendered');
-	assert_equals(s2.querySelector('#shd3').offsetTop, 0,
+	assert_false(isVisible(s2.querySelector('#shd3')),
 		'Element should not be rendered');
 	
 }), 'A_06_03_01_T04', PROPS(A_06_03_01, {

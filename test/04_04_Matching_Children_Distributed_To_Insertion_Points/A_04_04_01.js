@@ -53,13 +53,13 @@ A_04_04_01_T1.step(function () {
 
             //The order of DOM elements should be the following:
             //li3, li6 - invisible. Other elements visible
-            assert_equals(d.querySelector('#li3').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li3')),
 	            'Point 1: Elements that don\'t match insertion point criteria participate in distribution');
-	        assert_equals(d.querySelector('#li6').offsetTop, 0,
+	        assert_false(isVisible(d.querySelector('#li6')),
 	            'Point 2: Elements that don\'t match insertion point criteria participate in distribution');
 
 
-            assert_true(d.querySelector('#li1').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li1')),
             	'Point 3: Reference combinators should be a valid insertion point matching criteria, element should be visible');
             assert_true(d.querySelector('#li1').offsetTop < d.querySelector('#li2').offsetTop,
                 'Point 4: Reference combinators should be a valid insertion point matching criteria');

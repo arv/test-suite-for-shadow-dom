@@ -20,7 +20,7 @@ var A_06_00_08 = {
     highlight:'The @host @-rule matches a shadow host in the nesting tree'
 };
 
-//Test fails. See https://bugs.webkit.org/show_bug.cgi?id=103608
+
 test(unit(function (ctx) {
 	var d = newRenderedHTMLDocument(ctx);
     
@@ -48,11 +48,11 @@ test(unit(function (ctx) {
 	s.appendChild(div);
 	
 	//@host rule shouldn't take any effect
-	assert_true(d.querySelector('#li1').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#li1')),
 		'Point 1: element should be rendered');
-	assert_true(d.querySelector('#li3').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#li3')),
 		'Point 2: element should be rendered');
-	assert_true(d.querySelector('#li5').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#li5')),
 		'Point 3: element should be rendered');
 
 	
@@ -61,7 +61,7 @@ test(unit(function (ctx) {
     reviewer:''
 }));
 
-//TODO (sgrekhov) Check the expected result at https://www.w3.org/Bugs/Public/show_bug.cgi?id=20150
+
 test(unit(function (ctx) {
 	var d = newRenderedHTMLDocument(ctx);
 
@@ -89,12 +89,13 @@ test(unit(function (ctx) {
 				'ul {display:none;}' +
 			'}';
 	s.appendChild(style);
-
-	assert_true(d.querySelector('#li1').offsetTop, 0,
+	
+	//@host rule shouldn't made li1, li3 and li5 invisible
+	assert_false(isVisible(d.querySelector('#li1')),
 		'Point 1: element should be rendered');
-	assert_true(d.querySelector('#li3').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#li3')),
 		'Point 2: element should be rendered');
-	assert_true(d.querySelector('#li5').offsetTop, 0,
+	assert_false(isVisible(d.querySelector('#li5')),
 		'Point 3: element should be rendered');
 	
 	
@@ -104,7 +105,7 @@ test(unit(function (ctx) {
 }));
 
 
-//Test fails. See https://bugs.webkit.org/show_bug.cgi?id=103608
+
 test(unit(function (ctx) {
 	var d = newRenderedHTMLDocument(ctx);
 
@@ -131,7 +132,7 @@ test(unit(function (ctx) {
 			'}';
 	s2.appendChild(style);
 	
-	assert_equals(s1.querySelector('#shd1').offsetTop, 0,
+	assert_false(isVisible(s1.querySelector('#shd1')),
 		'Point 1: element should not be rendered');
 
 	

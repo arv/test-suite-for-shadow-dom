@@ -40,17 +40,17 @@ A_04_03_06_10_T01.step(function () {
             s.appendChild(subdiv1);
 
             //li1, li3, li5 should be visible, li2, li4, li6 not
-            assert_true(d.querySelector('#li1').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li1')),
                 '1-st element should match :nth-of-type(2n+1) pseudo-class selector');
-            assert_true(d.querySelector('#li3').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li3')),
             	'3-rd element should match :nth-of-type(2n+1) pseudo-class selector');
-            assert_true(d.querySelector('#li5').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#li5')),
             	'5-th element should match :nth-of-type(2n+1) pseudo-class selector');
-            assert_equals(d.querySelector('#li2').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li2')),
                 '2-nd element shouldn\'t match :nth-of-type(2n+1) pseudo-class selector');
-            assert_equals(d.querySelector('#li4').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li4')),
             	'4-th element shouldn\'t match :nth-of-type(2n+1) pseudo-class selector');
-            assert_equals(d.querySelector('#li6').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#li6')),
             	'6-nd element shouldn\'t match :nth-of-type(2n+1) pseudo-class selector');
 
         } finally {

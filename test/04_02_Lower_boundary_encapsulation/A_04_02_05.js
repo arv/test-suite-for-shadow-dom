@@ -40,7 +40,7 @@ A_04_02_05_T1.step(function () {
             subdiv1.innerHTML = "<ul><content select='.nobody'><span id='shadowspan'>Inactive insertion point</span></content></ul>";
             s.appendChild(subdiv1);
 
-            assert_true(s.querySelector('#shadowspan').offsetTop > 0,
+            assert_true(isVisible(s.querySelector('#shadowspan')),
                 'Inactive insertion point should be in a fallback content');
 
             // All li1-li6 should be invisible, shadowspan visible
@@ -86,8 +86,8 @@ A_04_02_05_T2.step(function () {
             var linksWrapper = d.querySelector('#links-wrapper');
             var s = createSR(linksWrapper);
 
-            assert_equals(d.querySelector('#link10').offsetTop, 0, 'Children of shadow host should be hidden');
-            assert_equals(d.querySelector('#link11').offsetTop, 0, 'Children of shadow host should be hidden');
+            assert_false(isVisible(d.querySelector('#link10')), 'Children of shadow host should be hidden');
+            assert_false(isVisible(d.querySelector('#link11')), 'Children of shadow host should be hidden');
 
             assert_equals(standaloneContent.childNodes.length, 0, '<content> outside shadow tree should not partisipate in distribution');
 
@@ -122,8 +122,8 @@ A_04_02_05_T3.step(function () {
             s.appendChild(content1);
 
 
-            assert_true(d.querySelector('#link10').offsetTop>0, 'First <content> should participate in distribution');
-            assert_equals(d.querySelector('#link11').offsetTop, 0, 'Nested <content> should not participate in distribution');
+            assert_true(isVisible(d.querySelector('#link10')), 'First <content> should participate in distribution');
+            assert_false(isVisible(d.querySelector('#link11')), 'Nested <content> should not participate in distribution');
 
         } finally {
             iframe.parentNode.removeChild(iframe);

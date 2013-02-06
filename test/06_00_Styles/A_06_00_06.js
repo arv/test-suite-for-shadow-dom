@@ -43,12 +43,12 @@ test(unit(function (ctx) {
 	s.appendChild(span);
 	
 	//theTreeSpan should be visible, theShadowSpan not
-	assert_true(d.querySelector('#theTreeSpan').offsetTop > 0,
+	assert_true(isVisible(d.querySelector('#theTreeSpan')),
 		'CSS styles declared in shadow tree must not be applied to the elements ' +
 		'in the document tree');
 
 	//theTreeSpan should be visible, theShadowSpan not
-	assert_equals(s.querySelector('#theShadowSpan').offsetTop, 0,
+	assert_false(isVisible(s.querySelector('#theShadowSpan')),
 		'CSS styles declared in shadow tree must be applied to the element ' +
 		'in the same shadow tree');
 	

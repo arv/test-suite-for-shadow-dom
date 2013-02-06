@@ -42,7 +42,7 @@ test(unit(function (ctx) {
 	s.appendChild(div1);
 	
 	//apply-author-styles flag is false by default. Invisible style shouldn't be applied
-	assert_true(s.querySelector('#shd').offsetTop > 0,
+	assert_true(isVisible(s.querySelector('#shd')),
     	'CSS styles declared in enclosing tree must not be applied in a shadow tree ' +
     	'if the apply-author-styles flag is set to false');
 
@@ -76,7 +76,7 @@ test(unit(function (ctx) {
 	s.appendChild(div1);
 	
 	//apply-author-styles flag is set to false. Invisible style shouldn't be applied
-	assert_true(s.querySelector('#shd').offsetTop > 0,
+	assert_true(isVisible(s.querySelector('#shd')),
     	'CSS styles declared in enclosing tree must not be applied in a shadow tree ' +
     	'if the apply-author-styles flag is set to false');
 
@@ -117,13 +117,13 @@ test(unit(function (ctx) {
 	
 	//apply-author-styles flag is false by default. Invisible style shouldn't be applied
 	//shd1 and shd2 should be visible. sh3 not because the tree should be active
-	assert_true(s1.querySelector('#shd1').offsetTop > 0,
+	assert_true(isVisible(s1.querySelector('#shd1')),
     	'Point 1: CSS styles declared in enclosing tree must not be applied in a shadow tree ' +
     	'if the apply-author-styles flag is set to false');
-	assert_true(s2.querySelector('#shd2').offsetTop > 0,
+	assert_true(isVisible(s2.querySelector('#shd2')),
 	    'Point 2: CSS styles declared in enclosing tree must not be applied in a shadow tree ' +
 	    'if the apply-author-styles flag is set to false');
-	assert_equals(s2.querySelector('#shd3').offsetTop, 0,
+	assert_false(isVisible(s2.querySelector('#shd3')),
 		'Fallback content shouldn\'t be rendered for active tree');
 
 
@@ -165,13 +165,13 @@ test(unit(function (ctx) {
 	
 	//apply-author-styles flag is set to false. Invisible style shouldn't be applied
 	//shd1 and shd2 should be visible. sh3 not because the tree should be active
-	assert_true(s1.querySelector('#shd1').offsetTop > 0,
+	assert_true(isVisible(s1.querySelector('#shd1')),
     	'Point 1: CSS styles declared in enclosing tree must not be applied in a shadow tree ' +
     	'if the apply-author-styles flag is set to false');
-	assert_true(s2.querySelector('#shd2').offsetTop > 0,
+	assert_true(isVisible(s2.querySelector('#shd2')),
     	'Point 2: CSS styles declared in enclosing tree must not be applied in a shadow tree ' +
     	'if the apply-author-styles flag is set to false');
-	assert_equals(s2.querySelector('#shd3').offsetTop, 0,
+	assert_false(isVisible(s2.querySelector('#shd3')),
 		'Fallback content shouldn\'t be rendered for active tree');
 
 

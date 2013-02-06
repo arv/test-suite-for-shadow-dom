@@ -40,7 +40,7 @@ test(unit(function (ctx) {
 	s.appendChild(div1);
 
 	//apply-author-styles flag is set to true. Invisible style should be applied
-	assert_equals(s.querySelector('#shd').offsetTop, 0,
+	assert_false(isVisible(s.querySelector('#shd')),
     	'CSS styles declared in enclosing tree must  be applied in a shadow tree ' +
     	'if the apply-author-styles flag is set to true');
 

@@ -40,9 +40,9 @@ A_04_03_06_05_T01.step(function () {
             s.appendChild(subdiv1);
 
             //inp1 should be visible, inp2 not
-            assert_true(d.querySelector('#inp1').offsetTop > 0,
+            assert_true(isVisible(d.querySelector('#inp1')),
                 'Element should match :disabled pseudo-class selector');
-            assert_equals(d.querySelector('#inp2').offsetTop, 0,
+            assert_false(isVisible(d.querySelector('#inp2')),
                 'Element shouldn\'t match :disabled pseudo-class selector');
 
         } finally {
