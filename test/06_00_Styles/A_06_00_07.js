@@ -13,7 +13,8 @@ var A_06_00_07 = {
     assert:'Styles:' +
         'Rules that contain select reference combinators match elements in the enclosing trees',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#styles',
-    highlight:'Rules that contain select reference combinators match elements in the enclosing trees'
+    highlight:'Rules that contain select reference combinators match elements in the enclosing trees',
+    bug: ['http://wkb.ug/82169']
 };
 
 //Reference combinators are not implemented yet, so the test shouldn't work for now

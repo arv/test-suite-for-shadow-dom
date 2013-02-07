@@ -15,7 +15,8 @@ var A_06_00_03 = {
     	'named shadow root style sheets',
     link:'http://www.w3.org/TR/shadow-dom/#styles',
     highlight:'Each shadow root has an associated list of zero or more style sheets, ' +
-    	'named shadow root style sheets'
+    	'named shadow root style sheets',
+    bug: ['https://bugs.webkit.org/show_bug.cgi?id=103393'] 
 };
 
 
