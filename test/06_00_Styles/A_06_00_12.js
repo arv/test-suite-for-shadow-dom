@@ -81,9 +81,9 @@ test(unit(function (ctx) {
 	assert_equals(d.querySelector('#li3').offsetHeight, height3, 'Point 22: Element height should not be changed');
 	assert_equals(d.querySelector('#li5').offsetHeight, height5, 'Point 23: Element height should not be changed');
 	
-	assert_equals(d.querySelector('#li2').offsetHeight, 0, 'Point 24: Element shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li4').offsetHeight, 0, 'Point 25: Element shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li6').offsetHeight, 0, 'Point 26: Element shouldn\'t be rendered');
+	assert_false(isVisible(d.querySelector('#li2')), 'Point 24: Element shouldn\'t be rendered');
+	assert_false(isVisible(d.querySelector('#li4')), 'Point 25: Element shouldn\'t be rendered');
+	assert_false(isVisible(d.querySelector('#li6')), 'Point 26: Element shouldn\'t be rendered');
 	
 	s.resetStyleInheritance = true;
 
@@ -176,9 +176,9 @@ test(unit(function (ctx) {
 	assert_equals(d.querySelector('#li3').offsetHeight, height3, 'Point 32: Element height should not be changed');
 	assert_equals(d.querySelector('#li5').offsetHeight, height5, 'Point 33: Element height should not be changed');
 	
-	assert_equals(d.querySelector('#li2').offsetHeight, 0, 'Point 34: Element shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li4').offsetHeight, 0, 'Point 35: Element shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li6').offsetHeight, 0, 'Point 36: Element shouldn\'t be rendered');
+	assert_false(isVisible(d.querySelector('#li2')), 'Point 34: Element shouldn\'t be rendered');
+	assert_false(isVisible(d.querySelector('#li4')), 'Point 35: Element shouldn\'t be rendered');
+	assert_false(isVisible(d.querySelector('#li6')), 'Point 36: Element shouldn\'t be rendered');
 	
 	var spnHeight = s2.querySelector('#spn1').offsetHeight;
 	
@@ -191,7 +191,7 @@ test(unit(function (ctx) {
 	assert_equals(d.querySelector('#li5').offsetHeight, defHeight5, 'Point 43: Inherited ' +
 			'element style should be reset');
 	
-	assert_equals(d.querySelector('#spn1').offsetHeight, spnHeight, 'Element shouldn\'t ' +
+	assert_equals(s2.querySelector('#spn1').offsetHeight, spnHeight, 'Element shouldn\'t ' +
 		'be affected by resetStyleInheritance flag');
 	
 }), 'A_06_00_12_T02', PROPS(A_06_00_12, {
@@ -260,9 +260,9 @@ test(unit(function (ctx) {
 	assert_equals(d.querySelector('#li3').offsetHeight, height3, 'Point 22: Element height should not be changed');
 	assert_equals(d.querySelector('#li5').offsetHeight, height5, 'Point 23: Element height should not be changed');
 	
-	assert_equals(d.querySelector('#li2').offsetHeight, 0, 'Point 24: Element shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li4').offsetHeight, 0, 'Point 25: Element shouldn\'t be rendered');
-	assert_equals(d.querySelector('#li6').offsetHeight, 0, 'Point 26: Element shouldn\'t be rendered');
+	assert_false(isVisible(d.querySelector('#li2')), 'Point 24: Element shouldn\'t be rendered');
+	assert_false(isVisible(d.querySelector('#li4')), 'Point 25: Element shouldn\'t be rendered');
+	assert_false(isVisible(d.querySelector('#li6')), 'Point 26: Element shouldn\'t be rendered');
 	
 	//Young tree
 	var s2 = createSR(host);
