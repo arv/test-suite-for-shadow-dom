@@ -41,7 +41,7 @@ test(unit(function (ctx) {
 		'<shadow id="shadow2"><span>This is a shadow fallback content 2</span></shadow>';
 	s3.appendChild(div);
 
-	//assert_equals(s3.querySelector('#shadow1').olderShadowRoot, s2, 'Point 1: Wrong olderShadowRoot value');
+	assert_equals(s3.querySelector('#shadow1').olderShadowRoot, s2, 'Point 1: Wrong olderShadowRoot value');
 	assert_equals(s3.querySelector('#shadow2').olderShadowRoot, null, 'Point 2: Wrong olderShadowRoot value');
 
 }), 'A_10_05_06_T01', PROPS(A_10_05_06, {
