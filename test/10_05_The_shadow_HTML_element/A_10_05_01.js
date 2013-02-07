@@ -30,10 +30,10 @@ test(unit(function (ctx) {
 	var div = d.createElement('div');	
 	div.innerHTML = '' +
 		'<span id="spandex">This is a shadow root content</span>' +
-		'<shadow><span id="shadowId">This is a shadow fallback content</span></shadow>';
+		'<shadow><span id="fallbackSpan">This is a shadow fallback content</span></shadow>';
 	s.appendChild(div);
 	
-	assert_true(isVisible(s.querySelector('#shadowId')), 'Fallback content should be rendered');
+	assert_true(isVisible(s.querySelector('#fallbackSpan')), 'Fallback content should be rendered');
     
 }), 'A_10_05_01_T01', PROPS(A_10_05_01, {
 	author:'Sergey G. Grekhov <sgrekhov@unipro.ru>',
