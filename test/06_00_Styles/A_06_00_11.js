@@ -16,7 +16,8 @@ var A_06_00_11 = {
         'the shadow root of the shadow tree, distributed to this shadow insertion point',
     link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#styles',
     highlight:'the styles of the shadow insertion point node are inherited by the child nodes of ' +
-    	'the shadow root of the shadow tree, distributed to this shadow insertion point'
+    	'the shadow root of the shadow tree, distributed to this shadow insertion point',
+    bug: ['https://bugs.webkit.org/show_bug.cgi?id=103625']
 };
 
 

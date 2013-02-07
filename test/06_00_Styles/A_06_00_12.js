@@ -18,8 +18,7 @@ var A_06_00_12 = {
 	link:'https://dvcs.w3.org/hg/webcomponents/raw-file/tip/spec/shadow/index.html#styles',
 	highlight:'If the reset-style-inheritance flag is set for a shadow tree, all inheritable CSS ' +
 		'properties must behave as if they were explicitly set to the initial value at the upper ' +
-		'boundary of the tree.',
-	bug: ['https://bugs.webkit.org/show_bug.cgi?id=103709']
+		'boundary of the tree.'
 };
 
 // test Shadow root
@@ -100,7 +99,6 @@ test(unit(function (ctx) {
 }));
 
 // test shadow insertion point (<shadow> element)
-//Test fails. See https://bugs.webkit.org/show_bug.cgi?id=103709
 test(unit(function (ctx) {
 	var d = newRenderedHTMLDocument(ctx);
     
@@ -201,7 +199,6 @@ test(unit(function (ctx) {
 
 
 //test shadow insertion point (<shadow reset-style-inheritance=true> element)
-// Test fails. See https://bugs.webkit.org/show_bug.cgi?id=103709
 test(unit(function (ctx) {
 	var d = newRenderedHTMLDocument(ctx);
     
