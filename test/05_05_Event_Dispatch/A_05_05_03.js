@@ -27,6 +27,8 @@ A_05_05_03_T01.step(unit(function (ctx) {
 	
     var d = newRenderedHTMLDocument(ctx);
     
+    var invoked = false;
+    
     var host = d.createElement('div');
     host.setAttribute('style', 'height:50%; width:100%');
     host.setAttribute('id', 'host');
@@ -40,9 +42,16 @@ A_05_05_03_T01.step(unit(function (ctx) {
     div1.setAttribute('id', 'div1');
     s.appendChild(div1);
     
+    d.body.addEventListener('mouseover', A_05_05_03_T01.step_func(function(event) {
+    	assert_true(false, 'Event listeners shouldn\'t be invoked if target and relatedTarget are the same');
+    }), false);
+
+    host.addEventListener('mouseover', A_05_05_03_T01.step_func(function(event) {
+    	assert_true(false, 'Event listeners shouldn\'t be invoked if target and relatedTarget are the same');
+    }), false);
+    
     s.addEventListener('mouseover', A_05_05_03_T01.step_func(function(event) {
-    	assert_true(false, 'Event listeners shouldn\'t be invoked if target and relatedTarget ' +
-    			'are the same');  	
+    	invoked = true;  	
     }), false);
     
     
@@ -51,6 +60,8 @@ A_05_05_03_T01.step(unit(function (ctx) {
       0, 10, 10, 10, 10, false, false, false, false, 0, div1);
     
     div1.dispatchEvent(evt);
+    
+    assert_true(invoked, 'Event listeners should be invoked');
     
     A_05_05_03_T01.done();
 }));
