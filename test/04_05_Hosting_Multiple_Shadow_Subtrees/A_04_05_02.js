@@ -52,12 +52,23 @@ A_04_05_02_T1.step(function () {
             subdiv3.innerHTML = '<ul><content select=".shadow2"></content></ul>';
             s3.appendChild(subdiv3);
             
-            //add a shadow insertion point for the old tree
-            s3.appendChild(d.createElement('shadow'));
-            //add another shadow insertion point for the older tree.
-            //Shouldn't match
-            s3.appendChild(d.createElement('shadow'));
+            // add a shadow insertion point for the old tree
+            // s2 should be distributed into this point
+            var s3_div1 = d.createElement('div');
+            s3_div1.appendChild(d.createElement('shadow'));
+            s3.appendChild(s3_div1);
             
+            // Àdd another shadow insertion point
+            // According the spec this insertion point should be invisible
+            // (s2 should not be distributed to this point once again)
+            var s3_div2 = d.createElement('div');
+            s3_div2.appendChild(d.createElement('shadow'));
+            s3.appendChild(s3_div2);
+            
+            assert_true(isVisible(s3_div1), 'The first shadow insertion point in tree order ' +
+            		'should be recognised');
+            assert_true(s3_div2.offsetHeight < s3_div1.offsetHeight, 
+            		'The second shadow insertion point in tree order should not be recognised');
             
             //The order of DOM elements should be the following:
             //li4, li3, li6 visible. Other elements invisible
@@ -74,7 +85,7 @@ A_04_05_02_T1.step(function () {
                 'Point 3: Elements that don\'t match insertion point criteria participate in distribution');
             assert_false(isVisible(d.querySelector('#li5')),
                 'Point 4: Elements that don\'t match insertion point criteria participate in distribution');
-                
+            
         } finally {
             iframe.parentNode.removeChild(iframe);
         }
