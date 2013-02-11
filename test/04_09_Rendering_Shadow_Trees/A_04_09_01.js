@@ -38,7 +38,7 @@ test(unit(function (ctx) {
     			'<a id="a31" href="#">Link31 Shadow</a><a id="a32" href="#">Link32 Shadow</a>' +
     		'</li>' +
     		'<li id="li4" class="shadow2">' +
-    			'<a id="a41" href="#">Link41 Shadow 2</a><a id="a42" href="#">Link22 Shadow 2</a>' +
+    			'<a id="a41" href="#">Link41 Shadow 2</a><a id="a42" href="#">Link42 Shadow 2</a>' +
     		'</li>' +
     		'<li id="li5" class="shadow2">' +
     			'<a id="a51" href="#">Link51 Shadow</a><a id="a52" href="#">Link52 Shadow 2</a>' +
@@ -239,7 +239,7 @@ test(unit(function (ctx) {
 		'insertion point criteria shouldn\'t be rendered');
 	
 	//check the reprojected nodes (a12 visible, others not)
-	assert_equals(isVisible(d.querySelector('#a11')),
+	assert_false(isVisible(d.querySelector('#a11')),
 	    'Point 66: Aleady distributed nodes should behave like a shadow host child nodes');
 	assert_true(isVisible(d.querySelector('#a12')),
 		'Point 67: Aleady distributed nodes should behave like a shadow host child nodes');
