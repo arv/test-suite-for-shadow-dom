@@ -49,7 +49,7 @@ A_05_03_03_T01.step(unit(function (ctx) {
 		    			'Wrong target');
 	    }), false);
         
-    roots.playerShadowRoot.querySelector('.volume-slider').focus();
+    roots.volumeShadowRoot.querySelector('#volume').focus();
     
     assert_true(invoked, 'Event listener was not invoked');
     

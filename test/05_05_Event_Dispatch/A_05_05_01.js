@@ -114,7 +114,7 @@ A_05_05_01_T03.step(unit(function (ctx) {
     			invoked = true;
 		    	assert_equals(event.target.getAttribute('id'), 'volume-slider', 
 		    			'Wrong target');
-		    	assert_true(event.currentTarget.getAttribute('id'), 'volume-slider', 
+		    	assert_equals(event.currentTarget.getAttribute('id'), 'volume-slider', 
 		    			'Wrong currentTarget');
 	    }), false);
     
@@ -151,7 +151,7 @@ A_05_05_01_T04.step(unit(function (ctx) {
     			invoked = true;
 		    	assert_equals(event.target.getAttribute('id'), 'volume-slider', 
 		    			'Wrong target');
-		    	assert_true(event.currentTarget.getAttribute('id'), 'volume-slider', 
+		    	assert_equals(event.currentTarget.getAttribute('id'), 'volume-slider', 
 		    			'Wrong currentTarget');
 	    }), false);
     
@@ -187,7 +187,7 @@ A_05_05_01_T05.step(unit(function (ctx) {
     			invoked = true;
 		    	assert_equals(event.target.getAttribute('id'), 'volume-slider', 
 		    			'Wrong target');
-		    	assert_true(event.currentTarget.getAttribute('id'), 'volume-slider', 
+		    	assert_equals(event.currentTarget.getAttribute('id'), 'volume-slider', 
 		    			'Wrong currentTarget');
 	    }), false);
     
@@ -223,7 +223,7 @@ A_05_05_01_T06.step(unit(function (ctx) {
     			invoked = true;
 		    	assert_equals(event.target.getAttribute('id'), 'volume-slider', 
 		    			'Wrong target');
-		    	assert_true(event.currentTarget.getAttribute('id'), 'volume-slider', 
+		    	assert_equals(event.currentTarget.getAttribute('id'), 'volume-slider', 
 		    			'Wrong currentTarget');
 	    }), false);
     
@@ -260,7 +260,7 @@ A_05_05_01_T07.step(unit(function (ctx) {
     			invoked = true;
 		    	assert_equals(event.target.getAttribute('id'), 'player', 
 		    			'Wrong target');
-		    	assert_true(event.currentTarget.getAttribute('id'), 'player', 
+		    	assert_equals(event.currentTarget.getAttribute('id'), 'player', 
 		    			'Wrong currentTarget');
 	    }), false);
     

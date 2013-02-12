@@ -36,7 +36,7 @@ A_05_03_02_T01.step(unit(function (ctx) {
     
     var roots = createTestMediaPlayer(d);
     
-    roots.playerShadowRoot.querySelector('.volume-slider').focus();
+    roots.volumeShadowRoot.querySelector('#volume').focus();
     
     //expected result of what relative target should be see
     //see at http://www.w3.org/TR/shadow-dom/#event-retargeting-example

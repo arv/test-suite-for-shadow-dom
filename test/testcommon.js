@@ -249,34 +249,33 @@ function assert_nodelist_contents_equal_noorder(actual, expected, message) {
 
 // based on example from http://www.w3.org/TR/shadow-dom/#event-retargeting-example
 function createTestMediaPlayer(d) {
-    d.body.innerHTML = '' +
-	'<div id="player">' +
-		'<input type="checkbox" id="outside-control">' +
-		'<div id="player-shadow-host">' +
-	    '</div>' +
-	'</div>';
+    d.body.innerHTML += '' +
+	    '<input type="checkbox" id="outside-control">' +
+		'<div id="player">' +
+		'</div>';
 
-	var playerShadowRoot = createSR(d.querySelector('#player-shadow-host'));
+	var playerShadowRoot = createSR(d.querySelector('#player'));
 	playerShadowRoot.innerHTML = '' +
 		'<div id="controls">' +
 			'<button class="play-button">PLAY</button>' +
-			'<input type="range" id="timeline">' +
-				'<div id="timeline-shadow-host">' +
-				'</div>' +
-			'</input>' +
+//			'<input type="range" id="timeline">' +
+//			'</input>' +
+			'<div id="timeline">' +
+			'</div>' +
 		    '<div class="volume-slider-container" id="volume-slider-container">' +
-		        '<input type="range" class="volume-slider" id="volume-slider">' +
-		            '<div id="volume-shadow-host">' +
-		            '</div>' +
-		        '</input>' +
+//		        '<input type="range" class="volume-slider" id="volume-slider">' +
+//		        '</input>' +
+		        '<div class="volume-slider" id="volume-slider">' +
+		        '</div>' +
 		    '</div>' +
 		'</div>';
 
-	var timeLineShadowRoot = createSR(playerShadowRoot.querySelector('#timeline-shadow-host'));
+	var timeLineShadowRoot = createSR(playerShadowRoot.querySelector('#timeline'));
 	timeLineShadowRoot.innerHTML =  '<div class="slider-thumb" id="timeline-slider-thumb"></div>';
 
-	var volumeShadowRoot = createSR(playerShadowRoot.querySelector('#volume-shadow-host'));
-	volumeShadowRoot.innerHTML = '<div class="slider-thumb" id="volume-slider-thumb"></div>';
+	var volumeShadowRoot = createSR(playerShadowRoot.querySelector('#volume-slider'));
+	volumeShadowRoot.innerHTML = '<div class="slider-thumb" id="volume-slider-thumb">' +
+		'<input type="range" id="volume"></input></div>';
 
 	return {
 		'playerShadowRoot': playerShadowRoot,
